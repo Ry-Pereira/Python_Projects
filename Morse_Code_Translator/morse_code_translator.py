@@ -51,7 +51,7 @@ def cypher_text(text):
     text_to_morse_code = ""
     for character in text:
         if character == " ":
-            text_to_morse_code += " "
+            text_to_morse_code += "/"
         else:
             for morse_text in morse_code_alphabet_and_numbers.keys():
                 if character == morse_text:
@@ -60,16 +60,45 @@ def cypher_text(text):
     print("Morse Code: ",text_to_morse_code)
 
 def decypher(morse_code):
-    morse_code_to_text = ""
+    text = ''
+    morse_code_to_text = []
+    morse = ' '
+    num = -1
+ 
     for code in morse_code:
-        if code ==" ":
-            morse_code_to_text += " "
+      num+=1
+      
+
+      if code == "/":
+          morse_code_to_text.append(morse)
+          morse = ' '
+          morse_code_to_text.append(" ")
+      
+          
+      else:
+          morse += code
+          
+          if num == (len(morse_code)-1):
+              
+              morse_code_to_text.append(morse)
+          
+    
+    print(morse_code_to_text)
+    for term in morse_code_to_text:
+        print(term)
+        if term == " ":
+            text += " "
         else:
-            for morse_text in  morse_code_alphabet_and_numbers.keys():
-                if morse_code_alphabet_and_numbers[morse_text] == code:
-                    morse_code_to_text += morse_code_alphabet_and_numbers[morse_text]
+            for t in morse_code_alphabet_and_numbers.keys():
+                print(t)
+                if morse_code_alphabet_and_numbers[t] == term:
+                    print(morse_code_alphabet_and_numbers[t])
+                    text += t
                     
-    print("Text: ",morse_code_to_text)
+    print("text: ",text)
+         
+                  
+    
 
 menu_input = int(input("Choice: "))
 
