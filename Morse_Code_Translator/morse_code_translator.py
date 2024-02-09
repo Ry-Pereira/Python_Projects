@@ -62,7 +62,7 @@ def cypher_text(text):
 def decypher(morse_code):
     text = ''
     morse_code_to_text = []
-    morse = ' '
+    morse = ''
     num = -1
  
     for code in morse_code:
@@ -84,18 +84,25 @@ def decypher(morse_code):
           
     
     print(morse_code_to_text)
-    for term in morse_code_to_text:
-        print(term)
-        if term == " ":
-            text += " "
-        else:
-            for t in morse_code_alphabet_and_numbers.keys():
-                print(t)
-                if morse_code_alphabet_and_numbers[t] == term:
-                    print(morse_code_alphabet_and_numbers[t])
-                    text += t
+    numb = 0
+    if numb == len(morse_code_to_text):
+        for key in morse_code_alphabet_and_numbers.keys():
+            print(morse_code_alphabet_and_numbers[key])
+            if morse_code_to_text[numb] == morse_code_alphabet_and_numbers[key]:
+                 text += key
+                 numb += 1
+                 
+            else:
+                 text += " "
+                 numb +=1
+             
+
+            
+
+       
+      
                     
-    print("text: ",text)
+    print("text:",text)
          
                   
     
