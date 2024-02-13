@@ -21,21 +21,32 @@ def main():
 
     
     if want_lives == "y":
-        lives_amount = int(input("How many lives do you want"))
+        lives_amount = int(input("How many lives do you want: "))
         guess = int(input("Guess: "))
-        while guess != selected_number:
-            lives -= 1
+        while lives_amount != 0:
+            print(lives_amount)
             if guess > selected_number:
+                player_won = False
                 print("Guess is too big")
-            else:
-                print("Guess is too small")
-            
-            if lives == 0:
-                guess == selected_number
-            else:
-                player_won = True
-            
+                lives_amount -=1
+                guess = int(input("Guess: "))
                 
+            if guess < selected_number:
+                player_won = False
+                print("Guess is too small")
+                lives_amount -=1
+                guess = int(input("Guess: "))
+               
+                
+            if guess == selected_number:
+                print("Correct")
+                player_won = True
+                lives_amount == 0
+            
+               
+            
+            
+         
         
 
         
