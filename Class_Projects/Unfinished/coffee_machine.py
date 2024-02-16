@@ -20,7 +20,7 @@ menu_options = {
         'milk': 150,
         "price":2.50
     },
-    "cappuchino":{
+    "cappucino":{
         'water': 250,
         'coffee': 24,
         'milk': 100,
@@ -52,24 +52,31 @@ def print_menu(menu = menu_options):
                 print(item,":",(menu_options[item][attribute]),"$\n")
             
       
-def check_resources(choice,menu_options = menu_options,machine_resources = machine_resources):
-    for item in menu_options:
-        if item == choice:
-            for resource in 
+
 
 
 
 
 def choice(choice):
     if choice == "espresso":
-        print("espresso")
+        if machine_resources["water"] >= menu_options["espresso"]["water"] and machine_resources["coffee"] >= menu_options["espresso"]["coffee"]:
+            print("yes")
+        else:
+            print("nope")
     elif choice == "latte":
-        print('latte')
+        if machine_resources["water"] >= menu_options["latte"]["water"] and machine_resources["coffee"] >= menu_options["latte"]["coffee"] and machine_resources["milk"] >= menu_options["latte"]["milk"]:
+            print("yes")
+        else:
+            print("nope")
     elif choice == 'cappucino':
-        print('cappucino')
+        if machine_resources["water"] >= menu_options["cappucino"]["water"] and machine_resources["coffee"] >= menu_options["cappucino"]["coffee"] and machine_resources["milk"] >= menu_options["cappucino"]["milk"]:
+            print("yes")
+        else:
+            print("nope")
     else:
         print("Not a valid choice")
         
+def take_payment(pennies,nickels,dimes,quarters,dollars):
 
 #main --------------------------------------------------------------------------------
 def main():
