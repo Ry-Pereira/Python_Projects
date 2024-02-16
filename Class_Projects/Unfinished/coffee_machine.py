@@ -53,7 +53,9 @@ def print_menu(menu = menu_options):
             
       
 def check_resources(choice,menu_options = menu_options,machine_resources = machine_resources):
-    
+    for item in menu_options:
+        if item == choice:
+            for resource in 
 
 
 
