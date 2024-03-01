@@ -3,10 +3,10 @@
 
 
 
-# Introduction To Program
-
-print("Welcome To The MORSE CODE TRASNLATOR Program")
-print("We can decipher morse code into text and ciypher text into morse code")
+# Introduction To The Program
+def intro_to_program():
+    print("Welcome To The MORSE CODE TRASNLATOR Program")
+    print("We can decipher morse code into text and ciypher text into morse code")
 
 # Morse Code Dictionary
 
@@ -57,6 +57,11 @@ def print_menu():
     print("1. Cypher text to Morse Code")
     print("2. Decpher Morse Code to text")
     print("3.Exit\n\n")
+
+
+
+
+
     
 
 # Function converts Text input into Morse Code
@@ -71,6 +76,10 @@ def cypher_text(text):
                     text_to_morse_code += morse_code_alphabet_and_numbers[morse_text]
 
     print("Morse Code: ",text_to_morse_code)
+
+
+
+    
 
 #Function that converts Morse Code into Text.
 
@@ -119,11 +128,8 @@ def decypher(morse_code):
                     
     print("text:",text)
          
-                  
-# The Main function of the program
-def main()
-    menu_input = int(input("Choice: "))
-
+#Menu Selection FUnction
+def menu_selection(menu_input):
     while menu_input != 3:
         if menu_input == 1:
             cypher_text(input("Text to Morse Code: "))
@@ -134,8 +140,30 @@ def main()
         print_menu()
         menu_input = int(input("Choice: "))
 
+
+
+
+        
+
+#End of Program Message
+def end_message():
     print("Exit")
     print("Thankyou for using")
+
+
+
+
+    
+                  
+# The Main function of the program
+def main():
+    intro_to_program()
+    print_menu()
+    menu_selection(menu_input = int(input("Choice: ")))
+    end_message()
+
+
+
 
 
 
