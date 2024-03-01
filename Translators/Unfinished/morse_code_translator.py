@@ -84,49 +84,7 @@ def cypher_text(text):
 #Function that converts Morse Code into Text.
 
 def decypher(morse_code):
-    text = ''
-    morse_code_to_text = []
-    morse = ''
-    num = -1
- 
-    for code in morse_code:
-      num+=1
-      
-
-      if code == "/":
-          morse_code_to_text.append(morse)
-          morse = ' '
-          morse_code_to_text.append(" ")
-      
-          
-      else:
-          morse += code
-          
-          if num == (len(morse_code)-1):
-              
-              morse_code_to_text.append(morse)
-          
-    
-    print(morse_code_to_text)
-    numb = 0
-    if numb == len(morse_code_to_text):
-        for key in morse_code_alphabet_and_numbers.keys():
-            print(morse_code_alphabet_and_numbers[key])
-            if morse_code_to_text[numb] == morse_code_alphabet_and_numbers[key]:
-                 text += key
-                 numb += 1
-                 
-            else:
-                 text += " "
-                 numb +=1
-             
-
-            
-
-       
-      
-                    
-    print("text:",text)
+    #Coming Soon
          
 #Menu Selection FUnction
 def menu_selection(menu_input):
