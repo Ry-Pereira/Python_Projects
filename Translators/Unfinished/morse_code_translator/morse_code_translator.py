@@ -1,6 +1,15 @@
 # Introduction To The Program
 def intro_to_program():
     print("Welcome To The MORSE CODE TRASNLATOR Program")
+    print('''
+     ___  ___   ___   ____   __   ____      ___   ___   ____    ____      ___   ____ __  __  ____ ____   ___  ______   ___   ____ 
+ ||\\//||  // \\  || \\ (( \ ||        //    // \\  || \\  ||        // \\ ||    ||\ || ||    || \\ // \\ | || |  // \\  || \\
+ || \/ || ((   )) ||_//  \\  ||==     ((    ((   )) ||  )) ||==     (( ___ ||==  ||\\|| ||==  ||_// ||=||   ||   ((   )) ||_//
+ ||    ||  \\_//  || \\ \_)) ||___     \\__  \\_//  ||_//  ||___     \\_|| ||___ || \|| ||___ || \\ || ||   ||    \\_//  || \\
+ 
+ ''')
+
+                                                                                                                              
     print("We can decipher morse code into text and ciypher text into morse code\n\n")
 
 # Morse Code Dictionary
