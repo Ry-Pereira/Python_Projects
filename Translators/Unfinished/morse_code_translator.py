@@ -1,18 +1,13 @@
-
-
-
-
-
 # Introduction To The Program
 def intro_to_program():
     print("Welcome To The MORSE CODE TRASNLATOR Program")
-    print("We can decipher morse code into text and ciypher text into morse code")
+    print("We can decipher morse code into text and ciypher text into morse code\n\n")
 
 # Morse Code Dictionary
 
 morse_code_alphabet_and_numbers = {
     'a' : ".-",
-    "b":".---",
+    "b":"-...",
     "c":"-.-.",
     "d":"-..",
     "e":".",
@@ -37,16 +32,16 @@ morse_code_alphabet_and_numbers = {
     "x":"-..-",
     "y":"-.--",
     "z":"--..",
-    1:".----",
-    2:"..---",
-    3:"...--",
-    4:".....-",
-    5:".....",
-    6:"-....",
-    7:"--...",
-    8:"---..",
-    9:"----.",
-    0:"----"
+    "1":".----",
+    "2":"..---",
+    "3":"...--",
+    "4":".....-",
+    "5":".....",
+    "6":"-....",
+    "7":"--...",
+    "8":"---..",
+    "9":"----.",
+    "0":"----"
     }
 
 
@@ -56,18 +51,24 @@ def print_menu():
     
     print("1. Cypher text to Morse Code")
     print("2. Decpher Morse Code to text")
+    print("3. Print the Morse Code Alphabet and Numbers")
     print("3.Exit\n\n")
 
 
 
 
-
+#Tutorial Instructions
+def print_morse_code_alphabet_and_numbers():
+    print("MORSE CODE ALPHABET AND NUMBERS\n")
+    for morse_character in morse_code_alphabet_and_numbers.keys():
+        print(morse_character,":",morse_code_alphabet_and_numbers[morse_character])
+    print("\n")
     
 
 # Function converts Text input into Morse Code
 def cypher_text(text):
     text_to_morse_code = ""
-    for character in text:
+    for character in text.lower():
         if character == " ":
             text_to_morse_code += "/"
         else:
@@ -75,7 +76,7 @@ def cypher_text(text):
                 if character == morse_text:
                     text_to_morse_code += morse_code_alphabet_and_numbers[morse_text]
 
-    print("Morse Code: ",text_to_morse_code)
+    print("Text to Morse Code:",text_to_morse_code)
 
 
 
@@ -84,17 +85,32 @@ def cypher_text(text):
 #Function that converts Morse Code into Text.
 
 def decypher(morse_code):
-    #Coming Soon
+    morse_code_to_text = " "
+    morse_code_list = morse_code.split(" ")
+    for code in morse_code_list:
+        if code == "/":
+            morse_code_to_text += " "
+        else:
+            for morse_character in morse_code_alphabet_and_numbers.keys():
+                if morse_code_alphabet_and_numbers[morse_character] == code:
+                    morse_code_to_text += morse_character
+                    
+    print("Morse Code to Text:",morse_code_to_text)
+        
+    
          
-#Menu Selection FUnction
+#Menu Selection Function
 def menu_selection(menu_input):
-    while menu_input != 3:
+    while menu_input != 4:
         if menu_input == 1:
             cypher_text(input("Text to Morse Code: "))
         elif menu_input == 2:
             decypher(input("Morse to Text: "))
+        elif menu_input == 3:
+            print_morse_code_alphabet_and_numbers()
         else:
-            print("Enter a Valid Choice")
+            print("Please put a valid chopice")
+            
         print_menu()
         menu_input = int(input("Choice: "))
 
@@ -124,7 +140,7 @@ def main():
 
 
 
-
+#Main Function called
 main()
 
 
