@@ -1,15 +1,6 @@
 # Introduction To The Program
 def intro_to_program():
-    print("Welcome To The MORSE CODE TRASNLATOR Program")
-    print('''
-     ___  ___   ___   ____   __   ____      ___   ___   ____    ____      ___   ____ __  __  ____ ____   ___  ______   ___   ____ 
- ||\\//||  // \\  || \\ (( \ ||        //    // \\  || \\  ||        // \\ ||    ||\ || ||    || \\ // \\ | || |  // \\  || \\
- || \/ || ((   )) ||_//  \\  ||==     ((    ((   )) ||  )) ||==     (( ___ ||==  ||\\|| ||==  ||_// ||=||   ||   ((   )) ||_//
- ||    ||  \\_//  || \\ \_)) ||___     \\__  \\_//  ||_//  ||___     \\_|| ||___ || \|| ||___ || \\ || ||   ||    \\_//  || \\
- 
- ''')
-
-                                                                                                                              
+    print("Welcome To The MORSE CODE TRASNLATOR Program")                                                                                                           
     print("We can decipher morse code into text and ciypher text into morse code\n\n")
 
 # Morse Code Dictionary
@@ -66,7 +57,7 @@ def print_menu():
 
 
 
-#Tutorial Instructions
+#Function prints out the morse code alphabet and numbers
 def print_morse_code_alphabet_and_numbers():
     print("MORSE CODE ALPHABET AND NUMBERS\n")
     for morse_character in morse_code_alphabet_and_numbers.keys():
