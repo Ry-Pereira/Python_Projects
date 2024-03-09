@@ -50,7 +50,22 @@ def cypher_code(word_to_cypher):
 
 
 def decypher_code(word_to_decypher):
-    pass
+    decyphered_word = []
+    amount_of_shifts = int(input("Amount of shift")) - 1
+    for letter in word_to_decypher:
+        index_shift = alphabet.index(letter) - amount_of_shifts
+        print(index_shift)
+        while index_shift <= 25:
+            index_shift += 25
+            
+        print(index_shift)
+        decyphered_word.append(alphabet[index_shift])
+    c = ''
+    for letter in decyphered_word:
+        c+= letter
+    print(c)
+        
+    
 
         
 def main():
