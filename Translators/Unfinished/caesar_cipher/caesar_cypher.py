@@ -12,6 +12,7 @@ def intro_to_program():
 def print_menu():
     print("1. To Cypher Code")
     print("2. To Decypher Code\n")
+    print("3. To exit the Program")
 
 
 
@@ -22,8 +23,11 @@ def menu_selection(choice):
         cypher_code(word_to_cypher = input("Word to Cypher: "))
     elif choice ==2:
         decypher_code(word_to_decypher = input("Word to Decypher: "))
-    else:
+    elif choice == 3:
         print("Goodbye")
+    else:
+        print("Type in valid choice")
+        menu_selection(choice = int(input("Choice: ")))
 
 
 def cypher_code(word_to_cypher):
