@@ -31,11 +31,12 @@ def menu_selection(choice):
 
 def cypher_code(word_to_cypher):
     cyphered_word = []
-    amount_of_shifts = int(input("Amount of shift")) - 1
+    amount_of_shifts = int(input("Amount of shift")) 
     for letter in word_to_cypher:
         index_shift = alphabet.index(letter) + amount_of_shifts
         print(index_shift)
         while index_shift >= 25:
+            index_shift -= 1
             index_shift -= 25
             
         print(index_shift)
@@ -51,11 +52,12 @@ def cypher_code(word_to_cypher):
 
 def decypher_code(word_to_decypher):
     decyphered_word = []
-    amount_of_shifts = int(input("Amount of shift")) - 1
+    amount_of_shifts = int(input("Amount of shift"))
     for letter in word_to_decypher:
         index_shift = alphabet.index(letter) - amount_of_shifts
         print(index_shift)
-        while index_shift <= 25:
+        while index_shift <= 0:
+            index_shift += 1
             index_shift += 25
             
         print(index_shift)
