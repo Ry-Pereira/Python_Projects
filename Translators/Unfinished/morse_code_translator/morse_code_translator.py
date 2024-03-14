@@ -1,48 +1,11 @@
+from art_and_alphabet import *
+
+
 # Introduction To The Program
 def intro_to_program():
-    print("Welcome To The MORSE CODE TRASNLATOR Program")                                                                                                           
+    print(welcome_text)                                                                                                           
     print("We can decipher morse code into text and ciypher text into morse code\n\n")
 
-# Morse Code Dictionary
-
-morse_code_alphabet_and_numbers = {
-    'a' : ".-",
-    "b":"-...",
-    "c":"-.-.",
-    "d":"-..",
-    "e":".",
-    "f":"..-.",
-    "g":"--.",
-    "h":"....",
-    "i":"..",
-    "j":".---",
-    "k":"-.-",
-    "l":".-..",
-    "m":"--",
-    "n":"-.",
-    "o":"---",
-    "p":".--.",
-    "q":"--.-",
-    "r":".-.",
-    "s":"...",
-    "t":"-",
-    "u":"..-",
-    "v":"...-",
-    "w":".--",
-    "x":"-..-",
-    "y":"-.--",
-    "z":"--..",
-    "1":".----",
-    "2":"..---",
-    "3":"...--",
-    "4":".....-",
-    "5":".....",
-    "6":"-....",
-    "7":"--...",
-    "8":"---..",
-    "9":"----.",
-    "0":"----"
-    }
 
 
 # Function prints the menu options to the screen
