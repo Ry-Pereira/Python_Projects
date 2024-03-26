@@ -12,18 +12,9 @@ class Magic_8_Ball:
         
 
 
-class game_program:
-    def __init__(self,magic_8_ball,question):
-        self.magic_8_ball = magic_8_ball
-        self.question = question
-
-
-    def ask_question(self):
-        print("User Question:",self.question)
-        print(self.magic_8_ball.shake())
 
 
 
 
 
-game = game_program(Magic
+

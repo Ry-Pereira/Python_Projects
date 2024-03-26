@@ -1,3 +1,4 @@
+#This is the response pool for the magic 8 ball program 
 responses = ["It is certain",
              "It is decidely so",
              "Without a doubt",
