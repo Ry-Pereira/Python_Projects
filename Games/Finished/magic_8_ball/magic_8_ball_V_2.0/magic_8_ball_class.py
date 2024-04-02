@@ -5,8 +5,7 @@ class Magic_8_Ball:
         self.response_pool = response_pool
 
     def shake(self):
-        
-        return ("Magic 8 Ball:",random.choice(self.response_pool)
+        return ("Magic 8 Ball:",random.choice(self.response_pool))
 
     
         
