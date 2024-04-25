@@ -7,7 +7,7 @@ class Player:
     def __init__(self,player_name):
         self.player_name = player_name
         self.score = 0
-        self.moves = [rock = RockPaperScissorObject("Rock","Scissors","Paper"),paper = RockPaperScissorObject("Paper","Rock","Scissors"),scissors = RockPaperScissorObject("Scissors","Paper","Rock")]
+        self.moves = [RockPaperScissorObject("Rock","Scissors","Paper"),RockPaperScissorObject("Paper","Rock","Scissors"),RockPaperScissorObject("Scissors","Paper","Rock")]
         
 class Game:
 
@@ -19,18 +19,18 @@ class Game:
         self.player.score +=1
 
     def add_point_computer(self):
-        self.player.computer +=1
+        self.computer.score +=1
         
         
-    def battle(self):
-        if self.player.stength == self.computer.value:
+    def battle(self,player_move,computer_move):
+        if player_move.strength == computer_move.value:
             self.add_point_player()
-            return (self.value + "wins")
-        elif self.strength == other.weakness:
+            print("Player wins")
+        elif  player_move.strength == computer_move.weakness:
             self.add_point_computer()
-            return (computer.value + "wins")
+            print("Computer wins")
         else:
-            return "Tie"
+            print("Its a tie")
         
     def intro_to_program(self):
         print("Welcome To The Rock Paper Scissors Game Program")
@@ -51,16 +51,16 @@ class Game:
         while rounds != 0:
             user_move = int(input("Choice: "))
             if user_move == 1:
-                self.battle(player.move[1],computer.move[r.choice(self.bank),user_score)
+                self.battle(self.player.moves[0],self.computer.moves[random.randint(0,2)])
             if user_move == 2:
-                self.battle(player.move[2],random.choice(self.bank))
+                self.battle(self.player.moves[1],self.computer.moves[random.randint(0,2)])
             if user_move == 3:
-                self.battle(player.move[3],random.choice(self.bank))
+                self.battle(self.player.moves[2],self.computer.moves[random.randint(0,2)])
             rounds -= 1
 
-        if user_score > computer_score:
+        if self.player.score > self.computer.score:
             print("User wins")
-        elif user_score < computer_score:
+        elif self.player.score < self.computer.score:
             print("User Loses")
         else:
             print("Its a tie")
@@ -87,8 +87,9 @@ class Game:
         self.mode_selection(choice = int(input("CHoice: ")))
     
 
-
-Game = Game(Player(input("Choose Name for User: "),Player("Computer"))
+player = Player("Player")
+computer = Player("Computer")
+Game = Game(player,computer)
 Game.run()
 
 
