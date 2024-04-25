@@ -4,19 +4,13 @@ class Game:
         self.player = player
         self.computer = computer
 
-    def add_point_player(self):
-        self.player.score +=1
-
-    def add_point_computer(self):
-        self.computer.score +=1
-        
         
     def battle(self,player_move,computer_move):
         if player_move.strength == computer_move.move_name:
-            self.add_point_player()
+            self.player.add_point()
             print("Player wins")
         elif  player_move.strength == computer_move.weakness:
-            self.add_point_computer()
+            self.computer.add_point()
             print("Computer wins")
         else:
             print("Its a tie")
