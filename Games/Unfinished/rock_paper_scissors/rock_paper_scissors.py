@@ -1,14 +1,8 @@
 import random
-from rock_paper_scissor_object import RockPaperScissorObject
 
 
-class Player:
 
-    def __init__(self,player_name):
-        self.player_name = player_name
-        self.score = 0
-        self.moves = [RockPaperScissorObject("Rock","Scissors","Paper"),RockPaperScissorObject("Paper","Rock","Scissors"),RockPaperScissorObject("Scissors","Paper","Rock")]
-        
+  
 class Game:
 
     def __init__(self,player,computer):
@@ -23,7 +17,7 @@ class Game:
         
         
     def battle(self,player_move,computer_move):
-        if player_move.strength == computer_move.value:
+        if player_move.strength == computer_move.move_name:
             self.add_point_player()
             print("Player wins")
         elif  player_move.strength == computer_move.weakness:
@@ -65,21 +59,20 @@ class Game:
         else:
             print("Its a tie")
             
-                
-                
-            
         
     def mode_selection(self,choice):
         if choice == 1:
             print("Dueling against.... the computer")
             self.move_list()
             self.battling()
+            self.mode_selection(choice = int(input("CHoice: ")))
         
         elif choice == 2:
             print("Exiting Program...")
         else:
-            print("Coming Soon")
-   
+            print("Please Choose a Valid Option")
+            self.print_menu()
+            self.mode_selection(choice = int(input("CHoice: ")))
 
     def run(self):
         self.intro_to_program
@@ -87,9 +80,6 @@ class Game:
         self.mode_selection(choice = int(input("CHoice: ")))
     
 
-player = Player("Player")
-computer = Player("Computer")
-Game = Game(player,computer)
-Game.run()
+
 
 
