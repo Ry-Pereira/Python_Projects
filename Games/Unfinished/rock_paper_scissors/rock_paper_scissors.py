@@ -1,10 +1,5 @@
 import random
-
-
-
-  
 class Game:
-
     def __init__(self,player,computer):
         self.player = player
         self.computer = computer
@@ -39,6 +34,14 @@ class Game:
         print("Press 2 for Paper: Weakness: Scissors ,Strength against: Rock\n")
         print("Press 3 for Scissors: Weakness: Rock ,Strength against: Paper\n ")
 
+    def determine_winner(self):
+        if self.player.score > self.computer.score:
+            print("User wins")
+        elif self.player.score < self.computer.score:
+            print("User Loses")
+        else:
+            print("Its a tie")
+
 
     def battling(self):
         rounds = 3
@@ -52,12 +55,7 @@ class Game:
                 self.battle(self.player.moves[2],self.computer.moves[random.randint(0,2)])
             rounds -= 1
 
-        if self.player.score > self.computer.score:
-            print("User wins")
-        elif self.player.score < self.computer.score:
-            print("User Loses")
-        else:
-            print("Its a tie")
+        self.determine_winner()
             
         
     def mode_selection(self,choice):
