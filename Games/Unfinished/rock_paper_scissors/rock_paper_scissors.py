@@ -1,18 +1,34 @@
 import random
 from rock_paper_scissor_object import RockPaperScissorObject
+
+
+class Player:
+
+    def __init__(self,player_name):
+        self.player_name = player_name
+        self.score = 0
+        self.moves = [rock = RockPaperScissorObject("Rock","Scissors","Paper"),paper = RockPaperScissorObject("Paper","Rock","Scissors"),scissors = RockPaperScissorObject("Scissors","Paper","Rock")]
+        
 class Game:
 
-    def __init__(self):
-        self.rock = RockPaperScissorObject("Rock","Scissors","Paper")
-        self.paper = RockPaperScissorObject("Paper","Rock","Scissors")
-        self.scissors = RockPaperScissorObject("Scissors","Paper","Rock")
-        self.bank = [self.rock,self.paper,self.scissors]
+    def __init__(self,player,computer):
+        self.player = player
+        self.computer = computer
 
-    def battle(self,other):
-        if self.stength == other.value:
-            return self.value
+    def add_point_player(self):
+        self.player.score +=1
+
+    def add_point_computer(self):
+        self.player.computer +=1
+        
+        
+    def battle(self):
+        if self.player.stength == self.computer.value:
+            self.add_point_player()
+            return (self.value + "wins")
         elif self.strength == other.weakness:
-            return other.value
+            self.add_point_computer()
+            return (computer.value + "wins")
         else:
             return "Tie"
         
@@ -30,16 +46,24 @@ class Game:
         print("Press 3 for Scissors: Weakness: Rock ,Strength against: Paper\n ")
 
 
-    def battling(self,choice):
+    def battling(self):
         rounds = 3
         while rounds != 0:
-            choice = int(input("Choice: "))
+            user_move = int(input("Choice: "))
             if user_move == 1:
-                 if battle(self.rock,random.choice(self.bank)
+                self.battle(player.move[1],computer.move[r.choice(self.bank),user_score)
             if user_move == 2:
-                battle(self.paper,random.choice(self.bank)
+                self.battle(player.move[2],random.choice(self.bank))
             if user_move == 3:
-                battle(self.scissor,random.choice(self.bank)
+                self.battle(player.move[3],random.choice(self.bank))
+            rounds -= 1
+
+        if user_score > computer_score:
+            print("User wins")
+        elif user_score < computer_score:
+            print("User Loses")
+        else:
+            print("Its a tie")
             
                 
                 
@@ -49,6 +73,7 @@ class Game:
         if choice == 1:
             print("Dueling against.... the computer")
             self.move_list()
+            self.battling()
         
         elif choice == 2:
             print("Exiting Program...")
@@ -59,10 +84,11 @@ class Game:
     def run(self):
         self.intro_to_program
         self.print_menu()
-        self.mode_selection(mode = int(input("CHoice: ")))
+        self.mode_selection(choice = int(input("CHoice: ")))
     
 
 
-main()
+Game = Game(Player(input("Choose Name for User: "),Player("Computer"))
+Game.run()
 
 
