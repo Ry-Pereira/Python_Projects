@@ -11,11 +11,18 @@ class Magic8Ball:
         self.responses_pool = responses_pool
 
     def shake(self):
-        return (random.choice(self.responses_pool))
+        return random.choice(self.responses_pool)
     
 
 
 
+
+nod = Magic8Ball("responses.txt")
+
+
+print(nod.shake())
+
+    
 
     
         
