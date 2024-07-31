@@ -3,14 +3,13 @@ from memory_card import MemoryCard
 
 class ColorMemoryMadness:
 
-    def __init__(self,card_values):
-        card_deck = []
-        with open(card_values,"r") as file:
+    def __init__(self,card_file):
+        self.card_deck = []
+        with open(card_file,"r") as file:
              for line in file:
-                card_deck.append(MemoryCard("Memory Madness",line))
+                self.card_deck.append(MemoryCard("Memory Madness",line))
 
 
-        self.card_values = card_deck
 
 
     def print_stuff(self):
