@@ -50,7 +50,7 @@ class LinkedList:
             return False
         else:
             current = self.head
-            while(current.next != None):
+            while(current != None):
                 if current.data == data:
                     return True
                 current = current.next
@@ -59,9 +59,28 @@ class LinkedList:
     def remove(self,data):
         if self.head == None:
             print("The list is empty")
+            return
 
         if self.search(data) == False:
             print("Value is not in list")
+            return
+
+        else:
+            if self.head.data == data:
+                self.head = self.head.next
+            
+            
+            else:
+                current = self.head
+                while(current.next.data != data):
+                    current = current.next
+                temp = current.next.next
+                current.next = temp
+                
+            
+
+    
+
 
         
 
@@ -109,3 +128,27 @@ print("The linked list have the value (T/F): ",linked_list.search(0))
 
 #Check to see if the search function works for the class
 print("The linked list have the value (T/F): ",linked_list.search(2))
+
+
+
+#Check to see if the first value will be removed
+linked_list.remove(2)
+print("After removing 2")
+linked_list.print()
+
+
+#Check to see if the unapparent value will be removed
+linked_list.remove(0)
+print("After removing 0")
+linked_list.print()
+
+#Check to see if the value will be removed
+linked_list.remove(3)
+print("After removing 4\n")
+linked_list.print()
+
+
+#Check to see if the last value will be removed
+linked_list.remove(5)
+print("After removing 5")
+linked_list.print()
