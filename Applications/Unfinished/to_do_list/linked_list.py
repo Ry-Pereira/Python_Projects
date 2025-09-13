@@ -55,6 +55,17 @@ class LinkedList:
                     return True
                 current = current.next
             return False
+        
+    def updata(self,data_to_edit,data_to_updata):
+        if self.head == None:
+            print("The list is empty")
+        else:
+            current = self.head
+            while(current != None):
+                if current.data == data_to_edit:
+                    current.data = data_to_edit
+                current = current.next
+
     
     def remove(self,data):
         if self.head == None:
@@ -135,17 +146,19 @@ print("The linked list have the value (T/F): ",linked_list.search(2))
 linked_list.remove(2)
 print("After removing 2")
 linked_list.print()
-
+print("Length: ",linked_list.length())
 
 #Check to see if the unapparent value will be removed
 linked_list.remove(0)
 print("After removing 0")
 linked_list.print()
+print("Length: ",linked_list.length())
 
 #Check to see if the value will be removed
 linked_list.remove(3)
 print("After removing 4\n")
 linked_list.print()
+print("Length: ",linked_list.length())
 
 
 #Check to see if the last value will be removed
