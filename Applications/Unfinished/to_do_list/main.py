@@ -1,4 +1,4 @@
-from to_do_list import *
+from executive import *
 
 def main():
     todolistexecutive = todolistexecutive()
