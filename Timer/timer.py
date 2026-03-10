@@ -12,33 +12,75 @@
 from tkinter import *
 from tkinter import messagebox
 
+valid_numbers = [0,1,2,3,4,5,6,7,8,9]
 
 
 
 
 def main():
+
+
+    def start_timer():
+        timer_time = timer_entry.get()
+
+        if len(timer_time) > 5 or len(timer_time) < 5 :
+            messagebox.showinfo(title="Error",message="Sorry Please Input a valid time")
+            
+        elif timer_time == "00:00":
+            messagebox.showinfo(title="Error",message="Sorry Please Input a valid time")
+        elif timer_time[0] not in valid_numbers or timer_time[1] not in valid_numbers or timer_time[2] != ":" or timer_time[3] not in valid_numbers or timer_time[4] not in valid_numbers:
+            messagebox.showinfo(title="Error",message="Sorry please input in valud format")
+        else:
+            print(timer_time,len(timer_time),timer_time[4])
+            start_button.config(state=DISABLED)
+            restart_button.config(state=NORMAL)
+
+    def pause_timer():
+        pause_and_unpause_button.config(text="Unpause")
+        start_button.config(state=DISABLED)
+        restart_button.config(state=DISABLED)
+
+    def restart_timer():
+        start_button.config(state=NORMAL)
+        restart_button.config(state=DISABLED)
+        
+
+
     window = Tk()
     window.title("Timer")
     window.minsize(width = 220, height = 220)
-    window.config(padx = 20, pady= 20)
+    window.config(padx = 20, pady= 20, bg = "#84B179")
    
     
 
 
     #Label
     title_label = Label(text="A Simple Timer",font=("Arial",12))
+    title_label.config(bg = "#A2CB8B")
     title_label.grid(column = 1,row = 0)
 
 
     #Entry
-    timer_entry = Entry(width = 20)
-    timer_entry.grid(column = 1, row = 1)
+    timer_entry = Entry(width = 10)
+    timer_entry.grid(column = 1, row = 1, pady = 10)
+    timer_entry.insert(0,"00:00")
+    timer_entry.config(bg = "#A2CB8B")
     timer_entry.focus()
 
 
 
 
     #Button
+    start_button = Button(text = "Start", command = start_timer)
+    start_button.config(bg = "#A2CB8B")
+    start_button.grid(column=0,row=2, pady = 10)
+    pause_and_unpause_button = Button(text="Pause", command = pause_timer)
+    pause_and_unpause_button.config(bg = "#A2CB8B")
+    pause_and_unpause_button.grid(column=1,row=2, pady = 10)
+    restart_button = Button(text="Restart", command = restart_timer)
+    restart_button.config(bg = "#A2CB8B")
+    restart_button.grid(column=2,row=2, pady = 10)
+    restart_button.config(state=DISABLED)
 
 
 
