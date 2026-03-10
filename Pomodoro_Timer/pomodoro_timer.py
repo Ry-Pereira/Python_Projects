@@ -22,12 +22,20 @@ PEACH = "#FF937E"
 LIME = "#C1E59F"
 GREEN = "#A3D78A"
 
+
+timer = None
+current_minutes = 25
+current_seconds = 0
+
 #Handful of quotes to give for the usewr for encourgament
 quotes = ["The key is not to prioritize what's on your schedule, but to schedule your priorities. - Stephen Covey",
           "The future depends on what you do today. - Mahatma Gandhi",
           "Don't watch the clock; do what it does. Keep going. - Sam Levenson",
           "Time is what we want most, but what we use worst. - William Penn",
           "The bad news is time flies. The good news is you're the pilot. - Michael Altshuler"]
+
+
+
 
 
 #The main function will serve as main entry into the program itself.
@@ -40,8 +48,49 @@ def main():
     window.minsize(width=400, height=400)
     window.config(padx = 10,pady = 10, bg = PEACH)
 
+    def start_timer():
+        global current_minutes, current_seconds
+        countdown(current_minutes,current_seconds)
+        
 
-    title_label = Label(text="Pomodoro Timer", font=("Times New Roman",16))
+    def pause_timer():
+        global timer, current_minutes, current_seconds
+        window.after_cancel(timer)
+
+    def continue_timer():
+        global timer, current_minutes, current_seconds
+        timer = window.after(1000,countdown)
+
+    def restart_timer():
+        global timer, current_minutes, current_seconds
+        window.after_cancel(timer)
+        timer_label.config(text = "00:00")
+
+    def countdown(minutes, seconds):
+        global timer, current_minutes, current_seconds
+        current_minutes = minutes
+        current_seconds = seconds
+        if current_seconds== 0:
+            timer_label.config(text = f'{current_minutes}:00')
+        else:
+
+            timer_label.config(text = f'{current_minutes}:{current_seconds:02d}')
+        
+        if current_minutes > 0 or current_seconds > 0:
+            if current_seconds == 0 or current_seconds == 60:
+                current_seconds = 59
+                current_minutes-=1
+            else:
+                current_seconds-=1
+            timer = window.after(1000,countdown,current_minutes,current_seconds)
+    
+
+
+        
+    
+    
+
+    title_label = Label(text="Pomodoro Timer🍅", font=("Times New Roman",16))
     title_label.grid(column=0,row=0)
 
     name_label = Label(text="By: Ryan Pereira", font=("Times New Roman",16))
@@ -50,19 +99,29 @@ def main():
     timer_label = Label(text="00:00", font=("Times New Roman",24))
     timer_label.grid(column=1,row=1)
 
-    start_button = Button(text = "Start")
+    start_button = Button(text = "Start",command = start_timer)
     start_button.grid(column = 0, row = 3)
 
 
-    pause_button = Button(text = "Pause")
+    pause_button = Button(text = "Pause", command = pause_timer)
     pause_button.grid(column = 1, row = 3)
 
-    reset_button = Button(text = "Reset")
-    reset_button.grid(column = 2, row = 3)
+    continue_button = Button(text = "Continue", command = continue_timer)
+    continue_button.grid(column = 2, row = 3)
+
+    reset_button = Button(text = "Reset", command = restart_timer)
+    reset_button.grid(column = 3, row = 3)
 
 
     quote_label = Label(text=choice(quotes),font=("Times New Roman",12))
     quote_label.grid(column=1,row=4)
+
+    '''
+    canvas = Canvas(width = 200, height = 224, bg = PEACH, highlightthickness=0)
+    tomatos_img = PhotoImage(file="tomatoes.png")
+    canvas.create_image(10,12,image = tomatos_img)
+    canvas.grid(column=1,row=2)
+    '''
 
 
 
