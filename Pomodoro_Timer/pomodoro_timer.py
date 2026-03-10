@@ -114,7 +114,7 @@ def main():
 
 
     quote_label = Label(text=choice(quotes),font=("Times New Roman",12))
-    quote_label.grid(column=1,row=4)
+    quote_label.grid(column=1,row=6)
 
     '''
     canvas = Canvas(width = 200, height = 224, bg = PEACH, highlightthickness=0)
