@@ -8,17 +8,28 @@
 
 
 
-
+#From the tkinter module, importing everything
 from tkinter import *
+#From the tkinter module, importing messagebox functionality
 from tkinter import messagebox
 
-valid_numbers = [0,1,2,3,4,5,6,7,8,9]
+
+#Valid Number
+VALID_NUMBERS = [0,1,2,3,4,5,6,7,8,9]
 
 
 
+#Colors
+WILLOW_GREEN = "#84B179"
+SPRING_GREEN = "#A2CB8B"
+SPRING_MIST = "#C7EABB"
+SPRING_DEW = "#E8F5BD"
 
+#Main function, the main entry point into the program
 def main():
 
+    def countdown():
+        pass
 
     def start_timer():
         timer_time = timer_entry.get()
@@ -90,5 +101,5 @@ def main():
     window.mainloop()
 
 
-
+#Calling the main function for the whole program to start
 main()
