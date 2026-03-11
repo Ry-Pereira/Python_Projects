@@ -33,11 +33,21 @@ def main():
     def countdown(minutes,seconds):
         
         print("In countdown",minutes,seconds)
+        
         timer_label.config(text=f"{minutes:02} : {seconds:02}")
 
         if seconds > 0:
             window.after(1000,countdown,minutes,seconds-1)
-        pass
+        elif seconds == 0 and minutes > 0:
+            window.after(1000,countdown,minutes-1,seconds + 59)
+        elif seconds == 0 and minutes == 0:
+            timer_label.config(text="Timer Is Done")
+            timer_label.grid_forget()
+            timer_entry.grid(column = 1, row = 1, pady = 10)
+            start_button.config(state=NORMAL)
+            restart_button.config(state=DISABLED)
+
+        
 
     def start_timer():
         timer_time = timer_entry.get()
@@ -58,10 +68,12 @@ def main():
             restart_button.config(state=NORMAL)
             
 
-            timer_entry.destroy()
+            timer_entry.grid_forget()
             timer_label.grid(column = 1, row = 1, pady = 10)
      
             countdown(set_minutes,set_seconds)
+
+            
 
     def pause_timer():
         pause_and_unpause_button.config(text="Unpause")
@@ -69,6 +81,8 @@ def main():
         restart_button.config(state=DISABLED)
 
     def restart_timer():
+        window.after_cancel()
+
         start_button.config(state=NORMAL)
         restart_button.config(state=DISABLED)
         
