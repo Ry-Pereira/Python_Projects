@@ -20,6 +20,7 @@ VALID_NUMBERS = [0,1,2,3,4,5,6,7,8,9]
 set_minutes = None
 set_seconds = None
 
+time_id = None
 
 #Colors
 WILLOW_GREEN = "#84B179"
@@ -31,15 +32,16 @@ SPRING_DEW = "#E8F5BD"
 def main():
 
     def countdown(minutes,seconds):
+        global time_id
         
         print("In countdown",minutes,seconds)
         
         timer_label.config(text=f"{minutes:02} : {seconds:02}")
 
         if seconds > 0:
-            window.after(1000,countdown,minutes,seconds-1)
+            time_id = window.after(1000,countdown,minutes,seconds-1)
         elif seconds == 0 and minutes > 0:
-            window.after(1000,countdown,minutes-1,seconds + 59)
+            time_id = window.after(1000,countdown,minutes-1,seconds + 59)
         elif seconds == 0 and minutes == 0:
             timer_label.config(text="Timer Is Done")
             timer_label.grid_forget()
@@ -81,10 +83,12 @@ def main():
         restart_button.config(state=DISABLED)
 
     def restart_timer():
-        window.after_cancel()
-
+        window.after_cancel(time_id)
+        timer_label.grid_forget()
+        timer_entry.grid(column = 1, row = 1, pady = 10)
         start_button.config(state=NORMAL)
         restart_button.config(state=DISABLED)
+        
         
 
 
@@ -125,6 +129,7 @@ def main():
     restart_button.config(bg = "#A2CB8B")
     restart_button.grid(column=2,row=2, pady = 10)
     restart_button.config(state=DISABLED)
+    pause_and_unpause_button.config(state=DISABLED)
 
 
 
