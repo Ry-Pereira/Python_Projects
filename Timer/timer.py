@@ -17,6 +17,8 @@ from tkinter import messagebox
 #Valid Number
 VALID_NUMBERS = [0,1,2,3,4,5,6,7,8,9]
 
+set_minutes = None
+set_seconds = None
 
 
 #Colors
@@ -28,7 +30,13 @@ SPRING_DEW = "#E8F5BD"
 #Main function, the main entry point into the program
 def main():
 
-    def countdown():
+    def countdown(minutes,seconds):
+        
+        print("In countdown",minutes,seconds)
+        timer_label.config(text=f"{minutes:02} : {seconds:02}")
+
+        if seconds > 0:
+            window.after(1000,countdown,minutes,seconds-1)
         pass
 
     def start_timer():
@@ -39,12 +47,21 @@ def main():
             
         elif timer_time == "00:00":
             messagebox.showinfo(title="Error",message="Sorry Please Input a valid time")
-        elif timer_time[0] not in valid_numbers or timer_time[1] not in valid_numbers or timer_time[2] != ":" or timer_time[3] not in valid_numbers or timer_time[4] not in valid_numbers:
+        elif int(timer_time[0]) not in VALID_NUMBERS or int(timer_time[1]) not in VALID_NUMBERS or timer_time[2] != ":" or int(timer_time[3]) not in VALID_NUMBERS or int(timer_time[4]) not in VALID_NUMBERS:
             messagebox.showinfo(title="Error",message="Sorry please input in valud format")
         else:
-            print(timer_time,len(timer_time),timer_time[4])
+            set_minutes = int(timer_time[0:2])
+            set_seconds = int(timer_time[3:5])
+            print(set_minutes,set_seconds)
+            
             start_button.config(state=DISABLED)
             restart_button.config(state=NORMAL)
+            
+
+            timer_entry.destroy()
+            timer_label.grid(column = 1, row = 1, pady = 10)
+     
+            countdown(set_minutes,set_seconds)
 
     def pause_timer():
         pause_and_unpause_button.config(text="Unpause")
@@ -69,6 +86,8 @@ def main():
     title_label = Label(text="A Simple Timer",font=("Arial",12))
     title_label.config(bg = "#A2CB8B")
     title_label.grid(column = 1,row = 0)
+
+    timer_label = Label(text = "00:00",font=("Arial",22))
 
 
     #Entry
