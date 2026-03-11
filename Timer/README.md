@@ -1,5 +1,5 @@
-Porject for Pomodoro Timer
+Porject for Timer Program
 
 
 - Ryan Antony Pereira
-- Date: 3/9/26
+- Date: 3/10/26
