@@ -19,7 +19,7 @@ VALID_NUMBERS = [0,1,2,3,4,5,6,7,8,9]
 
 set_minutes = None
 set_seconds = None
-
+is_paused = False
 time_id = None
 
 #Colors
@@ -36,7 +36,7 @@ def main():
         
         print("In countdown",minutes,seconds)
         
-        timer_label.config(text=f"{minutes:02} : {seconds:02}")
+        timer_label.config(text=f"{minutes:02}:{seconds:02}")
 
         if seconds > 0:
             time_id = window.after(1000,countdown,minutes,seconds-1)
@@ -67,6 +67,7 @@ def main():
             print(set_minutes,set_seconds)
             
             start_button.config(state=DISABLED)
+            pause_and_unpause_button.config(state=NORMAL)
             restart_button.config(state=NORMAL)
             
 
@@ -76,11 +77,27 @@ def main():
             countdown(set_minutes,set_seconds)
 
             
-
+    
     def pause_timer():
-        pause_and_unpause_button.config(text="Unpause")
-        start_button.config(state=DISABLED)
-        restart_button.config(state=DISABLED)
+        global is_paused
+        if is_paused == False:
+            window.after_cancel(time_id)
+            pause_and_unpause_button.config(text="Unpause")
+            start_button.config(state=DISABLED)
+            restart_button.config(state=DISABLED)
+            is_paused = True
+         
+        else:
+            pause_and_unpause_button.config(text="Pause")
+            start_button.config(state=DISABLED)
+            restart_button.config(state=NORMAL)
+            is_paused = False
+            set_minutes = int(timer_label['text'][0:2])
+            set_seconds = int(timer_label['text'][3:5])
+            countdown(set_minutes,set_seconds-1)
+
+
+
 
     def restart_timer():
         window.after_cancel(time_id)
@@ -97,7 +114,7 @@ def main():
     window.minsize(width = 220, height = 220)
     window.config(padx = 20, pady= 20, bg = "#84B179")
    
-    
+    print(is_paused)
 
 
     #Label
