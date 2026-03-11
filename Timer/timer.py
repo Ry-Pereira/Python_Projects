@@ -6,6 +6,7 @@
 #Date: 6/10/2026
 #Last Modified: 6/11/2026
 
+#Stuff to Hash out: Need to work on formatting, becuase only the the left hand of the minute and seconds can sipport number 0-5
 
 
 #From the tkinter module, importing everything
@@ -17,7 +18,7 @@ from tkinter import messagebox
 
 
 #Valid numbers for the timer, since the user will input the time in string format, there needs to be checking to see if they are putting numbers, not letters or any specual characters.
-VALID_NUMBERS = [0,1,2,3,4,5,6,7,8,9]
+VALID_NUMBERS = ["0","1","2","3","4","5","6","7","8","9"]
 
 
 
@@ -106,7 +107,7 @@ def main():
             #Message box will show info with the title and message to indicate that the user needs to input a valid time, since 00:00 is not a valid time to start a timer, since it is already at 0, so the program will show a messagebox to the user saying to input a valid time.
             messagebox.showinfo(title="Error",message="Sorry Please Input a valid time")
         #If the timer time is not in the correct format, which means that the first two characters are not numbers, or the third character is not a colon, or the last two characters are not numbers, then the program will show a messagebox to the user saying to input a valid time, since the correct format only supports minutes and seconds occupied by 5 characters, with a colon in the middle, so if the first two characters are not numbers, or the third character is not a colon, or the last two characters are not numbers, then it is not in the correct format, and the program will show a messagebox to the user saying to input a valid time.
-        elif int(timer_time[0]) not in VALID_NUMBERS or int(timer_time[1]) not in VALID_NUMBERS or timer_time[2] != ":" or int(timer_time[3]) not in VALID_NUMBERS or int(timer_time[4]) not in VALID_NUMBERS:
+        elif timer_time[0] not in VALID_NUMBERS or timer_time[1] not in VALID_NUMBERS or timer_time[2] != ":" or timer_time[3] not in VALID_NUMBERS or timer_time[4] not in VALID_NUMBERS:
             #Message box will show info with the title and message to indicate that the user needs to input a valid time, since the correct format only supports minutes and seconds occupied by 5 characters, with a colon in the middle, so if the first two characters are not numbers, or the third character is not a colon, or the last two characters are not numbers, then it is not in the correct format, and the program will show a messagebox to the user saying to input a valid time.
             messagebox.showinfo(title="Error",message="Sorry please input in valud format")
         #Else if all conditions are passed, which means the timer is in correct format and characters used, then the program will start the timer by calling the countdown function with the minutes and seconds that the user inputed, and will also update the buttons and labels to reflect that the timer is running, and will also disable the start button, since there is a timer running, and will enable the pause and unpause button, since there is a timer running, and will enable the restart button, since there is a timer running, and will also hide the entry for the user to input a new time, since there is already a timer running, and will show the timer label to show the time counting down.
