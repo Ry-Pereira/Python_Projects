@@ -131,79 +131,123 @@ def main():
             countdown(set_minutes,set_seconds)
 
             
-    
+    #Function pause timer will be called when the user clicks the pause and unpause button, and will check if the timer is currently paused or not, if the timer is not paused, then it will pause the timer by canceling the after function using the time_id, and will update the buttons and labels to reflect that the timer is paused, and will also disable the start button, since there is a timer running, but it is paused, so the user should not be able to start another timer while there is already a timer running, even if it is paused, and will also disable the restart button, since there is a timer running, but it is paused, so the user should not be able to restart the timer while there is already a timer running, even if it is paused, and will also update the pause and unpause button to say "Unpause", since the timer is now paused, so the button should indicate that clicking it will unpause the timer, and will also update the timer label to have a different foreground color and background color to indicate that the timer is paused. If the timer is currently paused, then it will unpause the timer by calling the countdown function with the current minutes and seconds that are showing on the timer label, and will update the buttons and labels to reflect that the timer is running again, and will also disable the start button, since there is a timer running again, so the user should not be able to start another timer while there is already a timer running again, and will also enable the restart button, since there is a timer running again, so the user should be able to restart the timer while there is a timer running again, and will also update the pause and unpause button to say "Pause", since the timer is now running again, so the button should indicate that clicking it will pause the timer again, and will also update the timer label to have a different foreground color and background color to indicate that the timer is running again.
     def pause_timer():
+        #GLobal variables to keep track of if the timer is paused or not, and to keep track of the time_id, since the user can pause and unpause the timer, and even reset the timer, to keep track of time, and if the timer is paused or not.
         global is_paused, time_id
+        #If is_paused set to False, which means the timer is currently not paused, then the program will pause the timer by canceling the after function using the time_id, and will update the buttons and labels to reflect that the timer is paused, and will also disable the start button, since there is a timer running, but it is paused, so the user should not be able to start another timer while there is already a timer running, even if it is paused, and will also disable the restart button, since there is a timer running, but it is paused, so the user should not be able to restart the timer while there is already a timer running, even if it is paused, and will also update the pause and unpause button to say "Unpause", since the timer is now paused, so the button should indicate that clicking it will unpause the timer, and will also update the timer label to have a different foreground color and background color to indicate that the timer is paused. If is_paused set to True, which means the timer is currently paused, then the program will unpause the timer by calling the countdown function with the current minutes and seconds that are showing on the timer label, and will update the buttons and labels to reflect that the timer is running again, and will also disable the start button, since there is a timer running again, so the user should not be able to start another timer while there is already a timer running again, and will also enable the restart button, since there is a timer running again, so the user should be able to restart the timer while there is a timer running again, and will also update the pause and unpause button to say "Pause", since the timer is now running again, so the button should indicate that clicking it will pause the timer again, and will also update the timer label to have a different foreground color and background color to indicate that the timer is running again.
         if is_paused == False:
+            #Window after cancel will be called with the time_id, to cancel the after function that is currently running, to pause the timer, since there is a timer running, and it is not paused, so the after function should be canceled to pause the timer.
             window.after_cancel(time_id)
+            #Pause and unpause button will be updated to say "Unpause", since the timer is now paused, so the button should indicate that clicking it will unpause the timer.
             pause_and_unpause_button.config(text="Unpause")
+            #Start button will be updated to be disabled, since there is a timer running, but it is paused, so the user should not be able to start another timer while there is already a timer running, even if it is paused.
             start_button.config(state=DISABLED)
+            #Restart button will be updated to be disabled, since there is a timer running, but it is paused, so the user should not be able to restart the timer while there is already a timer running, even if it is paused.
             restart_button.config(state=DISABLED)
+            #Is paused will be set to True, since the timer is now paused, so the is_paused variable should be updated to reflect that the timer is paused.
             is_paused = True
-            
+            #Timer label will be configured to have the foreground color of SPRING MIST, and the background color of '#6A7E3F', to indicate that the timer is paused, since there is a timer running, but it is paused, so the timer label should be configured to indicate that the timer is paused.
             timer_label.config(fg = SPRING_MIST ,bg='#6A7E3F')
-         
+        #Else if is_paused set to True, which means the timer is currently paused, then the program will unpause the timer by calling the countdown function with the current minutes and seconds that are showing on the timer label, and will update the buttons and labels to reflect that the timer is running again, and will also disable the start button, since there is a timer running again, so the user should not be able to start another timer while there is already a timer running again, and will also enable the restart button, since there is a timer running again, so the user should be able to restart the timer while there is a timer running again, and will also update the pause and unpause button to say "Pause", since the timer is now running again, so the button should indicate that clicking it will pause the timer again, and will also update the timer label to have a different foreground color and background color to indicate that the timer is running again.
         else:
+            #Pause and unpause button will be updated to say "Pause", since the timer is now running again, so the button should indicate that clicking it will pause the timer again.
             pause_and_unpause_button.config(text="Pause")
+            #Start button will be updated to be disabled, since there is a timer running again, so the user should not be able to start another timer while there is already a timer running again.
             start_button.config(state=DISABLED)
+            #Restart button will be updated to be normal, since there is a timer running again, so the user should be able to restart the timer while there is a timer running again.
             restart_button.config(state=NORMAL)
+            #Is paused will be set to False, since the timer is now running again, so the is_paused variable should be updated to reflect that the timer is running again.
             is_paused = False
+            #Set minutes will be set to the first two characters of the timer label, which is the minutes that are currently showing on the timer label, and will be converted to an integer, since the timer label is in string format, so the time will be in string format, and will need to be converted to integers for minutes and seconds to be used in the countdown function.
             set_minutes = int(timer_label['text'][0:2])
+            #Set seconds will be set to the last two characters of the timer label, which is the seconds that are currently showing on the timer label, and will be converted to an integer, since the timer label is in string format, so the time will be in string format, and will need to be converted to integers for minutes and seconds to be used in the countdown function.
             set_seconds = int(timer_label['text'][3:5])
+            #Timer label will be configured to have the foreground color of WILLOW GREEN, and the background color of SPRING MIST, to indicate that the timer is running again, since there is a timer running again, so the timer label should be configured to indicate that the timer is running again.
             timer_label.config(fg = '#6A7E3F' ,bg=SPRING_MIST)
+            #Countdown function will be called with the set minutes and set seconds that are currently showing on the timer label, to unpause the timer and start it counting down again, since there is a timer running again, so the countdown function should be called to start the timer counting down again.
             countdown(set_minutes,set_seconds-1)
 
 
 
-
+    #Function restart timer will be called when the user clicks the restart button, and will restart the timer by canceling the after function using the time_id, and will update the buttons and labels to reflect that the timer is restarted, and will also disable the pause and unpause button, since there is no timer running, so there is no timer to pause or unpause, and will also disable the restart button, since there is no timer running, so there is no timer to restart, and will also update the start button to be normal, since there is no timer running, so the user should be able to start a new timer, and will also hide the timer label, since there is no timer running, and will show the entry for the user to input a new time.
     def restart_timer():
+        #Global variable to keep track of the time_id, since the user can pause and unpause the timer, and even reset the timer, to keep track of time, and if the timer is paused or not.
+        global time_id
         window.after_cancel(time_id)
+        #Timer label will be hidden, since there is no timer running, so the user should not be able to see the timer label when there is no timer running.
         timer_label.grid_forget()
+        #Timer entry will be shown again, in the same place as the timer label, with same configuration, to show the entry for the user to input a new time, since there is no timer running, so the user should be able to input a new time when there is no timer running.
         timer_entry.grid(column = 1, row = 1, pady = 10)
+        #start button will be updated to be normal, since there is no timer running, so the user should be able to start a new timer when there is no timer running.
         start_button.config(state=NORMAL)
+        #Pause and unpause button will be updated to be disabled, since there is no timer running, so there is no timer to pause or unpause, so the pause and unpause button should be disabled.
         pause_and_unpause_button.confug(state=DISABLED)
+        #Restart button will be updated to be disabled, since there is no timer running, so there is no timer to restart, so the restart button should be disabled.
         restart_button.config(state=DISABLED)
         
         
 
-
+    #Window setup, creating the window for the program, and setting the title, size, and background color of the window, to make it look nice and appealing to the user, and to make it more enjoyable to use the program.
     window = Tk()
+    #Window title will be set to "Timer", since this is a timer program, so the title should reflect that it is a timer program.
     window.title("Timer")
+    #Window minsize will be set to width of 220 and height of 220, since the program does not need to be very big, and this size is enough to fit all the buttons, labels, and entry, and also looks nice and appealing to the user, and also prevents the user from making the window too small to see the buttons, labels, and entry.
     window.minsize(width = 220, height = 220)
+    #Window config will be set to have a padding of 25 on the x and y axis, and will have a background color of WILLOW GREEN, to make it look nice and appealing to the user, and to make it more enjoyable to use the program.
     window.config(padx = 25, pady= 25, bg = "#84B179")
    
 
 
 
-    #Label
+    #Labels
+    #Title label will be created with the text "A Simple Timer", and will have a font of Arial with size 12, and will be configured to have a background color of SPRING GREEN, to make it look nice and appealing to the user, and to make it more enjoyable to use the program, and will be placed in the first column and first row of the grid, to be at the top of the window, and to be centered above the timer entry and timer label.
     title_label = Label(text="A Simple Timer",font=("Arial",12))
+    #Title label will be configured to have a background color of SPRING GREEN, to make it look nice and appealing to the user, and to make it more enjoyable to use the program.
     title_label.config(bg = "#A2CB8B")
+    #Title label will be placed in the first column and first row of the grid, to be at the top of the window, and to be centered above the timer entry and timer label.
     title_label.grid(column = 1,row = 0)
-
+    #Timer label will be created with the text "00:00", and will have a font of Arial with size 12, and will be configured to have a background color of SPRING MIST, to make it look nice and appealing to the user, and to make it more enjoyable to use the program, and will be placed in the first column and first row of the grid, to be in the same place as the timer entry, but will be hidden at the start of the program, since there is no timer running at the start of the program, so the timer label should be hidden at the start of the program, and will only be shown when there is a timer running.
     timer_label = Label(text = "00:00",font=("Arial",12),width = 10)
 
 
     #Entry
+    #Timer entry will be created with a width of 10, and a font of Arial with size 12, and will be configured to have a background color of SPRING GREEN, to make it look nice and appealing to the user, and to make it more enjoyable to use the program, and will be placed in the first column and first row of the grid, to be in the same place as the timer label, but will be shown at the start of the program, since there is no timer running at the start of the program, so the timer entry should be shown at the start of the program, and will only be hidden when there is a timer running.
     timer_entry = Entry(width = 10,font=("Arial",12))
+    #Timer entry will be placed in the first column and first row of the grid, to be in the same place as the timer label, but will be shown at the start of the program, since there is no timer running at the start of the program, so the timer entry should be shown at the start of the program, and will only be hidden when there is a timer running.
     timer_entry.grid(column = 1, row = 1, pady = 10)
+    #Timer entry will be configured to have a background color of SPRING GREEN, to make it look nice and appealing to the user, and to make it more enjoyable to use the program.
     timer_entry.insert(0,"00:00")
+    #Timer entry wil be configured to have a background color of SPRING GREEN, to make it look nice and appealing to the user, and to make it more enjoyable to use the program.
     timer_entry.config(bg = "#A2CB8B")
+    #Timer entry will be focused, so the user can immediately start typing in it.
     timer_entry.focus()
 
 
 
 
     #Button
+    #Start button will be created with the text "Start", and will have a font of Arial with size 12, and will be configured to have a background color of SPRING GREEN, to make it look nice and appealing to the user, and to make it more enjoyable to use the program, and will be placed in the first column and second row of the grid, to be below the timer entry and timer label, and to be on the left side of the window, and will have a command of start_timer, so that when the user clicks the start button, the start_timer function will be called to start the timer.
     start_button = Button(text = "Start", command = start_timer,font=("Arial",12))
+    #Start button will be configured to have a background color of SPRING GREEN, to make it look nice and appealing to the user, and to make it more enjoyable to use the program.
     start_button.config(bg = "#A2CB8B")
+    #Start button will be placed in the first column and second row of the grid, to be below the timer entry and timer label, and to be on the left side of the window, and will have a command of start_timer, so that when the user clicks the start button, the start_timer function will be called to start the timer.
     start_button.grid(column=0,row=2, pady = 10)
+    #Pause and unpause button will be created with the text "Pause", and will have a font of Arial with size 12, and will be configured to have a background color of SPRING GREEN, to make it look nice and appealing to the user, and to make it more enjoyable to use the program, and will be placed in the first column and second row of the grid, to be below the timer entry and timer label, and to be in the middle of the window, and will have a command of pause_timer, so that when the user clicks the pause and unpause button, the pause_timer function will be called to pause or unpause the timer depending on if the timer is currently paused or not.
     pause_and_unpause_button = Button(text="Pause", command = pause_timer,font=("Arial",12))
+    #Pause and unpause button will be configured to have a background color of SPRING GREEN, to make it look nice and appealing to the user, and to make it more enjoyable to use the program.
     pause_and_unpause_button.config(bg = "#A2CB8B")
+    #Pause and unpause button will be placed in the first column and second row of the grid, to be below the timer entry and timer label, and to be in the middle of the window, and will have a command of pause_timer, so that when the user clicks the pause and unpause button, the pause_timer function will be called to pause or unpause the timer depending on if the timer is currently paused or not.
     pause_and_unpause_button.grid(column=1,row=2, pady = 10)
+    #Restart button will be created with the text "Restart", and will have a font of Arial with size 12, and will be configured to have a background color of SPRING GREEN, to make it look nice and appealing to the user, and to make it more enjoyable to use the program, and will be placed in the first column and second row of the grid, to be below the timer entry and timer label, and to be on the right side of the window, and will have a command of restart_timer, so that when the user clicks the restart button, the restart_timer function will be called to restart the timer.
     restart_button = Button(text="Restart", command = restart_timer,font=("Arial",12))
+    #Restart button will be configured to have a background color of SPRING GREEN, to make it look nice and appealing to the user, and to make it more enjoyable to use the program.
     restart_button.config(bg = "#A2CB8B")
+    #Restart button will be placed in the first column and second row of the grid, to be below the timer entry and timer label, and to be on the right side of the window, and will have a command of restart_timer, so that when the user clicks the restart button, the restart_timer function will be called to restart the timer.
     restart_button.grid(column=2,row=2, pady = 10)
+    #At the start of the program, the pause and unpause button will be disabled, since there is no timer running at the start of the program, so there is no timer to pause or unpause, so the pause and unpause button should be disabled at the start of the program, and will only be enabled when there is a timer running.
     restart_button.config(state=DISABLED)
+    #Pause and unpause button will be disabled, since there is no timer running at the start of the program, so there is no timer to pause or unpause, so the pause and unpause button should be disabled at the start of the program, and will only be enabled when there is a timer running.
     pause_and_unpause_button.config(state=DISABLED)
 
     #If the user clicks the x buttons on the window, which meaning they want to leave, the function close window will be called, to ask if the user really want to leave the program.
