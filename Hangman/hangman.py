@@ -128,16 +128,19 @@ def main():
 
     #Window Set Up
     window = Tk()
-    window.minsize(width=300,height=300)
+   
     window.title("Hangman Game")
-    window.config(padx =30,pady=30)
+    window.config(padx =50,pady=50)
 
-
+    hangman_title = Label(text="HANGMAN",font=("Arial",20))
+    hangman_title.grid(row=0,column=0,columnspan=13)
 
     #Labels
-    title_label = Label(text="HANGMAN",font=("Arial",12))
-    hangman_art_label = Label(text= stage_0)
-    hangman_text_label = Label(text= "______")
+    canvas = Canvas(width=200,height=200)
+    canvas.config(bg="blue")
+    #canvas.create_text(100,20,text="Hangman",font=("Arial",12))
+    canvas.grid(row=1,column=0,columnspan=13)
+    
     
 
     #Buttons
@@ -172,39 +175,38 @@ def main():
 
     #Grid Placement
 
-    title_label.grid(row=0,column=1,columnspan=3)
-    hangman_art_label.grid(row=1,column=1,columnspan=3)
-    hangman_text_label.grid(row=2,column=1,columnspan=3)
 
-    a_button.grid(row=3,column=0,padx=0)
-    b_button.grid(row=3,column=1,padx=0)
-    c_button.grid(row=3,column=2,padx=0)
-    d_button.grid(row=4,column=0,padx=0)
-    e_button.grid(row=4,column=1,padx=0)   
-    f_button.grid(row=4,column=2,padx=0)
-    g_button.grid(row=5,column=0,padx=0)
-    h_button.grid(row=5,column=1,padx=0)
-    i_button.grid(row=5,column=2,padx=0)
-    j_button.grid(row=6,column=0,padx=0)
-    k_button.grid(row=6,column=1,padx=0)
-    l_button.grid(row=6,column=2,padx=0)
-    m_button.grid(row=7,column=0,padx=0)
-    n_button.grid(row=7,column=1,padx=0)
-    o_button.grid(row=7,column=2,padx=0)
-    p_button.grid(row=8,column=0,padx=0)
-    q_button.grid(row=8,column=1,padx=0)
-    r_button.grid(row=8,column=2,padx=0)
-    s_button.grid(row=9,column=0,padx=0)
-    t_button.grid(row=9,column=1,padx=0)
-    u_button.grid(row=9,column=2,padx=0)
-    v_button.grid(row=10,column=0,padx=0)
-    w_button.grid(row=10,column=1,padx=0)
-    x_button.grid(row=10,column=2,padx=0)
-    y_button.grid(row=11,column=0,padx=0)
-    z_button.grid(row=11,column=1,padx=0)
+    
+
+    a_button.grid(row=2,column=0,padx=0,pady=20)
+    b_button.grid(row=2,column=1,padx=0,pady=20)
+    c_button.grid(row=2,column=2,padx=0,pady=20)
+    d_button.grid(row=2,column=3,padx=0,pady=20)
+    e_button.grid(row=2,column=4,padx=0,pady=20)   
+    f_button.grid(row=2,column=5,padx=0,pady=20)
+    g_button.grid(row=2,column=6,padx=0,pady=20)
+    h_button.grid(row=2,column=7,padx=0,pady=20)
+    i_button.grid(row=2,column=8,padx=0,pady=20)
+    j_button.grid(row=2,column=9,padx=0,pady=20)
+    k_button.grid(row=2,column=10,padx=0,pady=20)
+    l_button.grid(row=2,column=11,padx=0,pady=20)
+    m_button.grid(row=2,column=12,padx=0,pady=20)
+    n_button.grid(row=3,column=0,padx=0,pady=10)
+    o_button.grid(row=3,column=1,padx=0,pady=10)
+    p_button.grid(row=3,column=2,padx=0,pady=10)
+    q_button.grid(row=3,column=3,padx=0,pady=10)
+    r_button.grid(row=3,column=4,padx=0,pady=10)
+    s_button.grid(row=3,column=5,padx=0,pady=10)
+    t_button.grid(row=3,column=6,padx=0,pady=10)
+    u_button.grid(row=3,column=7,padx=0,pady=10)
+    v_button.grid(row=3,column=8,padx=0,pady=10)
+    w_button.grid(row=3,column=9,padx=0,pady=10)
+    x_button.grid(row=3,column=10,padx=0,pady=10)
+    y_button.grid(row=3,column=11,padx=0,pady=10)
+    z_button.grid(row=3,column=12,padx=0,pady=10)
 
 
-    game(hangman_text_label)
+    
 
     window.mainloop()
     
