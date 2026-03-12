@@ -37,7 +37,6 @@ hangman_words = ["python", "variable", "function", "loop", "string","integer", "
 
 
 
-
 def main():
 
     
@@ -45,82 +44,113 @@ def main():
 
     def type_a():
         a_button.config(state=DISABLED)
+        type_in_letter("a")
 
     def type_b():
         b_button.config(state=DISABLED)
+        type_in_letter("b")
 
     def type_c():
         c_button.config(state=DISABLED)
+        type_in_letter("c")
 
     def type_d():
         d_button.config(state=DISABLED)
+        type_in_letter("d")
 
     def type_e():
         e_button.config(state=DISABLED)
+        type_in_letter("e")
 
     def type_f():
         f_button.config(state=DISABLED)
+        type_in_letter("f")
 
 
     def type_g():
         g_button.config(state=DISABLED)
+        type_in_letter("g")
 
     def type_h():
         h_button.config(state=DISABLED)
+        type_in_letter("h")
 
     def type_i():
         i_button.config(state=DISABLED)
+        type_in_letter("i")
 
 
     def type_j():
         j_button.config(state=DISABLED)
+        type_in_letter("j")
 
     def type_k():
         k_button.config(state=DISABLED)
+        type_in_letter("k")
 
     def type_l():
         l_button.config(state=DISABLED)
+        type_in_letter("l")
 
     def type_m():
         m_button.config(state=DISABLED)
+        type_in_letter("m")
 
     def type_n():
         n_button.config(state=DISABLED)
+        type_in_letter("n")
 
     def type_o():
         o_button.config(state=DISABLED)
+        type_in_letter("o")
 
     def type_p():
         p_button.config(state=DISABLED)
+        type_in_letter("p")
 
     def type_q():
         q_button.config(state=DISABLED)
+        type_in_letter("q")
 
     def type_r():
         r_button.config(state=DISABLED)
+        type_in_letter("r")
 
     def type_s():
         s_button.config(state=DISABLED)
+        type_in_letter("s")
 
     def type_t():
         t_button.config(state=DISABLED)
+        type_in_letter("t")
 
     def type_u():
         u_button.config(state=DISABLED)
+        type_in_letter("u")
 
     def type_v():
         v_button.config(state=DISABLED)
+        type_in_letter("v")
     
     def type_w():
         w_button.config(state=DISABLED)
+        type_in_letter("w")
     def type_x():
-        x_button.config(state=DISABLED)     
+        x_button.config(state=DISABLED)   
+        type_in_letter("x")  
     def type_y():
         y_button.config(state=DISABLED) 
+        type_in_letter("y")
     def type_z():
         z_button.config(state=DISABLED)
+        type_in_letter("z")
 
     
+    def type_in_letter(letter):
+        for num in range(len(letter)):
+            if selected_word[num] == letter:
+                blank_word[num] = letter
+        canvas.itemconfig(hangman_word,text=blank_word)
 
 
 
@@ -128,6 +158,11 @@ def main():
 
     #Window Set Up
     window = Tk()
+
+    selected_word = list(random.choice(hangman_words))
+    blank_word = []
+    for letter in selected_word:
+        blank_word.append("_")
    
     window.title("Hangman Game")
     window.config(padx =50,pady=50)
@@ -136,7 +171,9 @@ def main():
     hangman_title.grid(row=0,column=0,columnspan=13)
 
     #Labels
-    canvas = Canvas(width=200,height=200)
+    canvas = Canvas(width=320,height=200)
+    hangman_art = canvas.create_text(160,90,text=stage_0,font=("Arial",13),anchor="center")
+    hangman_word = canvas.create_text(160,180,text=blank_word,font=("Arial",20),anchor="center")
     canvas.config(bg="blue")
     #canvas.create_text(100,20,text="Hangman",font=("Arial",12))
     canvas.grid(row=1,column=0,columnspan=13)
@@ -144,32 +181,32 @@ def main():
     
 
     #Buttons
-    a_button = Button(text="A", command = type_a)
-    b_button = Button(text="B", command = type_b)
-    c_button = Button(text="C", command = type_c)
-    d_button = Button(text="D", command = type_d)
-    e_button = Button(text="E", command = type_e)
-    f_button = Button(text="F", command = type_f)
-    g_button = Button(text="G", command = type_g)
-    h_button = Button(text="H", command = type_h)
-    i_button = Button(text="I", command = type_i)
-    j_button = Button(text="J", command = type_j)
-    k_button = Button(text="K", command = type_k)
-    l_button = Button(text="L", command = type_l)
-    m_button = Button(text="M", command = type_m)
-    n_button = Button(text="N", command = type_n)
-    o_button = Button(text="O", command = type_o)
-    p_button = Button(text="P", command = type_p)
-    q_button = Button(text="Q", command = type_q)
-    r_button = Button(text="R", command = type_r)
-    s_button = Button(text="S", command = type_s)
-    t_button = Button(text="T", command = type_t)
-    u_button = Button(text="U", command = type_u)
-    v_button = Button(text="V", command = type_v)
-    w_button = Button(text="W", command = type_w)
-    x_button = Button(text="X", command = type_x)
-    y_button = Button(text="Y", command = type_y)
-    z_button = Button(text="Z", command = type_z)
+    a_button = Button(text="A", command = type_a,width = 2)
+    b_button = Button(text="B", command = type_b,width = 2)
+    c_button = Button(text="C", command = type_c,width = 2)
+    d_button = Button(text="D", command = type_d,width = 2)
+    e_button = Button(text="E", command = type_e,width = 2)
+    f_button = Button(text="F", command = type_f,width = 2)
+    g_button = Button(text="G", command = type_g,width = 2)
+    h_button = Button(text="H", command = type_h,width = 2)
+    i_button = Button(text="I", command = type_i,width = 2)
+    j_button = Button(text="J", command = type_j,width = 2)
+    k_button = Button(text="K", command = type_k,width = 2)
+    l_button = Button(text="L", command = type_l,width = 2)
+    m_button = Button(text="M", command = type_m,width = 2)
+    n_button = Button(text="N", command = type_n,width = 2)
+    o_button = Button(text="O", command = type_o,width = 2)
+    p_button = Button(text="P", command = type_p,width = 2)
+    q_button = Button(text="Q", command = type_q,width = 2)
+    r_button = Button(text="R", command = type_r,width = 2)
+    s_button = Button(text="S", command = type_s,width = 2)
+    t_button = Button(text="T", command = type_t,width = 2)
+    u_button = Button(text="U", command = type_u,width = 2)
+    v_button = Button(text="V", command = type_v,width = 2)
+    w_button = Button(text="W", command = type_w,width = 2)
+    x_button = Button(text="X", command = type_x,width = 2)
+    y_button = Button(text="Y", command = type_y,width = 2)
+    z_button = Button(text="Z", command = type_z,width = 2)
 
 
 
