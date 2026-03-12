@@ -14,7 +14,7 @@ from tkinter import *
 #From the tkinter module, importing messagebox functionality
 from tkinter import messagebox
 #rom the hagmanart_py module, importing all the ascii art
-from hangman_art import stage_0
+from hangman_art import stage_0,stage_1, stage_2, stage_3, stage_4, stage_5, stage_6
 
 import random
 
@@ -25,10 +25,10 @@ hangman_words = ["python", "variable", "function", "loop", "string","integer", "
     "castle", "dragon", "wizard", "knight", "kingdom","forest", "desert", "ocean", "island", "volcano","planet", "asteroid", "comet", "nebula", "universe"
 ]
 
+hangman_stages = [stage_0, stage_1, stage_2, stage_3, stage_4, stage_5, stage_6]
 
 
-
-
+lives = 7
 
 
 
@@ -145,15 +145,34 @@ def main():
         z_button.config(state=DISABLED)
         type_in_letter("z")
 
-    
+    def kill_game():
+        for button in buttons:
+            button.config(state=DISABLED)
+
+    def switch_stage(stage):
+        pass
+
     def type_in_letter(letter):
-        for num in range(len(letter)):
+        global lives
+        is_there = False
+        for num in range(len(selected_word)):
             if selected_word[num] == letter:
+                is_there = True
                 blank_word[num] = letter
-        canvas.itemconfig(hangman_word,text=blank_word)
+                canvas.itemconfig(hangman_word,text=blank_word)
+        
+        if is_there == False:
+            lives-=1
+            print(lives)
+
+        if lives == 0:
+            print("You lose")
+            kill_game()
+
+        
 
 
-
+        
     
 
     #Window Set Up
@@ -161,6 +180,7 @@ def main():
 
     selected_word = list(random.choice(hangman_words))
     blank_word = []
+    buttons = []
     for letter in selected_word:
         blank_word.append("_")
    
@@ -182,31 +202,57 @@ def main():
 
     #Buttons
     a_button = Button(text="A", command = type_a,width = 2)
+    buttons.append(a_button)
     b_button = Button(text="B", command = type_b,width = 2)
+    buttons.append(b_button)
     c_button = Button(text="C", command = type_c,width = 2)
+    buttons.append(c_button)
     d_button = Button(text="D", command = type_d,width = 2)
+    buttons.append(d_button)
     e_button = Button(text="E", command = type_e,width = 2)
+    buttons.append(e_button)
     f_button = Button(text="F", command = type_f,width = 2)
+    buttons.append(f_button)
     g_button = Button(text="G", command = type_g,width = 2)
+    buttons.append(g_button)
     h_button = Button(text="H", command = type_h,width = 2)
+    buttons.append(h_button)
     i_button = Button(text="I", command = type_i,width = 2)
+    buttons.append(i_button)
     j_button = Button(text="J", command = type_j,width = 2)
+    buttons.append(j_button)
     k_button = Button(text="K", command = type_k,width = 2)
+    buttons.append(k_button)
     l_button = Button(text="L", command = type_l,width = 2)
+    buttons.append(l_button)
     m_button = Button(text="M", command = type_m,width = 2)
+    buttons.append(m_button)
     n_button = Button(text="N", command = type_n,width = 2)
+    buttons.append(n_button)
     o_button = Button(text="O", command = type_o,width = 2)
+    buttons.append(o_button)
     p_button = Button(text="P", command = type_p,width = 2)
+    buttons.append(p_button)
     q_button = Button(text="Q", command = type_q,width = 2)
+    buttons.append(q_button)
     r_button = Button(text="R", command = type_r,width = 2)
+    buttons.append(r_button)
     s_button = Button(text="S", command = type_s,width = 2)
+    buttons.append(s_button)
     t_button = Button(text="T", command = type_t,width = 2)
+    buttons.append(t_button)
     u_button = Button(text="U", command = type_u,width = 2)
+    buttons.append(u_button)
     v_button = Button(text="V", command = type_v,width = 2)
+    buttons.append(v_button)
     w_button = Button(text="W", command = type_w,width = 2)
+    buttons.append(w_button)
     x_button = Button(text="X", command = type_x,width = 2)
+    buttons.append(x_button)
     y_button = Button(text="Y", command = type_y,width = 2)
+    buttons.append(y_button)
     z_button = Button(text="Z", command = type_z,width = 2)
+    buttons.append(z_button)
 
 
 
@@ -242,8 +288,9 @@ def main():
     y_button.grid(row=3,column=11,padx=0,pady=10)
     z_button.grid(row=3,column=12,padx=0,pady=10)
 
-
     
+    if lives == 0:
+        print("You lose")
 
     window.mainloop()
     
