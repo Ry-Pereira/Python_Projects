@@ -24,11 +24,12 @@ hangman_words = ["python", "variable", "function", "loop", "string","integer", "
     "network", "server", "client", "database", "algorithm","puzzle", "mystery", "adventure", "galaxy", "treasure",
     "castle", "dragon", "wizard", "knight", "kingdom","forest", "desert", "ocean", "island", "volcano","planet", "asteroid", "comet", "nebula", "universe"
 ]
-
+selected_word = list(random.choice(hangman_words))
 hangman_stages = [stage_0, stage_1, stage_2, stage_3, stage_4, stage_5, stage_6]
 
 
 lives = 7
+stage_number = 0
 
 
 
@@ -146,14 +147,24 @@ def main():
         type_in_letter("z")
 
     def kill_game():
+        global selected_word
         for button in buttons:
             button.config(state=DISABLED)
+        canvas.itemconfig(hangman_art,text="YOU LOSE")
+        canvas.itemconfig(hangman_word,text=selected_word)
+        
+        
+    def restart_or_quit():
+        pass
+        
 
     def switch_stage(stage):
-        pass
+        canvas.itemconfig(hangman_art,text=hangman_stages[stage])
+        
 
     def type_in_letter(letter):
         global lives
+        global stage_number
         is_there = False
         for num in range(len(selected_word)):
             if selected_word[num] == letter:
@@ -162,12 +173,17 @@ def main():
                 canvas.itemconfig(hangman_word,text=blank_word)
         
         if is_there == False:
+            stage_number +=1
             lives-=1
-            print(lives)
+            
+        if stage_number <= 6:
+            switch_stage(stage_number)
+
 
         if lives == 0:
             print("You lose")
             kill_game()
+        print(lives)
 
         
 
@@ -178,7 +194,8 @@ def main():
     #Window Set Up
     window = Tk()
 
-    selected_word = list(random.choice(hangman_words))
+    
+    print(selected_word)
     blank_word = []
     buttons = []
     for letter in selected_word:
@@ -258,37 +275,14 @@ def main():
 
     #Grid Placement
 
+    for num in range(26):
+        if num < 13:
+            buttons[num].grid(row=2,column=num,padx=0,pady=20)
+        
+        else:
+            buttons[num].grid(row=3,column=(num-13),padx=0,pady=20)
 
-    
 
-    a_button.grid(row=2,column=0,padx=0,pady=20)
-    b_button.grid(row=2,column=1,padx=0,pady=20)
-    c_button.grid(row=2,column=2,padx=0,pady=20)
-    d_button.grid(row=2,column=3,padx=0,pady=20)
-    e_button.grid(row=2,column=4,padx=0,pady=20)   
-    f_button.grid(row=2,column=5,padx=0,pady=20)
-    g_button.grid(row=2,column=6,padx=0,pady=20)
-    h_button.grid(row=2,column=7,padx=0,pady=20)
-    i_button.grid(row=2,column=8,padx=0,pady=20)
-    j_button.grid(row=2,column=9,padx=0,pady=20)
-    k_button.grid(row=2,column=10,padx=0,pady=20)
-    l_button.grid(row=2,column=11,padx=0,pady=20)
-    m_button.grid(row=2,column=12,padx=0,pady=20)
-    n_button.grid(row=3,column=0,padx=0,pady=10)
-    o_button.grid(row=3,column=1,padx=0,pady=10)
-    p_button.grid(row=3,column=2,padx=0,pady=10)
-    q_button.grid(row=3,column=3,padx=0,pady=10)
-    r_button.grid(row=3,column=4,padx=0,pady=10)
-    s_button.grid(row=3,column=5,padx=0,pady=10)
-    t_button.grid(row=3,column=6,padx=0,pady=10)
-    u_button.grid(row=3,column=7,padx=0,pady=10)
-    v_button.grid(row=3,column=8,padx=0,pady=10)
-    w_button.grid(row=3,column=9,padx=0,pady=10)
-    x_button.grid(row=3,column=10,padx=0,pady=10)
-    y_button.grid(row=3,column=11,padx=0,pady=10)
-    z_button.grid(row=3,column=12,padx=0,pady=10)
-
-    
     if lives == 0:
         print("You lose")
 
