@@ -29,11 +29,12 @@ hangman_words = ["python", "variable", "function", "loop", "string","integer", "
 alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 stage_number = 0
 hangman_stages = [stage_0, stage_1, stage_2, stage_3, stage_4, stage_5, stage_6]
-lives=7
+lives=6
 
 
 
-
+hangman_selected_word = None
+hangman_blanked_out_word = None
             
 
 def select_word():
@@ -51,16 +52,63 @@ def blankout_word(word):
 
 
 def main():
-    def lose_screen():
+    
+    global hangman_selected_word
+    global hangman_blanked_out_word
+
+    def disbale_all_buttons():
         for button in buttons:
             button.config(state=DISABLED)
+    
+    def enable_all_buttons():
+        for button in buttons:
+            button.grid()
+        for button in buttons:
+            button.config(state=NORMAL)
+
+    def restart():
+        global hangman_selected_word
+        global hangman_blanked_out_word
+        global lives
+        global stage_number
+
+        hangman_selected_word = select_word()
+        hangman_blanked_out_word = blankout_word(hangman_selected_word)
+        lives = 7
+        stage_number = 0
+        continue_button.grid_remove()
+        quit_button.grid_remove()
+        enable_all_buttons()
+        canvas.itemconfig(hangman_art,text=hangman_stages[stage_number])
+        canvas.itemconfig(hangman_word,text=hangman_blanked_out_word)
+        
+        
+
+
+
+    def quit_game():
+        window.destroy()
+
+
+    def continue_or_leave():
+        for button in buttons:
+            button.grid_remove()
+        continue_button.grid(row=2,column=0,rowspan=2,columnspan=5,pady=5)
+        quit_button.grid(row=2,column=10,rowspan=2,columnspan=5,pady=5)
+
+
+
+
+    def lose_screen():
+        disbale_all_buttons()
         canvas.itemconfig(hangman_art,text="YOU LOSE")
         canvas.itemconfig(hangman_word,text=hangman_selected_word)
+        window.after(4000,continue_or_leave)
     
     def win_screen():
-        for button in buttons:
-            button.config(state=DISABLED)
+        disbale_all_buttons()
         canvas.itemconfig(hangman_art,text="YOU WIN")
+        window.after(4000,continue_or_leave)
        
 
 
@@ -122,6 +170,9 @@ def main():
     
 
     #Button Setup
+    continue_button = Button(text="RESTART",command=restart,width=21,height=3)
+    quit_button = Button(text="QUIT",command=quit_game,width=21,height=3)
+    
     buttons = []
     for alphabet_letter in alphabet:
         button = Button(text=alphabet_letter,width=2)
@@ -131,7 +182,8 @@ def main():
             buttons[buttons.index(button)].grid(row=2,column=buttons.index(button),padx=0,pady=20)
         else:
             buttons[buttons.index(button)].grid(row=3,column=(buttons.index(button)-13),padx=0,pady=20)
-
+            
+    
     window.mainloop()
 
 
