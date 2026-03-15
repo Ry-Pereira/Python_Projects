@@ -25,11 +25,15 @@ hangman_words = ["python", "variable", "function", "loop", "string","integer", "
     "network", "server", "client", "database", "algorithm","puzzle", "mystery", "adventure", "galaxy", "treasure",
     "castle", "dragon", "wizard", "knight", "kingdom","forest", "desert", "ocean", "island", "volcano","planet", "asteroid", "comet", "nebula", "universe"
 ]
-
+#Alphabet literal list of every uppercase letter in the alphabet
 alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+#Setting the stage number to 0, to idnicate the start of the game
 stage_number = 0
+#Hangmang stages set to a list of the hangman stage art in order
 hangman_stages = [stage_0, stage_1, stage_2, stage_3, stage_4, stage_5, stage_6]
+#Setting the lives t 6, to indicate the start of the game
 lives=6
+
 
 
 
@@ -142,12 +146,10 @@ def main():
             switch_stage(stage_number)
 
         if hangman_blanked_out_word == hangman_selected_word:
-            print("You win")
             win_screen()
 
 
         if lives == 0:
-            print("You lose")
             lose_screen()
     
 
