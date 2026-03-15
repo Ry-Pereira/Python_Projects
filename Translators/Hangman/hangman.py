@@ -53,10 +53,15 @@ def blankout_word(word):
 def main():
     def lose_screen():
         for button in buttons:
-                button.config(state=DISABLED)
-                canvas.itemconfig(hangman_art,text="YOU LOSE")
-                canvas.itemconfig(hangman_word,text=hangman_selected_word)
+            button.config(state=DISABLED)
+        canvas.itemconfig(hangman_art,text="YOU LOSE")
+        canvas.itemconfig(hangman_word,text=hangman_selected_word)
     
+    def win_screen():
+        for button in buttons:
+            button.config(state=DISABLED)
+        canvas.itemconfig(hangman_art,text="YOU WIN")
+       
 
 
     def switch_stage(stage):
@@ -78,12 +83,19 @@ def main():
                 hangman_blanked_out_word[num] = letter
                 canvas.itemconfig(hangman_word,text=hangman_blanked_out_word)
         
+        
+
+
         if is_there == False:
             stage_number +=1
             lives-=1
             
         if stage_number <= 6:
             switch_stage(stage_number)
+
+        if hangman_blanked_out_word == hangman_selected_word:
+            print("You win")
+            win_screen()
 
 
         if lives == 0:
