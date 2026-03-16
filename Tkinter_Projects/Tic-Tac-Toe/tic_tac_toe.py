@@ -5,7 +5,6 @@ import random
 
 symbols=["X","O"]
 symbol = None
-
 wins = [
     []
 ]
@@ -21,9 +20,61 @@ def main():
             button.config(text="-",bg="white",state=NORMAL)
             button.grid_remove()
 
+    def who_won_x():
+        #LEft and right
+        if buttons[0]["text"] == "X" and buttons[1]["text"] == "X" and buttons[2]["text"] == "X":
+            pass
+        elif buttons[3]["text"] == "X" and buttons[4]["text"] == "X" and buttons[5]["text"] == "X":
+            pass
+        elif buttons[6]["text"] == "X" and buttons[7]["text"] == "X" and buttons[8]["text"] == "X":
+            pass
+
+        #Up and Down
+        elif buttons[0]["text"] == "X" and buttons[3]["text"] == "X" and buttons[6]["text"] == "X":
+            pass
+        elif buttons[1]["text"] == "X" and buttons[4]["text"] == "X" and buttons[7]["text"] == "X":
+            pass
+        elif buttons[2]["text"] == "X" and buttons[5]["text"] == "X" and buttons[8]["text"] == "X":
+            pass
+
+
+        #Across
+        elif buttons[0]["text"] == "X" and buttons[4]["text"] == "X" and buttons[8]["text"] == "X":
+            pass
+        elif buttons[2]["text"] == "X" and buttons[4]["text"] == "X" and buttons[6]["text"] == "X":
+            pass
+
+    def who_won_o():
+        #LEft and right
+        if buttons[0]["text"] == "O" and buttons[1]["text"] == "O" and buttons[2]["text"] == "O":
+            pass
+        elif buttons[3]["text"] == "O" and buttons[4]["text"] == "O" and buttons[5]["text"] == "O":
+            pass
+        elif buttons[6]["text"] == "O" and buttons[7]["text"] == "O" and buttons[8]["text"] == "O":
+            pass
+
+        #Up and Down
+        elif buttons[0]["text"] == "O" and buttons[3]["text"] == "O" and buttons[6]["text"] == "O":
+            pass
+        elif buttons[1]["text"] == "O" and buttons[4]["text"] == "O" and buttons[7]["text"] == "O":
+            pass
+        elif buttons[2]["text"] == "O" and buttons[5]["text"] == "O" and buttons[8]["text"] == "O":
+            pass
+
+
+        #Across
+        elif buttons[0]["text"] == "O" and buttons[4]["text"] == "O" and buttons[8]["text"] == "O":
+            pass
+        elif buttons[2]["text"] == "O" and buttons[4]["text"] == "O" and buttons[6]["text"] == "O":
+            pass
+
+
+
+
     def symbol_mark(button):
         global symbol
-    
+        who_won_x()
+        who_won_o()
         
         if symbol == "X":
             button.config(text=symbol,bg="red")
@@ -45,8 +96,11 @@ def main():
     tic_tac_toe_label = Label(text="TIC-TAC-TOE",font=("Arial",15),width=15)
     tic_tac_toe_label.grid(row=0,column=0,columnspan=4,pady = 10)
 
-    if 
-    tic_tac_toe_turn_label = Label(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="red")
+    if symbol == "X":
+        tic_tac_toe_turn_label = Label(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="red")
+    if symbol == "O":
+        tic_tac_toe_turn_label = Label(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="blue")
+
     tic_tac_toe_turn_label.grid(row=1,column=0,columnspan=4,pady = 10)
 
     #Button Setup
