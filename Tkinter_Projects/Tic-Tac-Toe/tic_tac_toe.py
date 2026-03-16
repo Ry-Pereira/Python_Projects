@@ -5,6 +5,7 @@ import random
 
 symbols=["X","O"]
 symbol = None
+winner = None
 wins = [
     []
 ]
@@ -20,70 +21,61 @@ def main():
             button.config(text="-",bg="white",state=NORMAL)
             button.grid_remove()
 
-    def who_won_x():
+    def did_win(symbol_to_compare):
         #LEft and right
-        if buttons[0]["text"] == "X" and buttons[1]["text"] == "X" and buttons[2]["text"] == "X":
-            pass
-        elif buttons[3]["text"] == "X" and buttons[4]["text"] == "X" and buttons[5]["text"] == "X":
-            pass
-        elif buttons[6]["text"] == "X" and buttons[7]["text"] == "X" and buttons[8]["text"] == "X":
-            pass
+        if buttons[0]["text"] == symbol_to_compare and buttons[1]["text"] == symbol_to_compare and buttons[2]["text"] == symbol_to_compare:
+            return True
+            
+        elif buttons[3]["text"] == symbol_to_compare and buttons[4]["text"] == symbol_to_compare and buttons[5]["text"] == symbol_to_compare:
+            return True
+        elif buttons[6]["text"] == symbol_to_compare and buttons[7]["text"] == symbol_to_compare and buttons[8]["text"] == symbol_to_compare:
+            return True
 
         #Up and Down
-        elif buttons[0]["text"] == "X" and buttons[3]["text"] == "X" and buttons[6]["text"] == "X":
-            pass
-        elif buttons[1]["text"] == "X" and buttons[4]["text"] == "X" and buttons[7]["text"] == "X":
-            pass
-        elif buttons[2]["text"] == "X" and buttons[5]["text"] == "X" and buttons[8]["text"] == "X":
-            pass
+        elif buttons[0]["text"] == symbol_to_compare and buttons[3]["text"] == symbol_to_compare and buttons[6]["text"] == symbol_to_compare:
+            return True
+        elif buttons[1]["text"] == symbol_to_compare and buttons[4]["text"] == symbol_to_compare and buttons[7]["text"] == symbol_to_compare:
+            return True
+        elif buttons[2]["text"] == symbol_to_compare and buttons[5]["text"] == symbol_to_compare and buttons[8]["text"] == symbol_to_compare:
+            return True
 
 
         #Across
-        elif buttons[0]["text"] == "X" and buttons[4]["text"] == "X" and buttons[8]["text"] == "X":
-            pass
-        elif buttons[2]["text"] == "X" and buttons[4]["text"] == "X" and buttons[6]["text"] == "X":
-            pass
+        elif buttons[0]["text"] == symbol_to_compare and buttons[4]["text"] == symbol_to_compare and buttons[8]["text"] == symbol_to_compare:
+            return True
+        elif buttons[2]["text"] == symbol_to_compare and buttons[4]["text"] == symbol_to_compare and buttons[6]["text"] == symbol_to_compare:
+            return True
+        else:
+            return False
 
-    def who_won_o():
-        #LEft and right
-        if buttons[0]["text"] == "O" and buttons[1]["text"] == "O" and buttons[2]["text"] == "O":
-            pass
-        elif buttons[3]["text"] == "O" and buttons[4]["text"] == "O" and buttons[5]["text"] == "O":
-            pass
-        elif buttons[6]["text"] == "O" and buttons[7]["text"] == "O" and buttons[8]["text"] == "O":
-            pass
+        
 
-        #Up and Down
-        elif buttons[0]["text"] == "O" and buttons[3]["text"] == "O" and buttons[6]["text"] == "O":
-            pass
-        elif buttons[1]["text"] == "O" and buttons[4]["text"] == "O" and buttons[7]["text"] == "O":
-            pass
-        elif buttons[2]["text"] == "O" and buttons[5]["text"] == "O" and buttons[8]["text"] == "O":
-            pass
-
-
-        #Across
-        elif buttons[0]["text"] == "O" and buttons[4]["text"] == "O" and buttons[8]["text"] == "O":
-            pass
-        elif buttons[2]["text"] == "O" and buttons[4]["text"] == "O" and buttons[6]["text"] == "O":
-            pass
+    
 
 
 
 
     def symbol_mark(button):
         global symbol
-        who_won_x()
-        who_won_o()
+        
         
         if symbol == "X":
             button.config(text=symbol,bg="red")
-            symbol = "O"
-            tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="blue")
+            if did_win(symbol) == True:
+                tic_tac_toe_turn_label.config(text="X WINS!",font=("Arial",15),width=15,fg="red")
+                remove_reset_all_buttons()
+            else:
+                symbol = "O"
+                tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="blue")
+         
         else:
             button.config(text=symbol,bg="blue")
-            symbol = "X"
-            tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="red")
+            if did_win(symbol) == True:
+                tic_tac_toe_turn_label.config(text="O WINS!",font=("Arial",15),width=15,fg="blue")
+                remove_reset_all_buttons()
+            else:
+                symbol = "X"
+                tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="red")
 
         button.config(state=DISABLED)
 
