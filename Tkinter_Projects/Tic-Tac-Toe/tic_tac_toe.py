@@ -21,6 +21,17 @@ def main():
             button.config(text="-",bg="white",state=NORMAL)
             button.grid_remove()
 
+    def restart_game():
+        pass
+
+    def quit_game():
+        window.destroy()
+
+
+    def restart_or_quit():
+        continue_button = Button(text="Restart",command=restart_game)
+        continue_button.config()
+        quit_button = Button(text="Quit",command=quit_game)
     def did_win(symbol_to_compare):
         #LEft and right
         if buttons[0]["text"] == symbol_to_compare and buttons[1]["text"] == symbol_to_compare and buttons[2]["text"] == symbol_to_compare:
@@ -89,9 +100,9 @@ def main():
     tic_tac_toe_label.grid(row=0,column=0,columnspan=4,pady = 10)
 
     if symbol == "X":
-        tic_tac_toe_turn_label = Label(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="red")
+        tic_tac_toe_turn_label = Label(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="red",bg='black')
     if symbol == "O":
-        tic_tac_toe_turn_label = Label(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="blue")
+        tic_tac_toe_turn_label = Label(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="blue",bg="black")
 
     tic_tac_toe_turn_label.grid(row=1,column=0,columnspan=4,pady = 10)
 
@@ -119,6 +130,14 @@ def main():
     buttons[6].grid(row=4,column=0,padx=0,pady=0)
     buttons[7].grid(row=4,column=1,padx=0,pady=0)
     buttons[8].grid(row=4,column=2,padx=0,pady=0)
+
+    for button in buttons:
+        button.grid_remove()
+
+    continue_button = Button(text="Restart",command=restart_game,width=11,height=2)
+    continue_button.grid(row=2,column=0,rowspan=3,columnspan=2,padx=0)
+    quit_button = Button(text="Quit",command=quit_game, width = 11,height=2)
+    quit_button.grid(row=2,column=2,rowspan=3,columnspan=2,padx=0)
 
 
     window.mainloop()
