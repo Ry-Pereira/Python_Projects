@@ -1,13 +1,28 @@
 from tkinter import *
+from functools import partial
 
 
 
-
-
-
+symbol = None
 
 def main():
     #Window Setup
+
+    global symbol
+    symbol = "X"
+
+
+    def symbol_mark(button):
+        global symbol
+        print(symbol)
+        button.config(text=symbol)
+        button.config(state=DISABLED)
+        if symbol == "X":
+            symbol = "O"
+        else:
+            symbol = "X"
+
+
     window = Tk()
     window.title("Tic-Tac-Toe")
     window.config(padx=50,pady=50)
@@ -18,16 +33,26 @@ def main():
 
     #Button Setup
     button_grid = []
-    button1 = Button(text="X",height=4,width=7)
-    button2 = Button(text="X",height=4,width=7)
-    button3 = Button(text="X",height=4,width=7)
-    button4 = Button(text="X",height=4,width=7)
-    button5 = Button(text="X",height=4,width=7)
-    button6 = Button(text="X",height=4,width=7)
-    button7 = Button(text="X",height=4,width=7)
-    button8 = Button(text="X",height=4,width=7)
-    button9 = Button(text="X",height=4,width=7)
+    button1 = Button(text="-",height=4,width=7)
+    button2 = Button(text="-",height=4,width=7)
+    button3 = Button(text="-",height=4,width=7)
+    button4 = Button(text="-",height=4,width=7)
+    button5 = Button(text="-",height=4,width=7)
+    button6 = Button(text="-",height=4,width=7)
+    button7 = Button(text="-",height=4,width=7)
+    button8 = Button(text="-",height=4,width=7)
+    button9 = Button(text="-",height=4,width=7)
 
+    #Button Configuration
+    button1.config(command=partial(symbol_mark,button1))
+    button2.config(command=partial(symbol_mark,button2))
+    button3.config(command=partial(symbol_mark,button3))
+    button4.config(command=partial(symbol_mark,button4))
+    button5.config(command=partial(symbol_mark,button5))
+    button6.config(command=partial(symbol_mark,button6))
+    button7.config(command=partial(symbol_mark,button7))
+    button8.config(command=partial(symbol_mark,button8))
+    button9.config(command=partial(symbol_mark,button9))
 
     button1.grid(row=1,column=0,padx=0,pady=0)
     button2.grid(row=1,column=1,padx=0,pady=0)
