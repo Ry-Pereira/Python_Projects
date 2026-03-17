@@ -13,6 +13,9 @@ continue_button = None
 quit_button = None
 
 
+tic_tac_toe_turn_label = None
+tic_tac_toe_label = None
+
 def remove_reset_all_buttons():
         global buttons
         for button in buttons:
@@ -28,18 +31,12 @@ def restart_or_quit():
         continue_button.grid()
         quit_button.grid()
 
-
-        
-def main():
-    #Window Setup
-
-    global symbol
-    symbol = random.choice(symbols)
-
-    
-
-    def restart_game():
+def restart_game():
         global symbol
+        global quit_button
+        global continue_button
+        global tic_tac_toe_turn_label
+
         symbol = random.choice(symbols)
         quit_button.grid_remove()
         continue_button.grid_remove()
@@ -53,7 +50,10 @@ def main():
             tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="blue",bg="black")
 
 
-    def did_win(symbol_to_compare):
+
+def did_win(symbol_to_compare):
+        global buttons
+        
         #LEft and right
         
         if buttons[0]["text"] == symbol_to_compare and buttons[1]["text"] == symbol_to_compare and buttons[2]["text"] == symbol_to_compare:
@@ -87,16 +87,10 @@ def main():
                 return "tie"
 
             return "continue"
-
         
-
-    
-
-
-
-
-    def symbol_mark(button):
+def symbol_mark(button):
         global symbol
+        global tic_tac_toe_turn_label
         
         
         if symbol == "X":
@@ -132,42 +126,26 @@ def main():
 
         button.config(state=DISABLED)
 
+
+
+def window_setup():
     global window
     window = Tk()
     window.title("Tic-Tac-Toe")
     window.config(padx=50,pady=50)
+    return window
 
-    #Label
-    tic_tac_toe_label = Label(text="TIC-TAC-TOE",font=("Arial",15),width=15)
-    tic_tac_toe_label.grid(row=0,column=0,columnspan=4,pady = 10)
-
-    if symbol == "X":
-        tic_tac_toe_turn_label = Label(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="red",bg='black')
-    if symbol == "O":
-        tic_tac_toe_turn_label = Label(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="blue",bg="black")
-
-    tic_tac_toe_turn_label.grid(row=1,column=0,columnspan=4,pady = 10)
-
-    #Button Setup
-    button_grid = []
+def button_setup():
     global buttons
+    global continue_button
+    global quit_button
     buttons = []
 
     for num in range(9):
         button = Button(text="-",height=4,width=7)
         button.config(command=partial(symbol_mark,button))
         buttons.append(button)
-        
 
-    global continue_button
-    global quit_button
-    continue_button = Button(text="Restart",command=restart_game,width=11,height=2)
-    continue_button.grid(row=2,column=0,rowspan=3,columnspan=2,padx=0)
-    quit_button = Button(text="Quit",command=quit_game, width = 11,height=2)
-    quit_button.grid(row=2,column=2,rowspan=3,columnspan=2,padx=0)
-
-    continue_button.grid_remove()
-    quit_button.grid_remove()
 
     buttons[0].grid(row=2,column=0,padx=0,pady=0)
     buttons[1].grid(row=2,column=1,padx=0,pady=0)
@@ -181,14 +159,44 @@ def main():
     buttons[7].grid(row=4,column=1,padx=0,pady=0)
     buttons[8].grid(row=4,column=2,padx=0,pady=0)
 
-    
+    continue_button = Button(text="Restart",command=restart_game,width=11,height=2)
+    continue_button.grid(row=2,column=0,rowspan=3,columnspan=2,padx=0)
+    quit_button = Button(text="Quit",command=quit_game, width = 11,height=2)
+    quit_button.grid(row=2,column=2,rowspan=3,columnspan=2,padx=0)
 
-    
+    continue_button.grid_remove()
+    quit_button.grid_remove()
+    return buttons,continue_button,quit_button
 
+def label_setup():
+    global symbol
+    global tic_tac_toe_label
+    global tic_tac_toe_turn_label
 
+    tic_tac_toe_label = Label(text="TIC-TAC-TOE",font=("Arial",15),width=15)
+    tic_tac_toe_label.grid(row=0,column=0,columnspan=4,pady = 10)
+    if symbol == "X":
+        tic_tac_toe_turn_label = Label(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="red",bg='black')
+    if symbol == "O":
+        tic_tac_toe_turn_label = Label(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="blue",bg="black")
+
+    tic_tac_toe_turn_label.grid(row=1,column=0,columnspan=4,pady = 10)
+     
+     
+def main():
+    #Window Setup
+    global symbol
+    global tic_tac_toe_turn_label
+    global continue_button
+    global quit_button
+    global tic_tac_toe_label
+
+    window = window_setup()
+    symbol = random.choice(symbols)
+    #Label
+    label_setup()
+    buttons,continue_button,quit_button = button_setup()
     window.mainloop()
-
-
 
 
 
