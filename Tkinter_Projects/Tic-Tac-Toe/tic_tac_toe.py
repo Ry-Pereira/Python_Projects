@@ -6,19 +6,37 @@ import random
 symbols=["X","O"]
 symbol = None
 winner = None
-wins = [
-    []
-]
+buttons = None
+window = None
 
+continue_button = None
+quit_button = None
+
+
+def remove_reset_all_buttons():
+        global buttons
+        for button in buttons:
+            button.grid_remove()
+
+def quit_game():
+        global window
+        window.destroy()
+
+def restart_or_quit():
+        global continue_button
+        global quit_button
+        continue_button.grid()
+        quit_button.grid()
+
+
+        
 def main():
     #Window Setup
 
     global symbol
     symbol = random.choice(symbols)
 
-    def remove_reset_all_buttons():
-        for button in buttons:
-            button.grid_remove()
+    
 
     def restart_game():
         global symbol
@@ -33,14 +51,6 @@ def main():
             tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="red",bg='black')
         if symbol == "O":
             tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="blue",bg="black")
-
-    def quit_game():
-        window.destroy()
-
-
-    def restart_or_quit():
-        continue_button.grid()
-        quit_button.grid()
 
 
     def did_win(symbol_to_compare):
@@ -122,7 +132,7 @@ def main():
 
         button.config(state=DISABLED)
 
-
+    global window
     window = Tk()
     window.title("Tic-Tac-Toe")
     window.config(padx=50,pady=50)
@@ -140,6 +150,7 @@ def main():
 
     #Button Setup
     button_grid = []
+    global buttons
     buttons = []
 
     for num in range(9):
@@ -148,7 +159,8 @@ def main():
         buttons.append(button)
         
 
-
+    global continue_button
+    global quit_button
     continue_button = Button(text="Restart",command=restart_game,width=11,height=2)
     continue_button.grid(row=2,column=0,rowspan=3,columnspan=2,padx=0)
     quit_button = Button(text="Quit",command=quit_game, width = 11,height=2)
