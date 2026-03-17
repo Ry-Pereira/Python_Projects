@@ -18,46 +18,65 @@ def main():
 
     def remove_reset_all_buttons():
         for button in buttons:
-            button.config(text="-",bg="white",state=NORMAL)
             button.grid_remove()
 
     def restart_game():
-        pass
+        global symbol
+        symbol = random.choice(symbols)
+        quit_button.grid_remove()
+        continue_button.grid_remove()
+        for button in buttons:
+            button.grid()
+            button.config(text="-",bg="white",state=NORMAL)
+        
+        if symbol == "X":
+            tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="red",bg='black')
+        if symbol == "O":
+            tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="blue",bg="black")
 
     def quit_game():
         window.destroy()
 
 
     def restart_or_quit():
-        continue_button = Button(text="Restart",command=restart_game)
-        continue_button.config()
-        quit_button = Button(text="Quit",command=quit_game)
+        continue_button.grid()
+        quit_button.grid()
+
+
     def did_win(symbol_to_compare):
         #LEft and right
+        
         if buttons[0]["text"] == symbol_to_compare and buttons[1]["text"] == symbol_to_compare and buttons[2]["text"] == symbol_to_compare:
-            return True
+            return "win"
             
         elif buttons[3]["text"] == symbol_to_compare and buttons[4]["text"] == symbol_to_compare and buttons[5]["text"] == symbol_to_compare:
-            return True
+            return "win"
         elif buttons[6]["text"] == symbol_to_compare and buttons[7]["text"] == symbol_to_compare and buttons[8]["text"] == symbol_to_compare:
-            return True
+            return "win"
 
         #Up and Down
         elif buttons[0]["text"] == symbol_to_compare and buttons[3]["text"] == symbol_to_compare and buttons[6]["text"] == symbol_to_compare:
-            return True
+            return "win"
         elif buttons[1]["text"] == symbol_to_compare and buttons[4]["text"] == symbol_to_compare and buttons[7]["text"] == symbol_to_compare:
-            return True
+            return "win"
         elif buttons[2]["text"] == symbol_to_compare and buttons[5]["text"] == symbol_to_compare and buttons[8]["text"] == symbol_to_compare:
-            return True
+            return "win"
 
 
         #Across
         elif buttons[0]["text"] == symbol_to_compare and buttons[4]["text"] == symbol_to_compare and buttons[8]["text"] == symbol_to_compare:
-            return True
+             return "win"
         elif buttons[2]["text"] == symbol_to_compare and buttons[4]["text"] == symbol_to_compare and buttons[6]["text"] == symbol_to_compare:
-            return True
+            return "win"
         else:
-            return False
+            is_tie = True
+            for button in buttons:
+                if button["text"] == "-":
+                    is_tie = False
+            if is_tie == True:
+                return "tie"
+
+            return "continue"
 
         
 
@@ -72,18 +91,31 @@ def main():
         
         if symbol == "X":
             button.config(text=symbol,bg="red")
-            if did_win(symbol) == True:
+            did_won = did_win(symbol)
+            if did_won == "win":
                 tic_tac_toe_turn_label.config(text="X WINS!",font=("Arial",15),width=15,fg="red")
                 remove_reset_all_buttons()
+                restart_or_quit()
+            elif did_won == "tie":
+                tic_tac_toe_turn_label.config(text="TIE",font=("Arial",15),width=15,fg="GREEN")
+                remove_reset_all_buttons()
+                restart_or_quit()
+
             else:
                 symbol = "O"
                 tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="blue")
          
         else:
             button.config(text=symbol,bg="blue")
-            if did_win(symbol) == True:
+            did_won = did_win(symbol)
+            if did_won == "win":
                 tic_tac_toe_turn_label.config(text="O WINS!",font=("Arial",15),width=15,fg="blue")
                 remove_reset_all_buttons()
+                restart_or_quit()
+            elif did_won == "tie":
+                tic_tac_toe_turn_label.config(text="TIE",font=("Arial",15),width=15,fg="GREEN")
+                remove_reset_all_buttons()
+                restart_or_quit()
             else:
                 symbol = "X"
                 tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="red")
@@ -117,7 +149,13 @@ def main():
         
 
 
+    continue_button = Button(text="Restart",command=restart_game,width=11,height=2)
+    continue_button.grid(row=2,column=0,rowspan=3,columnspan=2,padx=0)
+    quit_button = Button(text="Quit",command=quit_game, width = 11,height=2)
+    quit_button.grid(row=2,column=2,rowspan=3,columnspan=2,padx=0)
 
+    continue_button.grid_remove()
+    quit_button.grid_remove()
 
     buttons[0].grid(row=2,column=0,padx=0,pady=0)
     buttons[1].grid(row=2,column=1,padx=0,pady=0)
@@ -131,13 +169,9 @@ def main():
     buttons[7].grid(row=4,column=1,padx=0,pady=0)
     buttons[8].grid(row=4,column=2,padx=0,pady=0)
 
-    for button in buttons:
-        button.grid_remove()
+    
 
-    continue_button = Button(text="Restart",command=restart_game,width=11,height=2)
-    continue_button.grid(row=2,column=0,rowspan=3,columnspan=2,padx=0)
-    quit_button = Button(text="Quit",command=quit_game, width = 11,height=2)
-    quit_button.grid(row=2,column=2,rowspan=3,columnspan=2,padx=0)
+    
 
 
     window.mainloop()
