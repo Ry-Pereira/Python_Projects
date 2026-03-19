@@ -1,3 +1,10 @@
+#Name: Ryan Pereira
+#Project Name: Tic-Tac-Toe
+#Description:# A Tkinter-based Tic-Tac-Toe game where two players take turns placing X or O on a 3x3 grid.The program manages turns, checks for wins or ties, and allows restarting or quitting after the game ends.
+#Collaborators: None
+#Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
+#Date: 6/16/2026
+#Last Modified: 6/18/2026
 
 #From tkinter import all the classes and functions, which allows us to use them without prefixing them with tkinter.
 from tkinter import *
