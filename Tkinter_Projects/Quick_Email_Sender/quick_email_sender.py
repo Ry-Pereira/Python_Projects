@@ -11,8 +11,13 @@
 
 import smtplib
 from tkinter import *
+from tkinter import messagebox
 
 window = None
+to_entry = None
+subject_entry = None
+message_entry = None
+entries = []
 buttons = []
 
 
@@ -42,8 +47,14 @@ def label_setup():
 
 
 def entry_setup():
+    global entries
+    global to_entry
+    global subject_entry
+    global message_entry
+
     to_entry = Entry(width=20)
     to_entry.grid(row=2,column=2)
+    
 
     subject_entry = Entry(width=20)
     subject_entry.grid(row =3,column=2)
@@ -51,12 +62,36 @@ def entry_setup():
     message_entry = Text(width=40,height=20)
     message_entry.grid(row=5,column=1,columnspan=3)
 
+    entries.append(to_entry)
+    entries.append(subject_entry)
+ 
+
 
 def send_email():
-    pass
+    print("Went Well")
+    global entries
+    global to_entry
+    global subject_entry
+    global message_entry
+
+    to_text = to_entry.get()
+    subject_text = subject_entry.get()
+    message_text = message_entry.get("1.0", END)
+
+    if len(to_text) == 0:
+        messagebox.showinfo(title="To Line",message="To Section Must Be Filled")
 
 def clear_all_sections():
-    pass
+    global entries
+    global message_entry
+    for text_entry in entries:
+        #Text entry deletes everything at the 0 character and until the end
+        text_entry.delete(0,END)
+
+    #Message entry deletes everything, until the end of th text, 1.0
+    #Starts at line 1, character 0, and goes until the end of text
+    message_entry.delete("1.0",END)
+
 
 def save_draft():
     pass
