@@ -78,8 +78,26 @@ def send_email():
     subject_text = subject_entry.get()
     message_text = message_entry.get("1.0", END)
 
-    if len(to_text) == 0:
+    if len(message_text) == 0 and len(to_text) == 0 and len(subject_text) == 0:
+        messagebox.showinfo(title="To, Subject, and Message Line Empty",message="Please fill in the to section\nSubject is optional\nMessage is optional")
+
+    elif len(to_text) == 0 and len(subject_text) == 0:
+        messagebox.showinfo(title="To and Subject Line Empty",message="Please fill in the to section\nSubject is optional")
+    elif len(to_text) == 0 and len(message_text) == 0:
+        messagebox.showinfo(title="To and Subject Line Empty",message="Please fill in the to section\nMessage is optional")
+
+    elif len(to_text) == 0:
         messagebox.showinfo(title="To Line",message="To Section Must Be Filled")
+    elif len(subject_text) == 0:
+        result = messagebox.askokcancel(title="Subject Text Is Empty",message="Do You Wish To Send A Empty Subject")
+        if result == True:
+            subject_text = "No Subject"
+    elif len(message_text) == 0:
+        result = messagebox.askokcancel(title="Message Text Is Empty",message="Do You Wish To Send A Empty Message")
+        if result == True:
+            message_text = "No Message"
+    
+        
 
 def clear_all_sections():
     global entries
