@@ -56,61 +56,99 @@ def restart_or_quit():
         #QUit_button is gridded to the window, which makes it visible in the window, so the player can choose whether to restart or quit the game.
         quit_button.grid()
 
+
+# The restart game function is used to restart the game, back to the original when the user first started playing the program game
 def restart_game():
+        #Symbol set to global
         global symbol
+        #Quit button set to global
         global quit_button
+        #Continue button set to global
         global continue_button
+        #Tic-tac-toe-turn-label set to global
         global tic_tac_toe_turn_label
 
+        #Symbol set to the random choise of the symbols list
         symbol = random.choice(symbols)
+        #Quit button is removed from the grid, but remembered of its position
         quit_button.grid_remove()
+        #Continue button is removed from the grid, but remembered of its position
         continue_button.grid_remove()
+        #Iterating over each button in buttons list, following code is executed below for each iteration
         for button in buttons:
+            #Buttons is gridded back to its position
             button.grid()
+            #Buttons is updated with text,background and state set to functioning as before
             button.config(text="-",bg="white",state=NORMAL)
         
+        #If the symbol is set to X, following code is executed
         if symbol == "X":
+            #Tic-Tac-Toe turn labl is upated with the text to say who;s turn it is, the font,width,foreground and background specification
             tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="red",bg='black')
+        #If the symbol is set to O, following code is executed
         if symbol == "O":
+            #Tic-Tac-Toe turn labl is upated with the text to say who;s turn it is, the font,width,foreground and background specification
             tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="blue",bg="black")
 
 
-
+#The function did win, with symbol to compare put in as parameter argument. To to see if the tic tac board has a win, a tie, or not
 def did_win(symbol_to_compare):
+        #Buttons set to global
         global buttons
         
         #LEft and right
-        
+        #If the button at index 0,1,2 if the text is set to the symbol to compare, then its a win
         if buttons[0]["text"] == symbol_to_compare and buttons[1]["text"] == symbol_to_compare and buttons[2]["text"] == symbol_to_compare:
+            #Return win string to indicate there is a winner
             return "win"
-            
+        #Elif the button at index 3,4,5 if the text is set to the symbol to compare, then its a win
         elif buttons[3]["text"] == symbol_to_compare and buttons[4]["text"] == symbol_to_compare and buttons[5]["text"] == symbol_to_compare:
+            #Return win string to indicate there is a winner
             return "win"
+        #Elif the button at index 6,7,8 if the text is set to the symbol to compare, then its a win
         elif buttons[6]["text"] == symbol_to_compare and buttons[7]["text"] == symbol_to_compare and buttons[8]["text"] == symbol_to_compare:
+            #Return win string to indicate there is a winner
             return "win"
 
         #Up and Down
+        #Elif the button at index 0,3,6 if the text is set to the symbol to compare, then its a win
         elif buttons[0]["text"] == symbol_to_compare and buttons[3]["text"] == symbol_to_compare and buttons[6]["text"] == symbol_to_compare:
+            #Return win string to indicate there is a winner
             return "win"
+        #Elif the button at index 1,4,7 if the text is set to the symbol to compare, then its a win
         elif buttons[1]["text"] == symbol_to_compare and buttons[4]["text"] == symbol_to_compare and buttons[7]["text"] == symbol_to_compare:
+            #Return win string to indicate there is a winner
             return "win"
+        #Elif the button at index 2,5,8 if the text is set to the symbol to compare, then its a win
         elif buttons[2]["text"] == symbol_to_compare and buttons[5]["text"] == symbol_to_compare and buttons[8]["text"] == symbol_to_compare:
+            #Return win string to indicate there is a winner
             return "win"
 
 
         #Across
+        #Elif the button at index 0,4,8 if the text is set to the symbol to compare, then its a win
         elif buttons[0]["text"] == symbol_to_compare and buttons[4]["text"] == symbol_to_compare and buttons[8]["text"] == symbol_to_compare:
+             #Return win string to indicate there is a winner
              return "win"
+        #Elif the button at index 2,4,6 if the text is set to the symbol to compare, then its a win
         elif buttons[2]["text"] == symbol_to_compare and buttons[4]["text"] == symbol_to_compare and buttons[6]["text"] == symbol_to_compare:
+            #Return win string to indicate there is a winner
             return "win"
+        #Else if all condition fail, following code will execute it
         else:
+            #Is tie variable set to to True to idnicate no winner was set from the board
             is_tie = True
+            #Iterate over each button in buttons list, code executes per iteration
             for button in buttons:
+                #If the button text is set - string, following code is executed
                 if button["text"] == "-":
+                    #Then is tie variable is set to False
                     is_tie = False
+            #If is tie variable set to True, there is a tie, code below is executed
             if is_tie == True:
+                #Returns tie string to indicate, there is a tie in the board, no one won
                 return "tie"
-
+            #Returns continue string, to indicate no winner has been reached, no tie has occured, there are still buttons to press for the game to continue
             return "continue"
         
 def symbol_mark(button):
