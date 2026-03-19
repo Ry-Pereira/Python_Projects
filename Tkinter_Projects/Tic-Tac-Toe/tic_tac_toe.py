@@ -150,43 +150,72 @@ def did_win(symbol_to_compare):
                 return "tie"
             #Returns continue string, to indicate no winner has been reached, no tie has occured, there are still buttons to press for the game to continue
             return "continue"
-        
+
+#The symbol mark function is used to mark the button that was pressed by the user, with the symbol assigned, and making the button unsuable, as its already marked
 def symbol_mark(button):
+        #Symbol set to global
         global symbol
+        #Tic-Tac-Toe turn label set to global
         global tic_tac_toe_turn_label
         
-        
+        #If the symbol is set to X string
         if symbol == "X":
+            #Button is configered with text set to symbol, background is set to red
             button.config(text=symbol,bg="red")
+            #Did won variable is set to the value return of did win with symbol given as argument
             did_won = did_win(symbol)
+            #If did won is equal to win string
             if did_won == "win":
+                #Tic-Tac-Toe turn label is configure with following specific values
                 tic_tac_toe_turn_label.config(text="X WINS!",font=("Arial",15),width=15,fg="red")
+                #Remove reset all buttons is executed
                 remove_reset_all_buttons()
+                #Restart or quite function is called
                 restart_or_quit()
+            #If did won is equal to tie string
             elif did_won == "tie":
+                #Tic-Tac-Toe turn label is configure with following specific values
                 tic_tac_toe_turn_label.config(text="TIE",font=("Arial",15),width=15,fg="GREEN")
+                #Remove reset all buttons is executed
                 remove_reset_all_buttons()
+                #Restart or quite function is called
                 restart_or_quit()
 
             else:
+                #Symbol is set to O string
                 symbol = "O"
+                #Tic-Tac-Toe turn label is configure with following specific values
                 tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="blue")
          
+        #If the symbol is set to O string
         else:
+            #Button is configered with text set to symbol, background is set to blue
             button.config(text=symbol,bg="blue")
+            #Did won variable is set to the value return of did win with symbol given as argument
             did_won = did_win(symbol)
+            #If did won is equal to win string
             if did_won == "win":
+                #Tic-Tac-Toe turn label is configure with following specific values
                 tic_tac_toe_turn_label.config(text="O WINS!",font=("Arial",15),width=15,fg="blue")
+                #Remove reset all buttons is executed
                 remove_reset_all_buttons()
+                #Restart or quite function is called
                 restart_or_quit()
+            #If did won is equal to tie string
             elif did_won == "tie":
+                #Tic-Tac-Toe turn label is configure with following specific values
                 tic_tac_toe_turn_label.config(text="TIE",font=("Arial",15),width=15,fg="GREEN")
+                #Remove reset all buttons is executed
                 remove_reset_all_buttons()
+                #Restart or quite function is called
                 restart_or_quit()
             else:
+                #Symbol is set to X string
                 symbol = "X"
+                #Tic-Tac-Toe turn label is configure with following specific values
                 tic_tac_toe_turn_label.config(text=f"{symbol}'s Turn:",font=("Arial",15),width=15,fg="red")
 
+        #Button is configured the state to be disbaled, so the buttons can be used anymore, until reset
         button.config(state=DISABLED)
 
 
