@@ -12,7 +12,7 @@ class KanyeWestGeneratorUI:
         self.canvas.grid(row=1,column=1)
 
 
-        self.kanye_image = PhotoImage(file="kanye_west_photo.png")
+        self.kanye_image = PhotoImage(file="kanye.png")
         self.canvas.create_image(40,40,image = self.kanye_image)
 
         self.title_label = Label(text="Kanye West Quote Generator",font=("Arial",12))
