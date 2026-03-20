@@ -20,7 +20,9 @@ class KanyeWestGeneratorUI:
 
 
         self.kanye_image = PhotoImage(file="images/kanye.png")
-        self.canvas.create_image(230,500,image = self.kanye_image)
+       
+        kanye_image_id = self.canvas.create_image(230,500,image = self.kanye_image)
+        self.canvas.tag_bind(kanye_image_id,"<Button-1>",self.thinkinking_quote)
 
         self.red_bubble = PhotoImage(file="images/speech_bubbles/red_speech.png")
         self.orange_bubble = PhotoImage(file="images/speech_bubbles/orange_speech.png")
@@ -29,10 +31,11 @@ class KanyeWestGeneratorUI:
         self.blue_bubble = PhotoImage(file="images/speech_bubbles/blue_speech.png")
         self.purple_bubble = PhotoImage(file="images/speech_bubbles/purple_speech.png")
         self.pink_bubble = PhotoImage(file="images/speech_bubbles/pink_speech.png")
-        
+        self.intro_text = self.canvas.create_text(300,240,text="Click on Kanye West for Quote.",font=("Arial",18,"bold italic"),width=170)
         self.speech_bubbles = [self.red_bubble,self.orange_bubble,self.yellow_bubble,self.green_bubble,self.blue_bubble,self.purple_bubble, self.pink_bubble]
 
-        self.generate_random_quote()
+        self.bubble = None
+        self.bubble_text = None
 
         
 
@@ -40,13 +43,20 @@ class KanyeWestGeneratorUI:
 
         self.window.mainloop()
 
+    def thinkinking_quote(self,event):
+        self.canvas.delete(self.intro_text)
+        self.canvas.delete(self.bubble)
+        self.canvas.delete(self.bubble_text)
+        self.window.after(500,self.generate_random_quote)
+    
+
+
+
     def generate_random_quote(self):
         response = requests.get(url="https://api.kanye.rest")
         quote = response.json()["quote"]
-        
-
-        self.canvas.create_image(300,250,image = random.choice(self.speech_bubbles))
-        self.canvas.create_text(300,240,text=quote,font=("Arial",22,"bold italic"),width=120)
+        self.bubble = self.canvas.create_image(300,250,image = random.choice(self.speech_bubbles))
+        self.bubble_text= self.canvas.create_text(300,240,text=quote,font=("Arial",18,"bold italic"),width=170)
 
 
 
