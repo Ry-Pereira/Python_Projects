@@ -1,4 +1,5 @@
 from tkinter import *
+import requests
 import random
 
 BACKGROUND_COLOR = "#8CC7C4"
@@ -28,16 +29,27 @@ class KanyeWestGeneratorUI:
         self.blue_bubble = PhotoImage(file="images/speech_bubbles/blue_speech.png")
         self.purple_bubble = PhotoImage(file="images/speech_bubbles/purple_speech.png")
         self.pink_bubble = PhotoImage(file="images/speech_bubbles/pink_speech.png")
-
+        
         self.speech_bubbles = [self.red_bubble,self.orange_bubble,self.yellow_bubble,self.green_bubble,self.blue_bubble,self.purple_bubble, self.pink_bubble]
 
-        self.canvas.create_image(300,250,image = random.choice(self.speech_bubbles))
+        self.generate_random_quote()
 
         
 
         
 
         self.window.mainloop()
+
+    def generate_random_quote(self):
+        response = requests.get(url="https://api.kanye.rest")
+        quote = response.json()["quote"]
+        
+
+        self.canvas.create_image(300,250,image = random.choice(self.speech_bubbles))
+        self.canvas.create_text(300,240,text=quote,font=("Arial",22,"bold italic"),width=120)
+
+
+
 
 
 d = KanyeWestGeneratorUI()
