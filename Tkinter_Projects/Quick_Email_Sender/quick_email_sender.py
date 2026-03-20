@@ -26,24 +26,25 @@ buttons = []
 def window_setup():
     window = Tk()
     window.title("Quick Email Sender")
-    window.config(padx=20,pady=20)
+    window.config(padx=30,pady=30)
     return window
 
 
 
 def label_setup():
     title_label = Label(text="Quick Email Sender",font=("Arial",24))
-    title_label.grid(row=1,column=0,columnspan=5)
+    title_label.grid(row=1,column=0,columnspan=6,pady=10)
 
-    to_section_label = Label(text="To:",font=("Arial",24))
-    to_section_label.grid(row=2,column=1)
+    to_section_label = Label(text="To:",font=("Arial",22),width=2,bg="yellow")
+    to_section_label.grid(row=2,column=0,columnspan=2)
+    
 
 
-    subject_section_label = Label(text="Subject:",font=("Arial",24))
-    subject_section_label.grid(row=3,column=1)
+    subject_section_label = Label(text="Subject:",font=("Arial",22,),width=10)
+    subject_section_label.grid(row=3,column=0,columnspan=2)
 
-    message_section_label = Label(text="Message:",font=("Arial",24))
-    message_section_label.grid(row=4,column=1)
+    message_section_label = Label(text="Message:",font=("Arial",22))
+    message_section_label.grid(row=4,column=0,columnspan=1)
 
 
 def entry_setup():
@@ -53,14 +54,14 @@ def entry_setup():
     global message_entry
 
     to_entry = Entry(width=20)
-    to_entry.grid(row=2,column=2)
+    to_entry.grid(row=2,column=1,columnspan=5)
     
 
     subject_entry = Entry(width=20)
-    subject_entry.grid(row =3,column=2)
+    subject_entry.grid(row =3,column=1,columnspan=5)
 
-    message_entry = Text(width=40,height=20)
-    message_entry.grid(row=5,column=1,columnspan=3)
+    message_entry = Text(width=40,height=10)
+    message_entry.grid(row=5,column=0,columnspan=6)
 
     entries.append(to_entry)
     entries.append(subject_entry)
@@ -121,15 +122,12 @@ def exit_program():
 
 
 def button_setup():
-    send_button = Button(text="Send",command=send_email)
-    clear_button = Button(text="Clear",command = clear_all_sections)
-    save_button = Button(text="Save",command=save_draft)
-    exit_button = Button(text="Exit",command = exit_program)
+    send_button = Button(text="Send",command=send_email,font=('Arial',12),width=24)
+    clear_button = Button(text="Clear",command = clear_all_sections,font=('Arial',12),width=24)
+    save_button = Button(text="Save",command=save_draft,font=('Arial',12),width=24)
+    exit_button = Button(text="Exit",command = exit_program,font=('Arial',12),width=24)
 
-    send_button.grid(row=6,column=0)
-    clear_button.grid(row=6,column=1)
-    save_button.grid(row=6,column=2)
-    exit_button.grid(row=6,column=3)
+   
 
 
 def main():
