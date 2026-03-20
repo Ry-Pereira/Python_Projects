@@ -1,4 +1,5 @@
 from tkinter import *
+import random
 
 BACKGROUND_COLOR = "#8CC7C4"
 WINDOW_COLOR = "#2C687B"
@@ -17,11 +18,22 @@ class KanyeWestGeneratorUI:
         self.canvas.grid(row=1,column=0,columnspan=2,pady=10)
 
 
-        self.kanye_image = PhotoImage(file="kanye.png")
-        self.canvas.create_image(150,500,image = self.kanye_image)
+        self.kanye_image = PhotoImage(file="images/kanye.png")
+        self.canvas.create_image(230,500,image = self.kanye_image)
 
-        self.bubble = PhotoImage(file="speech_bubble.png")
-        self.canvas.create_image(150,500,image = self.bubble)
+        self.red_bubble = PhotoImage(file="images/speech_bubbles/red_speech.png")
+        self.orange_bubble = PhotoImage(file="images/speech_bubbles/orange_speech.png")
+        self.yellow_bubble = PhotoImage(file="images/speech_bubbles/yellow_speech.png")
+        self.green_bubble = PhotoImage(file="images/speech_bubbles/green_speech.png")
+        self.blue_bubble = PhotoImage(file="images/speech_bubbles/blue_speech.png")
+        self.purple_bubble = PhotoImage(file="images/speech_bubbles/purple_speech.png")
+        self.pink_bubble = PhotoImage(file="images/speech_bubbles/pink_speech.png")
+
+        self.speech_bubbles = [self.red_bubble,self.orange_bubble,self.yellow_bubble,self.green_bubble,self.blue_bubble,self.purple_bubble, self.pink_bubble]
+
+        self.canvas.create_image(300,250,image = random.choice(self.speech_bubbles))
+
+        
 
         
 
