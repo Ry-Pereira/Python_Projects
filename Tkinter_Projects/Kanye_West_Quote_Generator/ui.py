@@ -1,10 +1,12 @@
 from tkinter import *
-import requests
+from kanye_west_quote_data import *
 import random
 
 BACKGROUND_COLOR = "#8CC7C4"
 WINDOW_COLOR = "#2C687B"
 TITLE_COLOR = "white"
+
+
 class KanyeWestGeneratorUI:
     def __init__(self):
         self.window = Tk()
@@ -19,7 +21,7 @@ class KanyeWestGeneratorUI:
         self.canvas.grid(row=1,column=0,columnspan=2,pady=10)
 
 
-        self.kanye_image = PhotoImage(file="images/kanye.png")
+        self.kanye_image = PhotoImage(file="images/kanye_faces/kanye.png")
        
         kanye_image_id = self.canvas.create_image(230,500,image = self.kanye_image)
         self.canvas.tag_bind(kanye_image_id,"<Button-1>",self.thinkinking_quote)
@@ -53,8 +55,7 @@ class KanyeWestGeneratorUI:
 
 
     def generate_random_quote(self):
-        response = requests.get(url="https://api.kanye.rest")
-        quote = response.json()["quote"]
+        response,quote = get_response()
         self.bubble = self.canvas.create_image(300,250,image = random.choice(self.speech_bubbles))
         self.bubble_text= self.canvas.create_text(300,240,text=quote,font=("Arial",18,"bold italic"),width=170)
 
@@ -62,4 +63,4 @@ class KanyeWestGeneratorUI:
 
 
 
-d = KanyeWestGeneratorUI()
+
