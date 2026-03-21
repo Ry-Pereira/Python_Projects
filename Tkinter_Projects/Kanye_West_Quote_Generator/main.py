@@ -14,7 +14,7 @@ from ui import KanyeWestGeneratorUI
 
 
 #The function main, is the main entry point into the program
-def main():
+def main() -> None:
     #The kanywestui variable stores the object of the KanywestGeneratorUI class constructor
     kanywestui = KanyeWestGeneratorUI()
     
