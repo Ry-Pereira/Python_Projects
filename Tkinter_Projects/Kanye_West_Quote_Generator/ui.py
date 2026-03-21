@@ -67,7 +67,7 @@ class KanyeWestGeneratorUI:
 
 
     #The thinking quote function , requires and event parameter, because of the tag bind function to work. Whenver a new quote is wanted, the previous quote and text si removed including the intro text at the beginning
-    def thinkinking_quote(self,event):
+    def thinkinking_quote(self,event :Tk.Event ) -> None:
         #The UI's canvas deletes the intro text
         self.canvas.delete(self.intro_text)
         #The UI's canvas deletes the bubble
@@ -80,13 +80,19 @@ class KanyeWestGeneratorUI:
 
 
     #The function generate random quote functiom, will store the response and quote from the get response function that will retrieve a random quote form the API, get  abubble image at random and change the xt to the quote on the scrren for the user to see
-    def generate_random_quote(self):
+    def generate_random_quote(self) -> None:
         #Response and quote is set to the get response function
-        response,quote = get_response()
-        #UI's bubble is set to the canvas creating and image with a image set to a random choice on the speech bubbles list, and at a x and y position
-        self.bubble = self.canvas.create_image(300,250,image = random.choice(self.speech_bubbles))
-        #Ui's bubble text is set to canvas crating text at x and y position, with specific font, and text set to the quote, with the width set to a specified number so it can wrap around.
-        self.bubble_text= self.canvas.create_text(300,240,text=quote,font=("Arial",18,"bold italic"),width=170)
+        response,quote,status = get_response()
+        #If the status code is 200, then the API was retrived well, and no error occurred
+        if status == 200:
+            #UI's bubble is set to the canvas creating and image with a image set to a random choice on the speech bubbles list, and at a x and y position
+            self.bubble = self.canvas.create_image(300,250,image = random.choice(self.speech_bubbles))
+            #Ui's bubble text is set to canvas crating text at x and y position, with specific font, and text set to the quote, with the width set to a specified number so it can wrap around.
+            self.bubble_text= self.canvas.create_text(300,240,text=quote,font=("Arial",18,"bold italic"),width=170)
+        #Elif the status code is not 200, then a error occurred when retrieving API information regarding to getting random quote from API.
+        else:
+            self.bubble_text= self.canvas.create_text(300,240,text="API Not Working At Moment.Try Later.",font=("Arial",18,"bold italic"),width=170)
+
 
 
 
