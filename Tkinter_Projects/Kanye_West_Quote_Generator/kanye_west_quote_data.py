@@ -19,5 +19,9 @@ def get_response() -> tuple:
     response = requests.get(url="https://api.kanye.rest")
     #Quote is seto the reponse, as the JSON file accessed, with the quote data being accessed
     quote = response.json()["quote"]
-    #Returns the response and quote
-    return response,quote
+    #Status code of the response is stored
+    status = response.status_code
+    #Returns the response and quote,status
+    return response,quote,status
+
+
