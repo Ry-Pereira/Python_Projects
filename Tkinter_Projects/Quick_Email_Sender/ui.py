@@ -101,6 +101,8 @@ class UI:
     def send_email(self):
         print("Went Well")
 
+        email = self.from_entry.get()
+        password = self.password_entry.get()
         to_text = self.to_entry.get()
         subject_text = self.subject_entry.get()
         message_text = self.message_entry.get("1.0", END)
@@ -123,6 +125,10 @@ class UI:
             result = messagebox.askokcancel(title="Message Text Is Empty",message="Do You Wish To Send A Empty Message")
             if result == True:
                 message_text = "No Message"
+
+        
+
+        
 
 
 d = UI()
