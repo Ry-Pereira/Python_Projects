@@ -21,41 +21,57 @@ class UI:
         self.entries = []
         self.window = Tk()
         self.window.title("Quick Email Sender")
-        self.window.config(padx=30,pady=30)
+        self.window.config(padx=20,pady=20)
 
         self.title_label = Label(text="Quick Email Sender",font=("Arial",24))
-        self.title_label.grid(row=1,column=0,columnspan=6,pady=10)
+        self.title_label.grid(row=0,column=0,columnspan=4,pady=10)
 
-        self.to_section_label = Label(text="To:",font=("Arial",22),width=2,bg="yellow")
-        self.to_section_label.grid(row=2,column=0,columnspan=2)
+        self.to_section_label = Label(text="To:",font=("Arial",18),width=2,bg="yellow")
+        self.to_section_label.grid(row=1,column=0)
     
 
 
-        self.subject_section_label = Label(text="Subject:",font=("Arial",22,),width=10)
-        self.subject_section_label.grid(row=3,column=0,columnspan=2)
+        self.subject_section_label = Label(text="Subject:",font=("Arial",20,),width=10)
+        self.subject_section_label.grid(row=2,column=0)
 
-        self.message_section_label = Label(text="Message:",font=("Arial",22))
-        self.message_section_label.grid(row=4,column=0,columnspan=1)
+        self.message_section_label = Label(text="Message:",font=("Arial",20))
+        self.message_section_label.grid(row=3,column=0)
 
 
-        self.to_entry = Entry(width=20)
-        self.to_entry.grid(row=2,column=1,columnspan=5)
+        self.to_entry = Text(width=20,height=1)
+        self.to_entry.grid(row=1,column=1)
     
 
-        self.subject_entry = Entry(width=20)
-        self.subject_entry.grid(row =3,column=1,columnspan=5)
+        self.subject_entry = Text(width=20,height=1)
+        self.subject_entry.grid(row=2,column=1)
 
         self.message_entry = Text(width=40,height=10)
-        self.message_entry.grid(row=5,column=0,columnspan=6)
+        self.message_entry.grid(row=4,column=0,columnspan=4,sticky="ew")
 
-        self.entries.append(self.to_entry)
-        self.entries.append(self.subject_entry)
+        #self.entries.append(self.to_entry)
+        #self.entries.append(self.subject_entry)
 
 
-        self.send_button = Button(text="Send",command=send_email,font=('Arial',12),width=24)
-        self.clear_button = Button(text="Clear",command = clear_all_sections,font=('Arial',12),width=24)
-        self.save_button = Button(text="Save",command=save_draft,font=('Arial',12),width=24)
-        self.exit_button = Button(text="Exit",command = exit_program,font=('Arial',12),width=24)
+        self.send_button = Button(text="Send",command=self.send_email,font=('Arial',12))
+        self.send_button.grid(row=5,column=0,sticky="ew")
+  
+
+
+        self.clear_button = Button(text="Clear",command = self.clear_all_sections,font=('Arial',12))
+        self.clear_button.grid(row=5,column=1,sticky="ew")
+       
+
+        self.save_button = Button(text="Save",command=self.save_draft,font=('Arial',12))
+        self.save_button.grid(row=5,column=2,sticky="ew")
+   
+
+        self.exit_button = Button(text="Exit",command = self.exit_program,font=('Arial',12))
+        self.exit_button.grid(row=5,column=3,sticky="ew")
+
+        for i in range(4):
+            self.window.grid_columnconfigure(i, weight=1)
+
+        self.window.mainloop()
 
     def exit_program(self):
         self.window.destroy()
@@ -98,3 +114,6 @@ class UI:
             result = messagebox.askokcancel(title="Message Text Is Empty",message="Do You Wish To Send A Empty Message")
             if result == True:
                 message_text = "No Message"
+
+
+d = UI()
