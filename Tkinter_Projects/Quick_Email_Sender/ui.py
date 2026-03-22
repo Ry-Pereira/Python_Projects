@@ -1,0 +1,100 @@
+#Name: Ryan Pereira
+#Project Name: Quick Email Sender
+#Module Name: UI
+#Module Purpose: ...
+#Description:# A Quick Email Sender
+#Collaborators: None
+#Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
+#Date: 6/18/2026
+#Last Modified: 6/22/2026
+
+
+
+
+from tkinter import *
+from tkinter import messagebox
+import smtplib
+
+class UI:
+    def __init__(self):
+
+        self.entries = []
+        self.window = Tk()
+        self.window.title("Quick Email Sender")
+        self.window.config(padx=30,pady=30)
+
+        self.title_label = Label(text="Quick Email Sender",font=("Arial",24))
+        self.title_label.grid(row=1,column=0,columnspan=6,pady=10)
+
+        self.to_section_label = Label(text="To:",font=("Arial",22),width=2,bg="yellow")
+        self.to_section_label.grid(row=2,column=0,columnspan=2)
+    
+
+
+        self.subject_section_label = Label(text="Subject:",font=("Arial",22,),width=10)
+        self.subject_section_label.grid(row=3,column=0,columnspan=2)
+
+        self.message_section_label = Label(text="Message:",font=("Arial",22))
+        self.message_section_label.grid(row=4,column=0,columnspan=1)
+
+
+        self.to_entry = Entry(width=20)
+        self.to_entry.grid(row=2,column=1,columnspan=5)
+    
+
+        self.subject_entry = Entry(width=20)
+        self.subject_entry.grid(row =3,column=1,columnspan=5)
+
+        self.message_entry = Text(width=40,height=10)
+        self.message_entry.grid(row=5,column=0,columnspan=6)
+
+        self.entries.append(self.to_entry)
+        self.entries.append(self.subject_entry)
+
+
+        self.send_button = Button(text="Send",command=send_email,font=('Arial',12),width=24)
+        self.clear_button = Button(text="Clear",command = clear_all_sections,font=('Arial',12),width=24)
+        self.save_button = Button(text="Save",command=save_draft,font=('Arial',12),width=24)
+        self.exit_button = Button(text="Exit",command = exit_program,font=('Arial',12),width=24)
+
+    def exit_program(self):
+        self.window.destroy()
+
+    def save_draft(self):
+        pass
+
+    def clear_all_sections(self):
+        for text_entry in self.entries:
+            #Text entry deletes everything at the 0 character and until the end
+            text_entry.delete(0,END)
+
+        #Message entry deletes everything, until the end of th text, 1.0
+        #Starts at line 1, character 0, and goes until the end of text
+        self.message_entry.delete("1.0",END)
+
+
+    def send_email(self):
+        print("Went Well")
+
+        to_text = self.to_entry.get()
+        subject_text = self.subject_entry.get()
+        message_text = self.message_entry.get("1.0", END)
+
+        if len(message_text) == 0 and len(to_text) == 0 and len(subject_text) == 0:
+            messagebox.showinfo(title="To, Subject, and Message Line Empty",message="Please fill in the to section\nSubject is optional\nMessage is optional")
+
+        elif len(to_text) == 0 and len(subject_text) == 0:
+            messagebox.showinfo(title="To and Subject Line Empty",message="Please fill in the to section\nSubject is optional")
+        elif len(to_text) == 0 and len(message_text) == 0:
+            messagebox.showinfo(title="To and Subject Line Empty",message="Please fill in the to section\nMessage is optional")
+
+        elif len(to_text) == 0:
+            messagebox.showinfo(title="To Line",message="To Section Must Be Filled")
+        elif len(subject_text) == 0:
+            result = messagebox.askokcancel(title="Subject Text Is Empty",message="Do You Wish To Send A Empty Subject")
+            if result == True:
+                subject_text = "No Subject"
+        elif len(message_text) == 0:
+            result = messagebox.askokcancel(title="Message Text Is Empty",message="Do You Wish To Send A Empty Message")
+            if result == True:
+                message_text = "No Message"
