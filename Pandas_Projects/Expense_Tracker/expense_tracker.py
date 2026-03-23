@@ -22,20 +22,35 @@ class TrackerBrain:
         })
         new_data.to_csv("expenses.csv",mode="a",header=False,index=False)
 
+    def update_dataframe(self):
+        self.expense_data_frame = pandas.read_csv(self.expense_csv_file)
+
+
+
     def show_total_spent(self):
         total_amount = self.expense_data_frame['Amount'].to_list()
         total_spend = sum(total_amount)
+        self.update_dataframe()
         return total_spend
     
-    def show_expenses(self):
-        pass
+    def show_entire_expenses(self):
+        #Converts the datargam to string with the index set to false, with the row number to not be shown
+        return self.expense_data_frame.to_string(index=False)
+    
 
-    def show_expenses_by_category(self):
+    
+    def show_expenses_by_category(self,category):
         pass
+        
 
 
 
     
+
+
+tester = TrackerBrain("expenses.csv")
+print(tester.expense_data_frame["Category"])
+
 
 
 
