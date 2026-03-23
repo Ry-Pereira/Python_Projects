@@ -1,12 +1,13 @@
 
-
+from expense_tracker import *
 
 
 
 
 
 def main():
-    pass
+    expense_tracker = TrackerBrain("expenses.csv")
+    
 
 
 
