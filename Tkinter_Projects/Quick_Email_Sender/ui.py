@@ -52,28 +52,40 @@ class UI:
         self.subject_section_label = Label(text="Subject:",font=("Arial",20,),bg="#F4EBD3",fg="#DED3C4")
         self.subject_section_label.grid(row=4,column=0)
 
+        #The Ui's message section label is set with text, font, foreground and background
         self.message_section_label = Label(text="Message:",font=("Arial",20),bg="#F4EBD3",fg="#DED3C4")
         self.message_section_label.grid(row=5,column=0)
 
+
+        #The Ui's has entries list to store the entries
         self.entries = []
+
+        #The from entry is set to a Text widget with set width,height, background
         self.from_entry = Text(width=20,height=2,bg="#98A1BC")
         self.from_entry.grid(row=1, column=1, columnspan=3, sticky="ew",pady=(10, 0))
 
+        #The password entry is set to a Text widget with set width,height, background
         self.password_entry = Text(width=20,height=2,bg="#98A1BC")
         self.password_entry.grid(row=2, column=1, columnspan=3, sticky="ew",pady=(10, 0))
 
+
+        #The to entry is set to a Text widget with set width,height, background
         self.to_entry = Text(width=20,height=2,bg="#98A1BC")
         self.to_entry.grid(row=3, column=1, columnspan=3, sticky="ew",pady=(10, 0))
     
-
+        #The subject entry is set to a Text widget with set width,height, background
         self.subject_entry = Text(width=20,height=2,bg="#98A1BC")
         self.subject_entry.grid(row=4, column=1, columnspan=3, sticky="ew",pady=(10, 0))
 
+        #The message entry is set to a Text widget with set width,height, background
         self.message_entry = Text(width=40,height=12,bg="#98A1BC")
         self.message_entry.grid(row=6,column=0,columnspan=4,sticky="ew",pady=(20, 0))
 
+        #The entries list appends the to entry
         self.entries.append(self.to_entry)
+        #The entries list appends the subject entry
         self.entries.append(self.subject_entry)
+        #The entries list appends the message entry
         self.entries.append(self.message_entry)
 
 
