@@ -1,6 +1,5 @@
-These are all of my Python projects. The projects are assigned in specific files that match the purpose of the programs within them.
-They are also categorized as either Finished or Unfinished to indicate their completion status.
+These are all of my Python projects. The projects are assigned in specific files that match the purpose of the programs within them. Some Project folder have specific names as to according to the type of python libraries associated with them.
 
 
 - Ryan Antony Pereira
-- Date: 3/2/24
+- Date: 3/24/26
