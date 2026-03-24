@@ -30,16 +30,20 @@ class UI:
         self.from_section_label.grid(row=1,column=0)
 
 
-        self.to_section_label = Label(text="To:",font=("Arial",20),bg="#F4EBD3",fg="#DED3C4")
-        self.to_section_label.grid(row=2,column=0)
+        self.password_section_label = Label(text="Password:",font=("Arial",20),bg="#F4EBD3",fg="#DED3C4")
+        self.password_section_label.grid(row=2,column=0)
+
+        self.to_section_label = Label(text="To",font=("Arial",20),bg="#F4EBD3",fg="#DED3C4")
+        self.to_section_label.grid(row=3,column=0)
     
 
 
         self.subject_section_label = Label(text="Subject:",font=("Arial",20,),bg="#F4EBD3",fg="#DED3C4")
-        self.subject_section_label.grid(row=3,column=0)
+        self.subject_section_label.grid(row=4,column=0)
 
         self.message_section_label = Label(text="Message:",font=("Arial",20),bg="#F4EBD3",fg="#DED3C4")
-        self.message_section_label.grid(row=4,column=0)
+        self.message_section_label.grid(row=5,column=0)
+
 
         self.from_entry = Text(width=20,height=2,bg="#98A1BC")
         self.from_entry.grid(row=1, column=1, columnspan=3, sticky="ew",pady=(10, 0))
@@ -100,15 +104,7 @@ class UI:
         self.message_entry.delete("1.0",END)
 
 
-    def send_email(self):
-        print("Went Well")
-
-        email = self.from_entry.get()
-        password = self.password_entry.get()
-        to_text = self.to_entry.get()
-        subject_text = self.subject_entry.get()
-        message_text = self.message_entry.get("1.0", END)
-
+    def check_fields(self,email,password,to_text,subject_text,message_text):
         if len(message_text) == 0 and len(to_text) == 0 and len(subject_text) == 0:
             messagebox.showinfo(title="To, Subject, and Message Line Empty",message="Please fill in the to section\nSubject is optional\nMessage is optional")
 
@@ -137,6 +133,38 @@ class UI:
             to_text_list = to_text.split("@")
             if to_text_list[1] not in self.valid_emails:
                 return False
+
+    def send_email(self):
+        print("Went Well")
+
+        email = (self.from_entry.get("1.0",END))
+        password = self.password_entry.get("1.0",END)
+        to_text = self.to_entry.get("1.0",END)
+        subject_text = self.subject_entry.get("1.0",END)
+        message_text = self.message_entry.get("1.0", END)
+        to_text_list = to_text.split("@")
+        print(to_text_list)
+        print(to_text_list[1].replace("\n"," "))
+
+        valid_send_form = self.check_fields(email,password,to_text,subject_text,message_text)
+        print("well")
+        if valid_send_form == True:
+            if to_text_list[1].replace("\n"," ") == "gmail.com":
+                print("Go into gmail")
+                connection = smtplib.SMTP("smtp.gmail.com")
+            elif to_text_list[1].replace("\n"," ") == "yahoo.com":
+                connection = smtplib.SMTP("smtp.mail.yahoo.com")
+            elif to_text_list[1].replace("\n"," ") == "outlook.com":
+                connection = smtplib.SMTP("smtp.office365.com")
+            else:
+                return
+            connection.starttls()
+            connection.login(user=email,password=password)
+            connection.sendmail(from_addr=email,to_addrs=to_text,msg=f"Subject:{subject_text}\n{message_text}")
+            connection.close()
+
+
+        
 
 
         
