@@ -6,45 +6,56 @@
 #Collaborators: None
 #Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
 #Date: 6/18/2026
-#Last Modified: 6/22/2026
+#Last Modified: 6/24/2026
 
 
 
-
+#From the tkinter module, imporitng all the classes,function, and global variable used in order to make this project program.
 from tkinter import *
+#From the tkinter module, importing the messagebox class in order to have a messagebox show up in the program for user notification.
 from tkinter import messagebox
+#Importing the smtplib module, in order to establish email sending functionality
 import smtplib
 
+#Defining a UI class in order to provide a Graphical User Interface for the Project program
 class UI:
     def __init__(self):
 
-        self.entries = []
+        #The ui's object has window set to a Tkinter class in order to provide a graphical user interface window to work on
         self.window = Tk()
+        #The Ui's window has a title with a string title value
         self.window.title("Quick Email Sender")
+        #The Ui's window is updated with a padding of 40 for y and x postion, so there is spacing, and background color being set.
         self.window.config(padx=40,pady=40,bg="#F4EBD3")
 
+
+        #The Ui's title label is set with text, font, foreground and background
         self.title_label = Label(text="Quick Email Sender",font=("Arial",24),bg="#F4EBD3",fg="#DED3C4")
         self.title_label.grid(row=0,column=0,columnspan=4,pady=10)
 
+
+        #The Ui's from section label is set with text, font, foreground and background
         self.from_section_label = Label(text="From:",font=("Arial",20),bg="#F4EBD3",fg="#DED3C4")
         self.from_section_label.grid(row=1,column=0)
 
-
+        #The Ui's password section label is set with text, font, foreground and background
         self.password_section_label = Label(text="Password:",font=("Arial",20),bg="#F4EBD3",fg="#DED3C4")
         self.password_section_label.grid(row=2,column=0)
 
+
+        #The Ui's to section label is set with text, font, foreground and background
         self.to_section_label = Label(text="To",font=("Arial",20),bg="#F4EBD3",fg="#DED3C4")
         self.to_section_label.grid(row=3,column=0)
     
 
-
+        #The Ui's subject section label is set with text, font, foreground and background
         self.subject_section_label = Label(text="Subject:",font=("Arial",20,),bg="#F4EBD3",fg="#DED3C4")
         self.subject_section_label.grid(row=4,column=0)
 
         self.message_section_label = Label(text="Message:",font=("Arial",20),bg="#F4EBD3",fg="#DED3C4")
         self.message_section_label.grid(row=5,column=0)
 
-
+        self.entries = []
         self.from_entry = Text(width=20,height=2,bg="#98A1BC")
         self.from_entry.grid(row=1, column=1, columnspan=3, sticky="ew",pady=(10, 0))
 
@@ -61,8 +72,9 @@ class UI:
         self.message_entry = Text(width=40,height=12,bg="#98A1BC")
         self.message_entry.grid(row=6,column=0,columnspan=4,sticky="ew",pady=(20, 0))
 
-        #self.entries.append(self.to_entry)
-        #self.entries.append(self.subject_entry)
+        self.entries.append(self.to_entry)
+        self.entries.append(self.subject_entry)
+        self.entries.append(self.message_entry)
 
 
         self.send_button = Button(text="Send",command=self.send_email,font=('Arial',12),bg="#555879",fg="#DED3C4")
