@@ -13,7 +13,29 @@ class TrackerBrain:
         self.expense_csv_file = expense_csv_file
         self.expense_data_frame = pandas.read_csv(expense_csv_file)
 
+    def check_values(self,date,amount,category,description):
+        if str(type(date)) != "<class 'int'>":
+            return False
+        elif str(type(amount)) != "<class 'int'>":
+            return False
+        elif str(type(category)) != "<class 'str'>":
+            return False
+        elif str(type(description)) != "<class 'str'>":
+            return False
+        else:
+            return True
+
+    def check_duplicates(self,date,amount,category,description):
+        if len(self.expense_data_frame[(self.expense_data_frame.Date == date) & (self.expense_data_frame.Amount == amount) & (self.expense_data_frame.Category == category) & (self.expense_data_frame.Description == description)]):
+            return True
+        else:
+            return False
+
     def add_expense(self,date,amount,category,description):
+        if self.check_values(date,amount,category,description) == False:
+            return "Wont work"
+        if self.check_duplicates(date,amount,category,description) == False:
+            return "Wont work"
         new_data = pandas.DataFrame({
             "Date":[date],
             "Amount":[amount],
@@ -33,24 +55,23 @@ class TrackerBrain:
         self.update_dataframe()
         return total_spend
     
+
     def show_entire_expenses(self):
         #Converts the datargam to string with the index set to false, with the row number to not be shown
         return self.expense_data_frame.to_string(index=False)
     
 
     
-    def show_expenses_by_category(self,category):
-        pass
-        
-
 
 
     
 
 
 tester = TrackerBrain("expenses.csv")
-print(tester.expense_data_frame["Category"])
-
+g = tester.expense_data_frame[(tester.expense_data_frame.Category == "Hello") | (tester.expense_data_frame.Category == "dead")]
+print(g)
+print(type(g))
+print(len(g))
 
 
 
