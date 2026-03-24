@@ -80,6 +80,8 @@ class UI:
         for i in range(4):
             self.window.grid_columnconfigure(i, weight=1,uniform="a")
 
+        self.valid_emails = ["gmail.com","office365.com","yahoo.com","me.com","aol.com"]
+
         self.window.mainloop()
 
     def exit_program(self):
@@ -126,6 +128,18 @@ class UI:
             if result == True:
                 message_text = "No Message"
 
+        if "@" in email:
+            email_list = email.split("@")
+            if email_list[1] not in self.valid_emails:
+                return False
+            
+        if "@" in to_text:
+            to_text_list = to_text.split("@")
+            if to_text_list[1] not in self.valid_emails:
+                return False
+
+
+        
         
 
         
