@@ -31,29 +31,35 @@ class UI:
 
         #The Ui's title label is set with text, font, foreground and background
         self.title_label = Label(text="Quick Email Sender",font=("Arial",24),bg="#F4EBD3",fg="#DED3C4")
+        #The Ui's title label is gridded at row,colum location with columnspan and padding for y set
         self.title_label.grid(row=0,column=0,columnspan=4,pady=10)
 
 
         #The Ui's from section label is set with text, font, foreground and background
         self.from_section_label = Label(text="From:",font=("Arial",20),bg="#F4EBD3",fg="#DED3C4")
+        #The Ui's from section label is gridded at row,colum location
         self.from_section_label.grid(row=1,column=0)
 
         #The Ui's password section label is set with text, font, foreground and background
         self.password_section_label = Label(text="Password:",font=("Arial",20),bg="#F4EBD3",fg="#DED3C4")
+        #The Ui's password section label is gridded at row,colum location
         self.password_section_label.grid(row=2,column=0)
 
 
         #The Ui's to section label is set with text, font, foreground and background
         self.to_section_label = Label(text="To",font=("Arial",20),bg="#F4EBD3",fg="#DED3C4")
+        #The Ui's to section label is gridded at row,colum location
         self.to_section_label.grid(row=3,column=0)
     
 
         #The Ui's subject section label is set with text, font, foreground and background
         self.subject_section_label = Label(text="Subject:",font=("Arial",20,),bg="#F4EBD3",fg="#DED3C4")
+        #The Ui's subject section label is gridded at row,colum location
         self.subject_section_label.grid(row=4,column=0)
 
         #The Ui's message section label is set with text, font, foreground and background
         self.message_section_label = Label(text="Message:",font=("Arial",20),bg="#F4EBD3",fg="#DED3C4")
+        #The Ui's message section label is gridded at row,colum location
         self.message_section_label.grid(row=5,column=0)
 
 
@@ -112,12 +118,16 @@ class UI:
 
         self.window.mainloop()
 
+    #Defining a exit program method to exit out of the program
     def exit_program(self):
+        #The Ui's window envokes the destroy functon, destroying the window entirely
         self.window.destroy()
 
-    def save_draft(self):
+    #Defining the email send form as a draft and to the csv document to save it
+    def save_draft(self,email,password,to_text,subject_text,message_text):
         pass
-
+    
+    #Defining clear all sections, that reurns all section in the email send form as empty
     def clear_all_sections(self):
         for text_entry in self.entries:
             #Text entry deletes everything at the 0 character and until the end
@@ -128,6 +138,7 @@ class UI:
         self.message_entry.delete("1.0",END)
 
 
+    #Defining a check fields method to check that section fields are valid in order to send the email
     def check_fields(self,email,password,to_text,subject_text,message_text):
         if len(message_text) == 0 and len(to_text) == 0 and len(subject_text) == 0:
             messagebox.showinfo(title="To, Subject, and Message Line Empty",message="Please fill in the to section\nSubject is optional\nMessage is optional")
@@ -158,6 +169,7 @@ class UI:
             if to_text_list[1] not in self.valid_emails:
                 return False
 
+    #Defining a method to verifying and sending the email
     def send_email(self):
         print("Went Well")
 
