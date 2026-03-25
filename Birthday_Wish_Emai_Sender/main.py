@@ -61,15 +61,19 @@ def send_email(birdthdays):
             )
 
 def main():
-   with open("letter1.txt", "r") as file:
-       r = file.readlines()
-       print(r)
-       print("\n")
-       for line in r:
-        line = line.replace("[First Name]","Ryan")
-        line = line.replace("[Last Name]","Pereira")
-        line = line.replace("[Your Name]","L")
-        print(line)
+    with open("letter1.txt", "r") as file:
+        r = file.readlines()
+  
+        print("\n")
+        message = ''
+        for line in r:
+            line = line.replace("[First Name]","Ryan")
+            line = line.replace("[Last Name]","Pereira")
+            line = line.replace("[Your Name]","L")
+            
+            message += line
+        print(message)
+    
            
     
        
