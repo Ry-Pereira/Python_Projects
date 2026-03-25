@@ -1,7 +1,11 @@
 import datetime as dt
 import smtplib
 
+EMAIL = ""
+PASSWORD = ""
+TO_ADDRESS = ""
 
+date_of_birth = dt.datetime(year=2004,month=2,day=17,hour=12)
 
 def get_time():
     now_time = dt.datetime.now()
@@ -14,6 +18,15 @@ def get_time():
 
     print(now_time)
 
+def send_email():
+    with smtplib.SMTP("smtp.gmail.com") as connection:
+        connection.starttls()
+        connection.login(user=EMAIL,password=PASSWORD)
+        connection.send_mail(
+            from_addr = EMAIL,
+            to_addr = TO_ADDRESS,
+            msg="Subject:Hello There\n\nThis is the body of the mail."
+        )
 
 def main():
     get_time()
