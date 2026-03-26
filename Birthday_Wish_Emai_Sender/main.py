@@ -22,7 +22,7 @@ letters_list = ["letter1.txt","letter2.txt","letter3.txt","letter4.txt"]
 
 
 #Defining the store birthday info function
-def store_birthday_info():
+def store_birthday_info()-> None:
     #Birthday year is set to the integer casting of asking the user for the year of their birth of the person they want to log in
     birthday_year = int(input("Year of Birth: "))
     #Birthday month is set to the integer casting of asking the user for the month of their birth of the person they want to log in
@@ -37,7 +37,7 @@ def store_birthday_info():
     birthday_email = str(input("Birthday Email To Send: "))
 
     
-
+    #New birthday info is set to a pandas dataframe with the birthday information aquired, set to the data belongings
     new_birthday_info = pandas.DataFrame({
         "First_Name": [birthday_first_name],
         "Last_Name": [birthday_last_name],
@@ -46,51 +46,68 @@ def store_birthday_info():
         "Month":[birthday_month],
         "Day":[birthday_day]
     })
-
+    #The new birthday infor executes the to csv method, with being appended to the birthdays.csv, as a row, with no exact index set
     new_birthday_info.to_csv("birthdays.csv",mode="a",header=False,index=False)
    
-def check_for_birthdays():
+#Defining a check for birthdays function
+def check_for_birthdays()-> pandas.DataFrame:
+    #Date noew is set to the date and time that is today now
     date_now = dt.datetime.now()
+    #Birtday dataframe is set to the dataframe object value of panadas executing the read csv function with birthdays.csv as input
     birthday_dataframe = pandas.read_csv("birthdays.csv")
+    #Birthdays today is a datframe value taken from the condition from the birthdays dataframe where is there is a row where the year,month, and day match today
     birthdays_today = birthday_dataframe[(birthday_dataframe.Year == date_now.year) & (birthday_dataframe.Month == date_now.month) & (birthday_dataframe.Day == date_now.day)]
+    #Returns the birthdays today dataframe
     return birthdays_today
 
     
-
-def send_email(birthdays):
+#Defining a send email function with birthdays as input
+def send_email(birthdays:pandas.DataFrame) -> None:
+    #For birthday row in the  birthdays dataframe rows, with index hidden
     for birthday_row in birthdays.itertuples(index=False):
-        print(birthday_row)
-        print(birthday_row.First_Name,birthday_row.Last_Name,birthday_row.Email,birthday_row.Year,birthday_row.Month,birthday_row.Day)
-        print("Tyepe:",type(birthday_row.First_Name))
+        #A random letter is randomly chosen from the letters list
         random_letter = random.choice(letters_list)
-
+        #With open the random letter text document, in read mode, with alias as file
         with open(random_letter, "r") as file:
+            #File lines is set to file readlines, to get tall the lines in the file as alist
             file_lines = file.readlines()
-    
-            print("\n")
+            #Message set to empty string
             message = ''
+            #For line in file lines
             for line in file_lines:
+                #Line is set to line,replace the string,[First Name], to birthday_row.First_Name value
                 line = line.replace("[First Name]",birthday_row.First_Name)
+                #Line is set to line,replace the string,[Last Name], to birthday_row.Last_Name value
                 line = line.replace("[Last Name]",birthday_row.Last_Name)
+                #Line is set to line,replace the string,[Your Name], to YOUR_Name value
                 line = line.replace("[Your Name]",YOUR_NAME)
+                #Line is set to line,replace the string,[Date], to birthday_row.Year value
                 line = line.replace("[Date]",str(birthday_row.Year))
+                #Line is set to line,replace the string,[Years turning], to (2026 - birthday_row.Year) value
                 line = line.replace("[Years turning]",str(2026-birthday_row.Year))
+                #Message is incremented with line string
                 message += line
-            print(message)
-
+            
+        #Full message is set to the f-string of subject set to birthday wish, with new linews, and the message
         full_message = f"Subject:Birthday Wish\n\n{message}"
+        #Full message bytes is set to full message is encoded
         full_message_bytes = full_message.encode("utf-8")
+        # A way to connect to connect to email provider.SMTP providerer is diffrent for very email rpiver, since mine ends in gmail, then it smtp.gmail.com
         connection = smtplib.SMTP("smtp.gmail.com")
+        #TLS starts for transport layer security
         connection.starttls()
+        #Connection requring a login with user set to email address and password to app password
         connection.login(user=EMAIL,password=PASSWORD)
+        #Conneection to send email from address to my email addres and to addres to my addres with mesg set to hello, have SUbject: to have subject in there
         connection.sendmail(from_addr=EMAIL,to_addrs=birthday_row.Email,msg=full_message_bytes)
+        #Closes the connection
         connection.close()
 
 
 
 
 #Defining the main function, the entry point into the project program
-def main():
+def main() -> None:
     #User_answer stores the input from the question if the user wants to store any birthday information
     user_answer = input("Do you want store any birthday information(y/n?")
     #If user answer is equal to y character string, 
