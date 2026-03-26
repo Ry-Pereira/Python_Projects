@@ -1,5 +1,6 @@
 import datetime as dt
 import pandas
+import random
 import smtplib
 
 EMAIL = ""
@@ -25,54 +26,67 @@ def store_birthday_info():
 
 
     new_birthday_info = pandas.DataFrame({
-        "First_Name": birthday_first_name,
-        "Last_Name": birthday_last_name,
-        "Email": birthday_email,
-        "Year": birthday_year,
-        "Month":birthday_month,
-        "Day":birthday_day,
-        "Time":birthday_hour
+        "First_Name": [birthday_first_name],
+        "Last_Name": [birthday_last_name],
+        "Email": [birthday_email],
+        "Year": [birthday_year],
+        "Month":[birthday_month],
+        "Day":[birthday_day],
+        "Time":[birthday_hour],
+        "Time_Period":[post_or_past_meridian]
     })
 
-    new_birthday_info.to_csv("birthday.csv",mode="a",header=False,index=False)
+    new_birthday_info.to_csv("birthdays.csv",mode="a",header=False,index=False)
    
 def check_for_birthdays():
     date_now = dt.datetime.now()
     birthday_dataframe = pandas.read_csv("birthdays.csv")
-    birthdays_today = birthday_dataframe[(birthday_dataframe.Year == date_now.year) & (birthday_dataframe.Month == date_now.month) & (birthday_dataframe.Day == date_now.Day)]
+    birthdays_today = birthday_dataframe[(birthday_dataframe.Year == date_now.year) & (birthday_dataframe.Month == date_now.month) & (birthday_dataframe.Day == date_now.day)]
     return birthdays_today
 
     
 
-def send_email(birdthdays):
-    for birthday in birthdays:
-
+def send_email(birthdays):
+    for birthday_row in birthdays.itertuples(index=False):
+        print(birthday_row)
+        print(birthday_row.First_Name,birthday_row.Last_Name,birthday_row.Email,birthday_row.Year,birthday_row.Month,birthday_row.Day)
+        print("Tyepe:",type(birthday_row.First_Name))
         random_letter = random.choice(letters_list)
 
+        with open(random_letter, "r") as file:
+            file_lines = file.readlines()
+    
+            print("\n")
+            message = ''
+            for line in file_lines:
+                line = line.replace("[First Name]",birthday_row.First_Name)
+                line = line.replace("[Last Name]",birthday_row.Last_Name)
+                line = line.replace("[Your Name]","Li")
+                line = line.replace("[Date]",str(birthday_row.Year))
+                line = line.replace("[Years turning]",str(2026-birthday_row.Year))
+                
+                message += line
+            print(message)
+
+        full_message = f"Subject:Birthday Wish\n\n{message}"
+        full_message_bytes = full_message.encode("utf-8")
+        connection = smtplib.SMTP("smtp.gmail.com")
+        connection.starttls()
+        connection.login(user=EMAIL,password=PASSWORD)
+        connection.sendmail(from_addr=EMAIL,to_addrs=birthday_row.Email,msg=full_message_bytes)
+        connection.close()
 
 
-        with smtplib.SMTP("smtp.gmail.com") as connection:
-            connection.starttls()
-            connection.login(user=EMAIL,password=PASSWORD)
-            connection.send_mail(
-                from_addr = EMAIL,
-                to_addr = TO_ADDRESS,
-                msg="Subject:Hello There\n\nThis is the body of the mail."
-            )
+
+
 
 def main():
-    with open("letter1.txt", "r") as file:
-        r = file.readlines()
-  
-        print("\n")
-        message = ''
-        for line in r:
-            line = line.replace("[First Name]","Ryan")
-            line = line.replace("[Last Name]","Pereira")
-            line = line.replace("[Your Name]","L")
-            
-            message += line
-        print(message)
+    birthdays = check_for_birthdays()
+    store_birthday_info()
+
+    
+    
+    
     
            
     
