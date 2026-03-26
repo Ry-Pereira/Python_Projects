@@ -64,7 +64,6 @@ def send_email(birthdays):
                 line = line.replace("[Your Name]","Li")
                 line = line.replace("[Date]",str(birthday_row.Year))
                 line = line.replace("[Years turning]",str(2026-birthday_row.Year))
-                
                 message += line
             print(message)
 
@@ -81,14 +80,15 @@ def send_email(birthdays):
 
 
 def main():
+    user_answer = input("Do you want store any birthday information(y/n?")
+    if user_answer == "y":
+        store_birthday_info()
     birthdays = check_for_birthdays()
-    store_birthday_info()
+    send_email(birthdays)
 
     
     
-    
-    
-           
+
     
        
 
