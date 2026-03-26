@@ -1,29 +1,42 @@
+#Importing the datetime module as dt, to get all the information for getting world time functions and variables
 import datetime as dt
+#Importing the pandas library for data manipulation and analysis, with primarily working on csv info
 import pandas
+#Importing the random module in order to be able to be randomly choose from the letters list
 import random
+#Importing smtplib module, in order for Simple Mail Transfer protocol to work, in sending Emails
 import smtplib
 
+#EMAIL constant variable set to empty string
 EMAIL = ""
+#PASSWORD constant variable set to empty string
 PASSWORD = ""
+#TO ADDRESS constant variable set to empty string
 TO_ADDRESS = ""
+#YOUR NAME constant variable set to empty string
+YOUR_NAME = ""
 
+
+#Letters list set to a list of letter text documents
 letters_list = ["letter1.txt","letter2.txt","letter3.txt","letter4.txt"]
 
-date_of_birth = dt.datetime(year=2004,month=2,day=17,hour=12)
 
+#Defining the store birthday info function
 def store_birthday_info():
+    #Birthday year is set to the integer casting of asking the user for the year of their birth of the person they want to log in
     birthday_year = int(input("Year of Birth: "))
-    birthday_month = int(input("Year of Month: "))
-    birthday_day = int(input("Year of Day: "))
-    birthday_hour = int(input("Hour to send Birthday"))
-    post_or_past_meridian  = input("Past or Post Meridian:")
-    birthday_first_name = input("Birthday First Name: ")
-    birthday_last_name = input("Birthday Last Name: ")
-    birthday_email = input("Birthday Email To Send: ")
+    #Birthday month is set to the integer casting of asking the user for the month of their birth of the person they want to log in
+    birthday_month = int(input("Month of Birth: "))
+    #Birthday day is set to the integer casting of asking the user for the day of their birth of the person they want to log in
+    birthday_day = int(input("Day of Birth: "))
+    #Birthday first name is set to the string casting of asking the user for the first name of the birth of the person they want to log in 
+    birthday_first_name = str(input("Birthday First Name: "))
+    #Birthday last name is set to the string casting of asking the user for the last name of the birth of the person they want to log in 
+    birthday_last_name = str(input("Birthday Last Name: "))
+    #Birthday email is set to the string casting of asking the user for the email of the birth of the person they want to log in 
+    birthday_email = str(input("Birthday Email To Send: "))
 
-    if post_or_past_meridian == "PM":
-        birthday_hour +=12
-
+    
 
     new_birthday_info = pandas.DataFrame({
         "First_Name": [birthday_first_name],
@@ -31,9 +44,7 @@ def store_birthday_info():
         "Email": [birthday_email],
         "Year": [birthday_year],
         "Month":[birthday_month],
-        "Day":[birthday_day],
-        "Time":[birthday_hour],
-        "Time_Period":[post_or_past_meridian]
+        "Day":[birthday_day]
     })
 
     new_birthday_info.to_csv("birthdays.csv",mode="a",header=False,index=False)
@@ -61,7 +72,7 @@ def send_email(birthdays):
             for line in file_lines:
                 line = line.replace("[First Name]",birthday_row.First_Name)
                 line = line.replace("[Last Name]",birthday_row.Last_Name)
-                line = line.replace("[Your Name]","Li")
+                line = line.replace("[Your Name]",YOUR_NAME)
                 line = line.replace("[Date]",str(birthday_row.Year))
                 line = line.replace("[Years turning]",str(2026-birthday_row.Year))
                 message += line
@@ -78,12 +89,17 @@ def send_email(birthdays):
 
 
 
-
+#Defining the main function, the entry point into the project program
 def main():
+    #User_answer stores the input from the question if the user wants to store any birthday information
     user_answer = input("Do you want store any birthday information(y/n?")
+    #If user answer is equal to y character string, 
     if user_answer == "y":
+        #Exexcutes the store birthday info function to get birthday info to store into the birthdays csv
         store_birthday_info()
+    #birthday holds the value of a datframe of the buirthdays that are current today from the check for birthdays function
     birthdays = check_for_birthdays()
+    #Executes the send_email function with birthdays as input, to go through each birthday and send a eamil according to each of its own information
     send_email(birthdays)
 
     
@@ -92,6 +108,7 @@ def main():
     
        
 
-        
+#If the program is being run directly, then the main program will be executed        
 if __name__ == "__main__":
+    #Main function is executed
     main()
