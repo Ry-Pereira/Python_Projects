@@ -1,3 +1,14 @@
+#Name: Ryan Pereira
+#Project Name: Birthday Wish Email Sender
+#Module Name: Main
+#Module Purpose: The moudle is the main entry into the program.
+#Description: A Birthay Wish Email sender
+#Collaborators: None
+#Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
+#Date: 6/23/2026
+#Last Modified: 6/26/2026
+
+
 #Importing the datetime module as dt, to get all the information for getting world time functions and variables
 import datetime as dt
 #Importing the pandas library for data manipulation and analysis, with primarily working on csv info
@@ -115,7 +126,7 @@ def send_email(birthdays:pandas.DataFrame) -> None:
             connection = smtplib.SMTP("smtp.mail.office365.com")
              #Valid email provider set to true
             valid_email_provider = True
-            
+
         #If the valid email provider is  True
         if valid_email_provider == True:
             #TLS starts for transport layer security
