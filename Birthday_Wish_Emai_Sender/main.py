@@ -93,15 +93,28 @@ def send_email(birthdays:pandas.DataFrame) -> None:
         #Full message bytes is set to full message is encoded
         full_message_bytes = full_message.encode("utf-8")
         # A way to connect to connect to email provider.SMTP providerer is diffrent for very email rpiver, since mine ends in gmail, then it smtp.gmail.com
-        connection = smtplib.SMTP("smtp.gmail.com")
-        #TLS starts for transport layer security
-        connection.starttls()
-        #Connection requring a login with user set to email address and password to app password
-        connection.login(user=EMAIL,password=PASSWORD)
-        #Conneection to send email from address to my email addres and to addres to my addres with mesg set to hello, have SUbject: to have subject in there
-        connection.sendmail(from_addr=EMAIL,to_addrs=birthday_row.Email,msg=full_message_bytes)
-        #Closes the connection
-        connection.close()
+
+        birthday_mail_provider_list = birthday_row.Email.split("@")
+        valid_email_provider = False
+        if birthday_mail_provider_list[1] == "gmail.com":
+            connection = smtplib.SMTP("smtp.gmail.com")
+            valid_email_provider = True
+        elif birthday_mail_provider_list[1] == "yahoo.com":
+            connection = smtplib.SMTP("smtp.mail.yahoo.com")
+            valid_email_provider = True
+        elif birthday_mail_provider_list[1] == "outlook.com":
+            connection = smtplib.SMTP("smtp.mail.yahoo.com")
+            valid_email_provider = True
+        
+        if valid_email_provider == True:
+            #TLS starts for transport layer security
+            connection.starttls()
+            #Connection requring a login with user set to email address and password to app password
+            connection.login(user=EMAIL,password=PASSWORD)
+            #Conneection to send email from address to my email addres and to addres to my addres with mesg set to hello, have SUbject: to have subject in there
+            connection.sendmail(from_addr=EMAIL,to_addrs=birthday_row.Email,msg=full_message_bytes)
+            #Closes the connection
+            connection.close()
 
 
 
