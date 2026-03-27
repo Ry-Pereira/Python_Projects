@@ -56,7 +56,7 @@ def check_for_birthdays()-> pandas.DataFrame:
     #Birtday dataframe is set to the dataframe object value of panadas executing the read csv function with birthdays.csv as input
     birthday_dataframe = pandas.read_csv("birthdays.csv")
     #Birthdays today is a datframe value taken from the condition from the birthdays dataframe where is there is a row where the year,month, and day match today
-    birthdays_today = birthday_dataframe[(birthday_dataframe.Year == date_now.year) & (birthday_dataframe.Month == date_now.month) & (birthday_dataframe.Day == date_now.day)]
+    birthdays_today = birthday_dataframe[(birthday_dataframe.Month == date_now.month) & (birthday_dataframe.Day == date_now.day)]
     #Returns the birthdays today dataframe
     return birthdays_today
 
@@ -92,20 +92,31 @@ def send_email(birthdays:pandas.DataFrame) -> None:
         full_message = f"Subject:Birthday Wish\n\n{message}"
         #Full message bytes is set to full message is encoded
         full_message_bytes = full_message.encode("utf-8")
-        # A way to connect to connect to email provider.SMTP providerer is diffrent for very email rpiver, since mine ends in gmail, then it smtp.gmail.com
 
+        #Birthday mail provider list is set to birthday row Email splitted by the @ string character
         birthday_mail_provider_list = birthday_row.Email.split("@")
+        #Valid email provider is set to False
         valid_email_provider = False
+        #If the birthday mail provider at first index is set to gmail.com string
         if birthday_mail_provider_list[1] == "gmail.com":
+            # A way to connect to connect to email provider.SMTP providerer is diffrent for very email rpiver, since mine ends in gmail, then it smtp.gmail.com
             connection = smtplib.SMTP("smtp.gmail.com")
+            #Valid email provider set to true
             valid_email_provider = True
+        #Elif the birthday mail provider at first index is set to yahoo.com string
         elif birthday_mail_provider_list[1] == "yahoo.com":
+            # A way to connect to connect to email provider.SMTP providerer is diffrent for very email rpiver, since mine ends in gmail, then it smtp.yahoo.com
             connection = smtplib.SMTP("smtp.mail.yahoo.com")
+             #Valid email provider set to true
             valid_email_provider = True
+        #Elif the birthday mail provider at first index is set to outlook.com string
         elif birthday_mail_provider_list[1] == "outlook.com":
-            connection = smtplib.SMTP("smtp.mail.yahoo.com")
+            # A way to connect to connect to email provider.SMTP providerer is diffrent for very email rpiver, since mine ends in gmail, then it smtp.office365.com
+            connection = smtplib.SMTP("smtp.mail.office365.com")
+             #Valid email provider set to true
             valid_email_provider = True
-        
+            
+        #If the valid email provider is  True
         if valid_email_provider == True:
             #TLS starts for transport layer security
             connection.starttls()
