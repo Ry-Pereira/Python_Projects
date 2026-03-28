@@ -71,11 +71,15 @@ def check_stock_list():
 
 #Defining a function to check the stock track list, to see if the paramater input for Ticker name and company name to check make any duplicates, returns true or false
 def check_for_stock_duplicates(ticker_name_to_check: str,stock_company_to_check: str):
+    #Stock datafram is set to a dtarame from pandas executing the read csv function on the csv file
     stock_dataframe = pandas.read_csv("stock_list.csv")
+    #For loop in iterating through the stcok tuple rows with no regard of index inclusion
     for stock in stock_dataframe.itertuples(index=False):
+        #If the stocker Ticker or Company value is equal to either the ticker or stock company to check, there is a duplicate
         if stock.Ticker == ticker_name_to_check or stock.Company == stock_company_to_check:
+            #Returns True to indicate there is a duplicate
             return True
-    
+    #Returns False to indicate there is no duplicate
     return False
         
 
