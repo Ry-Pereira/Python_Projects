@@ -75,17 +75,21 @@ def check_for_stock_duplicates(ticker_name_to_check: str,stock_company_to_check:
 
 
 def get_news_data(company_name):
-    yesterday = datetime.now() - timedelta(days=1).date()
-    yesterday_before = datetime.now() - timedelta(days=2).date()
+    yesterday = (datetime.now() - timedelta(days=1)).date()
+    yesterday_before = (datetime.now() - timedelta(days=2)).date()
 
-    news_api_previous_days = f"https://newsapi.org/v2/top-headlines?q=Apple&from={yesterday_before}&to={yesterday}&sortBy=popularity&apiKey={news_api_key}"
+    news_api_previous_days = f"https://newsapi.org/v2/top-headlines?q={company_name}&from={yesterday_before}&to={yesterday}&sortBy=popularity&apiKey={news_api_key}"
     response = requests.get(url=news_api_previous_days)
     data = response.json()
 
 
     for d in data["articles"]:
-        print(d)
-        print("\n")
+        print("SOruce",d["source"]["name"])
+        print("Author",d["author"])
+        print("Title",d["title"])
+        print("Description",d["description"])
+        print("URL",d["url"])
+        print("\n\n")
 
 
 #Defining the main function, the main enry point into the project program.
@@ -93,9 +97,8 @@ def main() -> None:
     #user_question = input("Do you wish to add a new stock to track(y/n?")
     #if user_question == "y":
     #    add_stock_data()
-    day_yesterday = datetime.datetime.now()
-    print(day_yesterday)
-    check_stock_list()
+    
+    get_news_data("Apple")
 
     
 
