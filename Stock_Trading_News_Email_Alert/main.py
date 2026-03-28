@@ -45,12 +45,22 @@ def add_stock_data():
         "High Price":[0.00],
         "Low Price":[0.00]
     })
-    new_stock_list_info.to_csv("stock_list.csv",mode="a",header=False,index=False)
+    if check_for_stock_duplicates(stock_ticker_name,stock_company_name) == False:
+        new_stock_list_info.to_csv("stock_list.csv",mode="a",header=False,index=False)
 
 def check_stock_list():
     stock_dataframe = pandas.read_csv("stock_list.csv")
     for stock in stock_dataframe.itertuples(index=False):
         print(stock.Ticker,stock.Company,stock.Close_Price)
+
+def check_for_stock_duplicates(ticker_name_to_check: str,stock_company_to_check: str) -> Boolean:
+    stock_dataframe = pandas.read_csv("stock_list.csv")
+    for stock in stock_dataframe.itertuples(index=False):
+        if stock.Ticker == ticker_name_to_check or stock.Company == stock_company_to_check:
+            return True
+    
+    return False
+        
 
 
 def get_news_data():
