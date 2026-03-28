@@ -14,7 +14,6 @@ import pandas
 
 
 key = "KUMA43H9MFPK7SVE"
-stock_api = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AAPL&apikey={key}'
 news_api_key = "ac096e631d564a83bed1ed2951d87969"
 
 news_api = f"https://newsapi.org/v2/top-headlines?q=Apple&from=2026-03-20&to=2026-03-27&sortBy=popularity&apiKey={news_api_key}"
@@ -22,7 +21,8 @@ news_api = f"https://newsapi.org/v2/top-headlines?q=Apple&from=2026-03-20&to=202
 
 
 def get_stock_data():
-    stock_name = ""
+    stock_ticker_name = ""
+    stock_api = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stock_ticker_name}&apikey={key}'
     response = requests.get(url=stock_api)
     data = response.json()
     for d in data:
@@ -47,6 +47,10 @@ def add_stock_data():
     })
     new_stock_list_info.to_csv("stock_list.csv",mode="a",header=False,index=False)
 
+def check_stock_list():
+    stock_dataframe = pandas.read_csv("stock_list.csv")
+    for stock in stock_dataframe.itertuples(index=False):
+        print(stock.Ticker,stock.Company,stock.Close_Price)
 
 
 def get_news_data():
@@ -60,7 +64,7 @@ def get_news_data():
 
 
 def main() -> None:
-    add_stock_data()
+    check_stock_list()
 
     
 
