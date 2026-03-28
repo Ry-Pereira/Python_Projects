@@ -1,3 +1,2 @@
-Ticker,Company,Open_Price,Close_Price,High_Price,Low_Price
-fdf,fd,1,1,1,1
-fdf,fd,1,1,1,1
+Ticker,Company,Open_Price_Yesterday,Close_Price_Yesterday,Open_Price_Yesterday_Before,Close_Price_Yesterday_Before
+IBM,IBM,1,1,1,1
