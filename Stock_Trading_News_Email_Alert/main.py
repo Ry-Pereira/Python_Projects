@@ -5,8 +5,8 @@
 #Description: ...
 #Collaborators: None
 #Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
-#Date: 6/27/2026
-#Last Modified: 6/27/2026 
+#Date: 6/28/2026
+#Last Modified: 6/28/2026 
 
 #Importing the requests module, in order for API retrieval,storing, and accessing to be made possible.
 import requests
@@ -14,6 +14,12 @@ import requests
 import pandas
 import time
 from datetime import datetime, timedelta
+
+#Importing smtplib module, in order for Simple Mail Transfer protocol to work, in sending Emails
+import smtplib
+
+EMAIL = ""
+PASSWORD = ""
 
 key = "KUMA43H9MFPK7SVE"
 news_api_key = "ac096e631d564a83bed1ed2951d87969"
@@ -82,16 +88,39 @@ def get_news_data(company_name):
     response = requests.get(url=news_api_previous_days)
     data = response.json()
 
+    news_message = ""
 
     for d in data["articles"]:
-        print("SOruce",d["source"]["name"])
-        print("Author",d["author"])
-        print("Title",d["title"])
-        print("Description",d["description"])
-        print("URL",d["url"])
-        print("\n\n")
 
+        message+= "SOruce",d["source"]["name"]
+        message += "Author",d["author"]
+        message += "Title",d["title"]
+        message += "Description",d["description"]
+        message += "URL",d["url"]
+        message += "\n\n"
 
+    return news_message
+    
+def send_email(company_name,news_message):
+    stock_and_company_dataframe = pandas.read_csv("stocks_list.csv")
+    stock_and_company = stock_and_company_dataframe[(stock_and_company_dataframe.Date == "company_name")]
+
+    for s in stock_and_company.ittrtuples(index=False):
+        #TLS starts for transport layer security
+        full_message = f"Subject:{company_name} has a {s.Close_Price_Yesterday}-{s.Close_Price_Yesterday_Before}\n\n{news_message}"
+        #Full message bytes is set to full message is encoded
+        full_message_bytes = full_message.encode("utf-8")
+        connection.starttls()
+        #Connection requring a login with user set to email address and password to app password
+        connection.login(user=EMAIL,password=PASSWORD)
+        #Conneection to send email from address to my email addres and to addres to my addres with mesg set to hello, have SUbject: to have subject in there
+        connection.sendmail(from_addr=EMAIL,to_addrs=EMAIL,msg=full_message_bytes)
+        #Closes the connection
+        connection.close()
+    
+
+    
+    
 #Defining the main function, the main enry point into the project program.
 def main() -> None:
     #user_question = input("Do you wish to add a new stock to track(y/n?")
