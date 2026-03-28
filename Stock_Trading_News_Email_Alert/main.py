@@ -32,6 +32,23 @@ def get_stock_data():
     time_series_data = response.json()["Time Series (Daily)"]["2026-03-26"]
     print(time_series_data)
 
+
+def add_stock_data():
+    stock_ticker_name = str(input("Stock Ticker Name: "))
+    stock_company_name = str(input("Stock Company Name: "))
+
+    new_stock_list_info = pandas.DataFrame({
+        "Ticker":[stock_ticker_name],
+        "Company":[stock_company_name],
+        "Open Price":[0.00],
+        "Close Price":[0.00],
+        "High Price":[0.00],
+        "Low Price":[0.00]
+    })
+    new_stock_list_info.to_csv("stock_list.csv",mode="a",header=False,index=False)
+
+
+
 def get_news_data():
     response = requests.get(url=news_api)
     data = response.json()
@@ -42,8 +59,8 @@ def get_news_data():
         print("\n")
 
 
-def main():
-    get_stock_data()
+def main() -> None:
+    add_stock_data()
 
     
 
