@@ -19,7 +19,7 @@ import smtplib
 
 #Defining a UI class in order to provide a Graphical User Interface for the Project program
 class UI:
-    def __init__(self):
+    def __init__(self) -> None:
 
         #The ui's object has window set to a Tkinter class in order to provide a graphical user interface window to work on
         self.window = Tk()
@@ -68,23 +68,28 @@ class UI:
 
         #The from entry is set to a Text widget with set width,height, background
         self.from_entry = Text(width=20,height=2,bg="#98A1BC")
+        #The from entry is gridded at row,colum location with columnspan and padding for y set
         self.from_entry.grid(row=1, column=1, columnspan=3, sticky="ew",pady=(10, 0))
 
         #The password entry is set to a Text widget with set width,height, background
         self.password_entry = Text(width=20,height=2,bg="#98A1BC")
+        #The password entry is gridded at row,colum location with columnspan and padding for y set
         self.password_entry.grid(row=2, column=1, columnspan=3, sticky="ew",pady=(10, 0))
 
 
         #The to entry is set to a Text widget with set width,height, background
         self.to_entry = Text(width=20,height=2,bg="#98A1BC")
+        #The to entry is gridded at row,colum location with columnspan and padding for y set
         self.to_entry.grid(row=3, column=1, columnspan=3, sticky="ew",pady=(10, 0))
     
         #The subject entry is set to a Text widget with set width,height, background
         self.subject_entry = Text(width=20,height=2,bg="#98A1BC")
+        #The subject entry is gridded at row,colum location with columnspan and padding for y set
         self.subject_entry.grid(row=4, column=1, columnspan=3, sticky="ew",pady=(10, 0))
 
         #The message entry is set to a Text widget with set width,height, background
         self.message_entry = Text(width=40,height=12,bg="#98A1BC")
+        #The message entry is gridded at row,colum location with columnspan and padding for y set
         self.message_entry.grid(row=6,column=0,columnspan=4,sticky="ew",pady=(20, 0))
 
         #The entries list appends the to entry
@@ -94,41 +99,49 @@ class UI:
         #The entries list appends the message entry
         self.entries.append(self.message_entry)
 
-
+        #The Ui's send button is set to a Button widget with text, command, font, background and foreground
         self.send_button = Button(text="Send",command=self.send_email,font=('Arial',12),bg="#555879",fg="#DED3C4")
+        #The Ui's send button is gridded at row,colum location with sticky and padding for y set
         self.send_button.grid(row=7,column=0,sticky="ew",pady=(20, 0))
   
 
-
+        #The Ui's clear button is set to a Button widget with text, command, font, background and foreground
         self.clear_button = Button(text="Clear",command = self.clear_all_sections,font=('Arial',12),bg="#555879",fg="#DED3C4")
+        #The Ui's clear button is gridded at row,colum location with sticky and padding for y set
         self.clear_button.grid(row=7,column=1,sticky="ew",pady=(20, 0))
        
 
+        #The Ui's save button is set to a Button widget with text, command, font, background and foreground
         self.save_button = Button(text="Save",command=self.save_draft,font=('Arial',12),bg="#555879",fg="#DED3C4")
+        #The Ui's save button is gridded at row,colum location with sticky and padding for y set
         self.save_button.grid(row=7,column=2,sticky="ew",pady=(20, 0))
    
-
+        #The Ui's exit button is set to a Button widget with text, command, font, background and foreground
         self.exit_button = Button(text="Exit",command = self.exit_program,font=('Arial',12),bg="#555879",fg="#DED3C4")
+        #The Ui's exit button is gridded at row,colum location with sticky and padding for y set
         self.exit_button.grid(row=7,column=3,sticky="ew",pady=(20, 0))
 
+        #The Ui's window has grid column configure for 4 columns with weight and uniform set
         for i in range(4):
+            #Setting the Ui's window grid column configure for 4 columns with weight and uniform set
             self.window.grid_columnconfigure(i, weight=1,uniform="a")
 
+        #The Ui's valid emails list is set with valid email domains for the program to work with
         self.valid_emails = ["gmail.com","office365.com","yahoo.com","me.com","aol.com"]
-
+        #The Ui's window has the mainloop function called on it in order to keep the program running and the graphical user interface responsive
         self.window.mainloop()
 
     #Defining a exit program method to exit out of the program
-    def exit_program(self):
+    def exit_program(self) -> None:
         #The Ui's window envokes the destroy functon, destroying the window entirely
         self.window.destroy()
 
     #Defining the email send form as a draft and to the csv document to save it
-    def save_draft(self,email,password,to_text,subject_text,message_text):
+    def save_draft(self,email:str,password:str,to_text:str,subject_text:str,message_text:str) -> None:
         pass
     
     #Defining clear all sections, that reurns all section in the email send form as empty
-    def clear_all_sections(self):
+    def clear_all_sections(self) -> None:
         for text_entry in self.entries:
             #Text entry deletes everything at the 0 character and until the end
             text_entry.delete(0,END)
@@ -139,7 +152,7 @@ class UI:
 
 
     #Defining a check fields method to check that section fields are valid in order to send the email
-    def check_fields(self,email,password,to_text,subject_text,message_text):
+    def check_fields(self,email:str,password:str,to_text:str,subject_text:str,message_text:str) -> bool:
         if len(message_text) == 0 and len(to_text) == 0 and len(subject_text) == 0:
             messagebox.showinfo(title="To, Subject, and Message Line Empty",message="Please fill in the to section\nSubject is optional\nMessage is optional")
 
@@ -170,7 +183,7 @@ class UI:
                 return False
 
     #Defining a method to verifying and sending the email
-    def send_email(self):
+    def send_email(self) -> None:
         print("Went Well")
 
         email = (self.from_entry.get("1.0",END))
