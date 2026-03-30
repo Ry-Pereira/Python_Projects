@@ -9,6 +9,8 @@
 #Last Modified: 6/29/2026 
 
 #Importing the requests module, in order for API retrieval,storing, and accessing to be made possible.
+from multiprocessing.dummy import connection
+#Importing the requests module, in order for API retrieval,storing, and accessing to be made possible.
 import requests
 #Importing the pandas library for data manipulation and analysis, with primarily working on csv info
 import pandas
@@ -16,21 +18,28 @@ import pandas
 import time
 #Importing the datetime and timedelta classes from the datetime module, in order for the program to have the ability to work with dates and times, such as getting the current date and time, and calculating the date for yesterday and the day before yesterday, which is used in the get stock data function to retrieve the stock data for yesterday and the day before yesterday, and in the get news data function to retrieve news articles from yesterday and the day before yesterday.
 from datetime import datetime, timedelta
-
 #Importing smtplib module, in order for Simple Mail Transfer protocol to work, in sending Emails
 import smtplib
 
+
+
+
+#EMAIL and PASSWORD variables are set to empty strings, which will be used to store the email address and app password for sending emails with the smtplib module. The user will need to input their email address and app password in these variables in order for the program to be able to send emails.
 EMAIL = ""
 PASSWORD = ""
 
-key = "KUMA43H9MFPK7SVE"
+
+
+
+#Stock data key and news api key variables are set to the API keys for the Alpha Vantage API and the News API, which are used to retrieve stock data and news data from the respective APIs. The user will need to input their own API keys in these variables in order for the program to be able to retrieve stock data and news data from the APIs.
+stock_data_key = "KUMA43H9MFPK7SVE"
 news_api_key = "ac096e631d564a83bed1ed2951d87969"
 
 
 
 
 #Defining a function to get stock data, with the parameter of stock ticker name, which is the stock ticker symbol for the stock that is being tracked, such as AAPL for Apple, MSFT for Microsoft, etc.
-def get_stock_data(stock_ticker_name):
+def get_stock_data(stock_ticker_name: str) -> dict:
     #Stock API is set to a string with the url for the stock API, with the function of TIME_SERIES_DAILY, and the symbol set to the stock ticker name parameter, and the apikey set to the key variable
     stock_api = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stock_ticker_name}&apikey={key}'
     #Response is set to the result of the requests get function with the url parameter set to the stock API variable
@@ -55,8 +64,11 @@ def get_stock_data(stock_ticker_name):
 
 
 
+
+
+
 #Defining a function to add stock data, which is used to add new stocks to track by inputting the stock ticker name and company name, which is then stored in a csv file. The function also checks for duplicates before adding new stocks to the csv file, by calling the check for stock duplicates function with the stock ticker name and company name as parameters, and if there are no duplicates, it adds the new stock data to the csv file with the to csv function, with the mode set to "a" to append the new stock data to the existing csv file, and with the header set to false and the index set to false to avoid adding an index column and a header row to the csv file.
-def add_stock_data():
+def add_stock_data() -> None:
     #Stock ticker name is set to the result of the input function with the prompt "Stock Ticker Name: ", which allows the user to input the stock ticker name for the stock they want to track
     stock_ticker_name = str(input("Stock Ticker Name: "))
     #Stock company name is set to the result of the input function with the prompt "Stock Company Name: ", which allows the user to input the stock company name for the stock they want to track
@@ -77,8 +89,11 @@ def add_stock_data():
         new_stock_list_info.to_csv("stock_list.csv",mode="a",header=False,index=False)
 
 
+
+
+
 #Defining a function to check the stock list, which is used to check the stock list and retrieve the latest stock data and news data for each stock in the list. The function reads the stock list csv file with the pandas read csv function, and then iterates through each stock in the stock list with a for loop, and for each stock, it prints the stock ticker name, company name, and close price, and then calls the get stock data function with the stock ticker name as a parameter to retrieve the latest stock data for that stock, and then calls the get news data function with the company name as a parameter to retrieve the latest news data for that company. The function also has a time sleep of 2 seconds between each stock in the stock list to avoid hitting the API rate limit and to avoid overwhelming the user with too much information at once.
-def check_stock_list():
+def check_stock_list() -> None:
     #Stock dataframe is set to a dataframe from pandas executing the read csv function on the stock list csv file, which gives a dataframe of the stock list csv file
     stock_dataframe = pandas.read_csv("stock_list.csv")
     #For loop in iterating through the stock tuple rows with no regard of index inclusion, and for each stock, it prints the stock ticker name, company name, and close price, and then calls the get stock data function with the stock ticker name as a parameter to retrieve the latest stock data for that stock, and then calls the get news data function with the company name as a parameter to retrieve the latest news data for that company. The function also has a time sleep of 2 seconds between each stock in the stock list to avoid hitting the API rate limit and to avoid overwhelming the user with too much information at once.
@@ -91,8 +106,11 @@ def check_stock_list():
         get_news_data(stock.Company)
 
 
+
+
+
 #Defining a function to check the stock track list, to see if the paramater input for Ticker name and company name to check make any duplicates, returns true or false
-def check_for_stock_duplicates(ticker_name_to_check: str,stock_company_to_check: str):
+def check_for_stock_duplicates(ticker_name_to_check: str,stock_company_to_check: str) -> bool:
     #Stock datafram is set to a dtarame from pandas executing the read csv function on the csv file
     stock_dataframe = pandas.read_csv("stock_list.csv")
     #For loop in iterating through the stcok tuple rows with no regard of index inclusion
@@ -105,8 +123,11 @@ def check_for_stock_duplicates(ticker_name_to_check: str,stock_company_to_check:
     return False
         
 
+
+
+
 #Defining a function to get news data, with the parameter of company name, which is the company name for the stock that is being tracked, such as Apple for AAPL, Microsoft for MSFT, etc. The function retrieves news articles from yesterday and the day before yesterday, and then formats the news articles into a message string that can be sent in an email.
-def get_news_data(company_name):
+def get_news_data(company_name: str) -> str:
     #Yesterday is set to the result of the datetime now function minus the result of the timedelta function with days set to 1, and then the date function is called on that result, which gives the date for yesterday
     yesterday = (datetime.now() - timedelta(days=1)).date()
     #Yesterday before is set to the result of the datetime now function minus the result of the timedelta function with days set to 2, and then the date function is called on that result, which gives the date for the day before yesterday
@@ -137,8 +158,12 @@ def get_news_data(company_name):
     #Returns the news message string that contains the formatted news articles that can be sent in an email.
     return news_message
     
+
+
+
+
 #Defining a function to send an email with the news articles related to the stock if there is a significant change in the stock price, with the parameters of company name and news message, which are used to format the email message with the subject indicating the percentage change in the stock price, and the body containing the news articles related to the stock. The function uses the smtplib module to send an email from the specified email address to the specified email address with the formatted message.
-def send_email(company_name,news_message):
+def send_email(company_name: str, news_message: str) -> None:
     #Connection is set to the result of the smtplib SMTP function with the parameter of the smtp server for gmail and the port number for tls, which creates a connection to the smtp server for sending emails
     stock_and_company_dataframe = pandas.read_csv("stocks_list.csv")
     #Stock and company dataframe is set to the result of filtering the stock and company dataframe with the condition that the Date column is equal to the company name parameter, which gives a dataframe of the stock and company information for the specified company name
@@ -163,13 +188,18 @@ def send_email(company_name,news_message):
     
 #Defining the main function, the main enry point into the project program.
 def main() -> None:
+    #User question is set to the result of the input function with the prompt "Do you wish to add a new stock to track(y/n?)", which allows the user to input whether they want to add a new stock to track or not, and if they input "y", the add stock data function is called to allow them to add a new stock to track.
     user_question = input("Do you wish to add a new stock to track(y/n?)")
+    #If the user input is "y", the add stock data function is called to allow them to add a new stock to track.
     if user_question == "y":
+        #The add stock data function is called to allow the user to add a new stock to track by inputting the stock ticker name and company name, which is then stored in a csv file. The function also checks for duplicates before adding new stocks to the csv file, by calling the check for stock duplicates function with the stock ticker name and company name as parameters, and if there are no duplicates, it adds the new stock data to the csv file with the to csv function, with the mode set to "a" to append the new stock data to the existing csv file, and with the header set to false and the index set to false to avoid adding an index column and a header row to the csv file.
         add_stock_data()
-    
-    get_news_data("Apple")
+
+    #Check stock list function is called to check the stock list and retrieve the latest stock data and news data for each stock in the list, and then send an email with the news articles related to the stock if there is a significant change in the stock price, with the subject of the email indicating the percentage change in the stock price.
+    check_stock_list()
 
     
+
 
 
 #If the program is being run directly, the main function will be executed
