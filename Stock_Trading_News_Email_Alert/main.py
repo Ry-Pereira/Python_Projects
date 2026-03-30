@@ -120,26 +120,36 @@ def get_news_data(company_name):
     #News message is set to an empty string, which will be used to store the formatted news articles that can be sent in an email
     news_message = ""
 
+    #For loop in iterating through the article info sections in the data with the key of "articles", and for each article info section, it formats the news article into a message string that can be sent in an email, with the source name, author, title, description, and url of the news article, and then adds a newline character to separate each news article in the message string.
     for article_info_section in data["articles"]:
-
-        news_message+= "SSource: " + article_info_section["source"]["name"] + "\n"
+        #Formats the news article into a message string that can be sent in an email, with the source name, author, title, description, and url of the news article, and then adds a newline character to separate each news article in the message string.
+        news_message+= "Source: " + article_info_section["source"]["name"] + "\n"
+        #Adds the author of the news article to the news message string with the key of "author" in the article info section, and then adds a newline character to separate each news article in the message string.
         news_message += "Author: " + article_info_section["author"] + "\n"
+        #Adds the title of the news article to the news message string with the key of "title" in the article info section, and then adds a newline character to separate each news article in the message string.
         news_message += "Title: " + article_info_section["title"] + "\n"
+        #Adds the description of the news article to the news message string with the key of "description" in the article info section, and then adds a newline character to separate each news article in the message string.
         news_message += "Description: " + article_info_section["description"] + "\n"
-        message += "URL",d["url"]
-        message += "\n\n"
-
+        #Adds the url of the news article to the news message string with the key of "url" in the article info section, and then adds a newline character to separate each news article in the message string.
+        news_message += "URL: " + article_info_section["url"] + "\n"
+        #Adds a newline character to separate each news article in the message string.
+        news_message += "\n\n"
+    #Returns the news message string that contains the formatted news articles that can be sent in an email.
     return news_message
     
+#Defining a function to send an email with the news articles related to the stock if there is a significant change in the stock price, with the parameters of company name and news message, which are used to format the email message with the subject indicating the percentage change in the stock price, and the body containing the news articles related to the stock. The function uses the smtplib module to send an email from the specified email address to the specified email address with the formatted message.
 def send_email(company_name,news_message):
+    #Connection is set to the result of the smtplib SMTP function with the parameter of the smtp server for gmail and the port number for tls, which creates a connection to the smtp server for sending emails
     stock_and_company_dataframe = pandas.read_csv("stocks_list.csv")
+    #Stock and company dataframe is set to the result of filtering the stock and company dataframe with the condition that the Date column is equal to the company name parameter, which gives a dataframe of the stock and company information for the specified company name
     stock_and_company = stock_and_company_dataframe[(stock_and_company_dataframe.Date == "company_name")]
-
-    for s in stock_and_company.ittrtuples(index=False):
+    #For loop in iterating through the stock and company tuple rows with no regard of index inclusion, and for each stock info section, it formats the email message with the subject indicating the percentage change in the stock price, and the body containing the news articles related to the stock, and then sends an email from the specified email address to the specified email address with the formatted message using the smtplib module.
+    for stock_info_section in stock_and_company.ittrtuples(index=False):
         #TLS starts for transport layer security
-        full_message = f"Subject:{company_name} has a {s.Close_Price_Yesterday}-{s.Close_Price_Yesterday_Before}\n\n{news_message}"
+        full_message = f"Subject:{company_name} has a ({stock_info_section.Close_Price_Yesterday}-{stock_info_section.Close_Price_Yesterday_Before})\n\n{news_message}"
         #Full message bytes is set to full message is encoded
         full_message_bytes = full_message.encode("utf-8")
+        #Conection starts for transport layer security
         connection.starttls()
         #Connection requring a login with user set to email address and password to app password
         connection.login(user=EMAIL,password=PASSWORD)
@@ -153,9 +163,9 @@ def send_email(company_name,news_message):
     
 #Defining the main function, the main enry point into the project program.
 def main() -> None:
-    #user_question = input("Do you wish to add a new stock to track(y/n?")
-    #if user_question == "y":
-    #    add_stock_data()
+    user_question = input("Do you wish to add a new stock to track(y/n?)")
+    if user_question == "y":
+        add_stock_data()
     
     get_news_data("Apple")
 
