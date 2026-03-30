@@ -35,13 +35,25 @@ headers ={
 #print(response)
 
 
-update_graph_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs/graph1"
-update_graph_config ={
-    "date": dt.datetime.now().strftime("%Y%m%d"),
-    "quantity": "1.5"
+#update_graph_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs/graph1"
+#update_graph_config ={
+ #   "date": dt.datetime.now().strftime("%Y%m%d"),
+ #   "quantity": "1.5"
+#}
+
+#response = requests.post(url=update_graph_endpoint,json=update_graph_config,headers=headers)
+
+
+#print(response)
+
+update_graph_pixel = f"{pixela_endpoint}/{USERNAME}/graphs/graph1/20260330"
+update_graph_pixel_config = {
+    "quantity": "2.0"
 }
+response = requests.put(url=update_graph_pixel,json=update_graph_pixel_config,headers=headers)
+print(response)
 
-response = requests.post(url=update_graph_endpoint,json=update_graph_config,headers=headers)
 
-
+delete_graph_pixel = f"{pixela_endpoint}/{USERNAME}/graphs/graph1/20260330"
+response = requests.delete(url=delete_graph_pixel, headers=headers)
 print(response)
