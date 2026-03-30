@@ -27,20 +27,28 @@ news_api_key = "ac096e631d564a83bed1ed2951d87969"
 
 
 
-
+#Defining a function to get stock data, with the parameter of stock ticker name, which is the stock ticker symbol for the stock that is being tracked, such as AAPL for Apple, MSFT for Microsoft, etc.
 def get_stock_data(stock_ticker_name):
+    #Stock API is set to a string with the url for the stock API, with the function of TIME_SERIES_DAILY, and the symbol set to the stock ticker name parameter, and the apikey set to the key variable
     stock_api = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stock_ticker_name}&apikey={key}'
+    #Response is set to the result of the requests get function with the url parameter set to the stock API variable
     response = requests.get(url=stock_api)
+    #Data is set to the result of the response json function, which converts the response to a json format
     data = response.json()
-    for d in data:
-        print(d)
-
+    
+    #Yesterday is set to the result of the datetime now function minus the result of the timedelta function with days set to 1, and then the date function is called on that result, which gives the date for yesterday
     yesterday = datetime.now() - timedelta(days=1).date()
+    #Yesterday before is set to the result of the datetime now function minus the result of the timedelta function with days set to 2, and then the date function is called on that result, which gives the date for the day before yesterday
     yesterday_before = datetime.now() - timedelta(days=2).date()
+    #Time series data yesterday is set to the result of the response json function with the key of "Time Series (Daily)" and then the key of yesterday, which gives the stock data for yesterday
     time_series_data_yesterday = response.json()["Time Series (Daily)"][str(yesterday)]
+    #Time series data yesterday before is set to the result of the response json function with the key of "Time Series (Daily)" and then the key of yesterday before, which gives the stock data for the day before yesterday
     time_series_data_yesterday_before = response.json()["Time Series (Daily)"][str(yesterday_before)]
+    #Stock tracker list is set to the result of the pandas read csv function with the parameter of the stock list csv file, which gives a dataframe of the stock list csv file
     stock_tracker_list = pandas.read_csv('stock_list.csv')
+    #The stock tracker list dataframe is updated with the new stock data for yesterday and the day before yesterday, with the loc function to locate the row with the stock ticker name, and then the columns for open price yesterday, close price yesterday, open price yesterday before, and close price yesterday before are set to the corresponding values from the time series data for yesterday and the day before yesterday
     stock_tracker_list.loc[stock_tracker_list['Ticker'] == stock_ticker_name,"Open_Price_Yesterday","Close_Price_Yesterday","Open_Price_Yesterday_Before","Close_Price_Yesterday_Before"] = time_series_data_yesterday["1. open"],time_series_data_yesterday["4. close"],time_series_data_yesterday_before["1. open"],time_series_data_yesterday_before["4. close"]
+    #The stock tracker list dataframe is then saved back to the stock list csv file with the to csv function, with the header set to false and the index set to false to avoid adding an index column and a header row to the csv file
     stock_tracker_list.to_csv("stock_list.csv",header=False,index=False)
 
 
