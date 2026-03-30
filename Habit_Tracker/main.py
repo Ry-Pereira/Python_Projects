@@ -1,5 +1,5 @@
 import requests
-
+import datetime as dt
 
 USERNAME = "tatertots"
 TOKEN = "hashrbowns:)"
@@ -17,17 +17,31 @@ user_parameters = {
 #response = requests.post(url=pixela_endpoint, json=user_parameters)
 #print(response.text)
 
-graph_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs"
-graph_config = {
-    "id": "graph1",
-    "name": "Coding Graph",
-    "unit":"hour",
-    "type":"float",
-    "color":"sora"
-}
+#graph_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs"
+#graph_config = {
+ #   "id": "graph1",
+  #  "name": "Coding Graph",
+   # "unit":"hour",
+    #"type":"float",
+    #"color":"sora"
+#}
 
+#Used for authentication
 headers ={
     "X-USER-TOKEN": TOKEN
 }
 
-requests.post(url=graph_endpoint,json=graph_config,headers=headers)
+#response = requests.post(url=graph_endpoint,json=graph_config,headers=headers)
+#print(response)
+
+
+update_graph_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs/graph1"
+update_graph_config ={
+    "date": dt.datetime.now().strftime("%Y%m%d"),
+    "quantity": "1.5"
+}
+
+response = requests.post(url=update_graph_endpoint,json=update_graph_config,headers=headers)
+
+
+print(response)
