@@ -217,6 +217,7 @@ class UI:
 
     #Defining a method to verifying and sending the email
     def send_email(self) -> None:
+        print("We made it to the send email function")
         #Email is set to the value from getting the text from the from entry field.
         email = (self.from_entry.get("1.0",END))
         #Password is set to the value from getting the text from the password entry field.
@@ -229,9 +230,20 @@ class UI:
         message_text = self.message_entry.get("1.0", END)
         #To text list is set to the to text split at the @ character, in order to get the email domain for validation and sending process.
         to_text_list = to_text.split("@")
+
+
         
+
+        print("We made it past the getting text from entry fields")
+        print(f"Email: {email}")
+        print(f"Password: {password}")
+        print(f"To: {to_text}")
+        print(f"Subject: {subject_text}")
+        print(f"Message: {message_text}")
+
         #Validating the send form by executing the Ui's object check fields function with email,password,to_text,subject_text,message_text as input
         valid_send_form = self.check_fields(email,password,to_text,subject_text,message_text)
+        print(f"Valid send form: {valid_send_form}")
       
         #If the vald send form is true then the mail is in the sending process, but checking to see if the email domain is valud first.
         if valid_send_form == True:
@@ -253,12 +265,19 @@ class UI:
                 messagebox.showinfo(title="Invalid Email Domain",message="Please enter a valid email domain")
                 #Returns out of the function, so email is not sent
                 return
+            
+            #Full message is set to the f-string of subject set to birthday wish, with new linews, and the message
+            full_message = f"Subject:{subject_text}\n\n{message_text}"
+            #Full message bytes is set to full message is encoded
+            full_message_bytes = full_message.encode("utf-8")
+
+            print("We made it past the domain check")
             #Connection starts TLS encryption for security
             connection.starttls()
             #Connection logs in with the email and password provided by the user
             connection.login(user=email,password=password)
             #Connection sends the email with the from address, to address, and message formatted with subject and message text
-            connection.sendmail(from_addr=email,to_addrs=to_text,msg=f"Subject:{subject_text}\n{message_text}")
+            connection.sendmail(from_addr=str(email),to_addrs=str(to_text),msg=full_message_bytes)
             #Connection us closed after sending the email
             connection.close()
 
