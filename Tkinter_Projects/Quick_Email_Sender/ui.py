@@ -192,24 +192,37 @@ class UI:
         subject_text = self.subject_entry.get("1.0",END)
         message_text = self.message_entry.get("1.0", END)
         to_text_list = to_text.split("@")
-        print(to_text_list)
-        print(to_text_list[1].replace("\n"," "))
+        
 
         valid_send_form = self.check_fields(email,password,to_text,subject_text,message_text)
-        print("well")
+      
+        #If the vald send form is true then the mail is in the sending process, but checking to see if the email domain is valud first.
         if valid_send_form == True:
+            #If the to text list at index 1, replaces  the new line with space character, if equal to gmail.com string, then the domain is gmail.
             if to_text_list[1].replace("\n"," ") == "gmail.com":
-                print("Go into gmail")
+                #Creating a connection variable that is set to the smtplib module's SMTP class with the gmail smtp server as the parameter, in order to establish a connection to the gmail smtp server for sending the email.
                 connection = smtplib.SMTP("smtp.gmail.com")
+            #ElIf the to text list at index 1, replaces  the new line with space character, if equal to yahoo.com string, then the domain is yahoo.
             elif to_text_list[1].replace("\n"," ") == "yahoo.com":
+                #Creating a connection variable that is set to the smtplib module's SMTP class with the yahoo smtp server as the parameter, in order to establish a connection to the yahoo smtp server for sending the email.
                 connection = smtplib.SMTP("smtp.mail.yahoo.com")
+            #If the to text list at index 1, replaces  the new line with space character, if equal to outlook.com string, then the domain is outlook.
             elif to_text_list[1].replace("\n"," ") == "outlook.com":
+                #Creating a connection variable that is set to the smtplib module's SMTP class with the outlook smtp server as the parameter, in order to establish a connection to the outlook smtp server for sending the email.
                 connection = smtplib.SMTP("smtp.office365.com")
+            #Else the email domain not valid
             else:
+                #Showing a message box that show infor of invalid email domain and to enter a valid email domain
+                messagebox.showinfo(title="Invalid Email Domain",message="Please enter a valid email domain")
+                #Returns out of the function, so email is not sent
                 return
+            #Connection starts TLS encryption for security
             connection.starttls()
+            #Connection logs in with the email and password provided by the user
             connection.login(user=email,password=password)
+            #Connection sends the email with the from address, to address, and message formatted with subject and message text
             connection.sendmail(from_addr=email,to_addrs=to_text,msg=f"Subject:{subject_text}\n{message_text}")
+            #Connection us closed after sending the email
             connection.close()
 
 
