@@ -153,47 +153,72 @@ class UI:
 
     #Defining a check fields method to check that section fields are valid in order to send the email
     def check_fields(self,email:str,password:str,to_text:str,subject_text:str,message_text:str) -> bool:
+        # If the length of the message,to, and subject text is 0, its empty.
         if len(message_text) == 0 and len(to_text) == 0 and len(subject_text) == 0:
+            #Messagebox shows info with title and message to fill in the to section, and that subject and message are optional
             messagebox.showinfo(title="To, Subject, and Message Line Empty",message="Please fill in the to section\nSubject is optional\nMessage is optional")
-
+        #Elif the length of the to and subject is 0, its empty
         elif len(to_text) == 0 and len(subject_text) == 0:
+            #Messagebox shows info with title and message to fill in the to section, and that subject is optional
             messagebox.showinfo(title="To and Subject Line Empty",message="Please fill in the to section\nSubject is optional")
+        #Elif the length of the to and message is 0, its empty
         elif len(to_text) == 0 and len(message_text) == 0:
+            #Messagebox shows info with title and message to fill in the to section, and that message is optional
             messagebox.showinfo(title="To and Subject Line Empty",message="Please fill in the to section\nMessage is optional")
-
+        #Elif the length of the subject and message is 0, its empty
         elif len(to_text) == 0:
+            #Messagebox shows info with title and message to fill in the to section, and that subject and message are optional
             messagebox.showinfo(title="To Line",message="To Section Must Be Filled")
+        #Elif the length of the subject is 0, its empty
         elif len(subject_text) == 0:
+            #Messagebox shows info with title and message to fill in the subject section, and that subject is optional
             result = messagebox.askokcancel(title="Subject Text Is Empty",message="Do You Wish To Send A Empty Subject")
+            #If the result is true, then the subject text is set to no subject, in order to send the email with no subject, but not return false and not send the email at all.
             if result == True:
+                #Subject text is set to no subject, in order to send the email with no subject, but not return false and not send the email at all.
                 subject_text = "No Subject"
+        #Elif the length of the message text is 0, its empty
         elif len(message_text) == 0:
+            #Messagebox shows info with title and message to fill in the message section, and that message is optional
             result = messagebox.askokcancel(title="Message Text Is Empty",message="Do You Wish To Send A Empty Message")
+            #If the result is true, then the message text is set to no message, in order to send the email with no message, but not return false and not send the email at all.
             if result == True:
+                #Message text is set to no message, in order to send the email with no message, but not return false and not send the email at all.
                 message_text = "No Message"
 
+        #If the email has an @ character in it, then the email list is set to the email split at the @ character, and if the email list at index 1 is not in the valid emails list, then return false, so email is not sent.
         if "@" in email:
+            #Email list is set to the email split at the @ character, in order to get the email domain for validation and sending process.
             email_list = email.split("@")
+            #If the email list at index 1 is not in the valid emails list, then return false, so email is not sent.
             if email_list[1] not in self.valid_emails:
+                #Returns false, to indicate not a valid email
                 return False
-            
+        #If the to text has an @ character in it, then the to text list is set to the to text split at the @ character, and if the to text list at index 1 is not in the valid emails list, then return false, so email is not sent.
         if "@" in to_text:
+            #To text list is set to the to text split at the @ character, in order to get the email domain for validation and sending process.
             to_text_list = to_text.split("@")
+            #If the to text list at index 1 is not in the valid emails list, then return false, so email is not sent.
             if to_text_list[1] not in self.valid_emails:
+                #Returns false, to indicate not a valid email
                 return False
 
     #Defining a method to verifying and sending the email
     def send_email(self) -> None:
-        print("Went Well")
-
+        #Email is set to the value from getting the text from the from entry field.
         email = (self.from_entry.get("1.0",END))
+        #Password is set to the value from getting the text from the password entry field.
         password = self.password_entry.get("1.0",END)
+        #To text is set to the value from getting the text from the to entry field.
         to_text = self.to_entry.get("1.0",END)
+        #Subject text is set to the value from getting the text from the subject entry field.
         subject_text = self.subject_entry.get("1.0",END)
+        #Message text is set to the value from getting the text from the message entry field.
         message_text = self.message_entry.get("1.0", END)
+        #To text list is set to the to text split at the @ character, in order to get the email domain for validation and sending process.
         to_text_list = to_text.split("@")
         
-
+        #Validating the send form by executing the Ui's object check fields function with email,password,to_text,subject_text,message_text as input
         valid_send_form = self.check_fields(email,password,to_text,subject_text,message_text)
       
         #If the vald send form is true then the mail is in the sending process, but checking to see if the email domain is valud first.
