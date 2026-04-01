@@ -5,8 +5,8 @@
 #Description: A Quick Email Sender that allows users to send emails quickly and easily through a graphical user interface.
 #Collaborators: None
 #Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
-#Date: 6/18/2026
-#Last Modified: 6/29/2026
+#Date: 3/18/2026
+#Last Modified: 3/31/2026
 
 
 #The main module is the entry point of the program, and it is responsible for running the program and creating an instance of the UI class to provide a graphical user interface for the program.

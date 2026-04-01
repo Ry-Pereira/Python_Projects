@@ -1,12 +1,12 @@
 #Name: Ryan Pereira
 #Project Name: Quick Email Sender
 #Module Name: UI
-#Module Purpose: ...
-#Description:# A Quick Email Sender
+#Module Purpose: The UI module is responsible for providing a graphical user interface for the Quick Email Sender program, allowing users to input their email information and send emails through the program.
+#Description:# A Quick Email Sender that allows users to send emails quickly and easily through a graphical user interface.
 #Collaborators: None
 #Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
-#Date: 6/18/2026
-#Last Modified: 6/24/2026
+#Date: 3/18/2026
+#Last Modified: 3/31/2026
 
 
 
@@ -19,6 +19,7 @@ import smtplib
 
 #Defining a UI class in order to provide a Graphical User Interface for the Project program
 class UI:
+    #Defining the init method for the UI class, in order to initialize the UI class and create the graphical user interface for the program.
     def __init__(self) -> None:
 
         #The ui's object has window set to a Tkinter class in order to provide a graphical user interface window to work on
@@ -138,7 +139,18 @@ class UI:
 
     #Defining the email send form as a draft and to the csv document to save it
     def save_draft(self,email:str,password:str,to_text:str,subject_text:str,message_text:str) -> None:
-        pass
+        #Email is set to the value from getting the text from the from entry field.
+        new_emailt_draft = {
+            "From":[email],
+            "Password":[password],
+            "To":[to_text],
+            "Subject":[subject_text],
+            "Message":[message_text]
+        }
+        #new email draft is converted to a pandas dataframe, and then the dataframe is appended to the email drafts csv file, with no index and no header, and mode set to append, so it adds to the csv file instead of overwriting it.
+        new_emailt_draft.to_csv("email_drafts.csv",mode = "a",index = False,header = False)
+        #Executing the Ui's object clear all section method to clear all section in the email sender after saving draft
+        self.clear_all_sections()
     
     #Defining clear all sections, that reurns all section in the email send form as empty
     def clear_all_sections(self) -> None:
@@ -260,4 +272,4 @@ class UI:
         
 
 
-d = UI()
+testing_ui = UI()
