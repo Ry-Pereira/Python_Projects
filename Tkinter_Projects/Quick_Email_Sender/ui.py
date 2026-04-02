@@ -156,7 +156,7 @@ class UI:
     def clear_all_sections(self) -> None:
         for text_entry in self.entries:
             #Text entry deletes everything at the 0 character and until the end
-            text_entry.delete(0,END)
+            text_entry.delete("1.0",END)
 
         #Message entry deletes everything, until the end of th text, 1.0
         #Starts at line 1, character 0, and goes until the end of text
@@ -169,18 +169,22 @@ class UI:
         if len(message_text) == 0 and len(to_text) == 0 and len(subject_text) == 0:
             #Messagebox shows info with title and message to fill in the to section, and that subject and message are optional
             messagebox.showinfo(title="To, Subject, and Message Line Empty",message="Please fill in the to section\nSubject is optional\nMessage is optional")
+            return True
         #Elif the length of the to and subject is 0, its empty
         elif len(to_text) == 0 and len(subject_text) == 0:
             #Messagebox shows info with title and message to fill in the to section, and that subject is optional
             messagebox.showinfo(title="To and Subject Line Empty",message="Please fill in the to section\nSubject is optional")
+            return True
         #Elif the length of the to and message is 0, its empty
         elif len(to_text) == 0 and len(message_text) == 0:
             #Messagebox shows info with title and message to fill in the to section, and that message is optional
             messagebox.showinfo(title="To and Subject Line Empty",message="Please fill in the to section\nMessage is optional")
+            return True
         #Elif the length of the subject and message is 0, its empty
         elif len(to_text) == 0:
             #Messagebox shows info with title and message to fill in the to section, and that subject and message are optional
             messagebox.showinfo(title="To Line",message="To Section Must Be Filled")
+            return True
         #Elif the length of the subject is 0, its empty
         elif len(subject_text) == 0:
             #Messagebox shows info with title and message to fill in the subject section, and that subject is optional
@@ -214,32 +218,29 @@ class UI:
             if to_text_list[1] not in self.valid_emails:
                 #Returns false, to indicate not a valid email
                 return False
+        return True
 
     #Defining a method to verifying and sending the email
     def send_email(self) -> None:
         print("We made it to the send email function")
         #Email is set to the value from getting the text from the from entry field.
-        email = (self.from_entry.get("1.0",END))
+        email = (self.from_entry.get("1.0",END)).strip()
         #Password is set to the value from getting the text from the password entry field.
-        password = self.password_entry.get("1.0",END)
+        password = self.password_entry.get("1.0",END).strip()
         #To text is set to the value from getting the text from the to entry field.
-        to_text = self.to_entry.get("1.0",END)
+        to_text = self.to_entry.get("1.0",END).strip()
         #Subject text is set to the value from getting the text from the subject entry field.
-        subject_text = self.subject_entry.get("1.0",END)
+        subject_text = self.subject_entry.get("1.0",END).strip()
         #Message text is set to the value from getting the text from the message entry field.
-        message_text = self.message_entry.get("1.0", END)
+        message_text = self.message_entry.get("1.0", END).strip()
         #To text list is set to the to text split at the @ character, in order to get the email domain for validation and sending process.
-        to_text_list = to_text.split("@")
+        domain = to_text.split("@")
 
 
         
 
         print("We made it past the getting text from entry fields")
-        print(f"Email: {email}")
-        print(f"Password: {password}")
-        print(f"To: {to_text}")
-        print(f"Subject: {subject_text}")
-        print(f"Message: {message_text}")
+        
 
         #Validating the send form by executing the Ui's object check fields function with email,password,to_text,subject_text,message_text as input
         valid_send_form = self.check_fields(email,password,to_text,subject_text,message_text)
@@ -248,15 +249,15 @@ class UI:
         #If the vald send form is true then the mail is in the sending process, but checking to see if the email domain is valud first.
         if valid_send_form == True:
             #If the to text list at index 1, replaces  the new line with space character, if equal to gmail.com string, then the domain is gmail.
-            if to_text_list[1].replace("\n"," ") == "gmail.com":
+            if domain[1].replace("\n"," ") == "gmail.com":
                 #Creating a connection variable that is set to the smtplib module's SMTP class with the gmail smtp server as the parameter, in order to establish a connection to the gmail smtp server for sending the email.
                 connection = smtplib.SMTP("smtp.gmail.com")
             #ElIf the to text list at index 1, replaces  the new line with space character, if equal to yahoo.com string, then the domain is yahoo.
-            elif to_text_list[1].replace("\n"," ") == "yahoo.com":
+            elif domain[1].replace("\n"," ") == "yahoo.com":
                 #Creating a connection variable that is set to the smtplib module's SMTP class with the yahoo smtp server as the parameter, in order to establish a connection to the yahoo smtp server for sending the email.
                 connection = smtplib.SMTP("smtp.mail.yahoo.com")
             #If the to text list at index 1, replaces  the new line with space character, if equal to outlook.com string, then the domain is outlook.
-            elif to_text_list[1].replace("\n"," ") == "outlook.com":
+            elif domain[1].replace("\n"," ") == "outlook.com":
                 #Creating a connection variable that is set to the smtplib module's SMTP class with the outlook smtp server as the parameter, in order to establish a connection to the outlook smtp server for sending the email.
                 connection = smtplib.SMTP("smtp.office365.com")
             #Else the email domain not valid
@@ -267,7 +268,8 @@ class UI:
                 return
             
             #Full message is set to the f-string of subject set to birthday wish, with new linews, and the message
-            full_message = f"Subject:{subject_text}\n\n{message_text}"
+            full_message = f"Subject: {subject_text}\n\n{message_text}"
+            print(f"Message: {full_message}")
             #Full message bytes is set to full message is encoded
             full_message_bytes = full_message.encode("utf-8")
 
@@ -277,7 +279,7 @@ class UI:
             #Connection logs in with the email and password provided by the user
             connection.login(user=email,password=password)
             #Connection sends the email with the from address, to address, and message formatted with subject and message text
-            connection.sendmail(from_addr=str(email),to_addrs=str(to_text),msg=full_message_bytes)
+            connection.sendmail(from_addr=email, to_addrs=to_text, msg=full_message)
             #Connection us closed after sending the email
             connection.close()
 
