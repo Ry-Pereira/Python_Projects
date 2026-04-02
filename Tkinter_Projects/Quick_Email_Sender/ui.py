@@ -116,11 +116,16 @@ class UI:
         self.save_button = Button(text="Save",command=self.save_draft,font=('Arial',12),bg="#555879",fg="#DED3C4")
         #The Ui's save button is gridded at row,colum location with sticky and padding for y set
         self.save_button.grid(row=7,column=2,sticky="ew",pady=(20, 0))
+
+        #The Ui's save button is set to a Button widget with text, command, font, background and foreground
+        self.previous_button = Button(text="Drafts",command=self.load_drafts,font=('Arial',12),bg="#555879",fg="#DED3C4")
+        #The Ui's save button is gridded at row,colum location with sticky and padding for y set
+        self.previous_button.grid(row=7,column=3,sticky="ew",pady=(20, 0))
    
         #The Ui's exit button is set to a Button widget with text, command, font, background and foreground
         self.exit_button = Button(text="Exit",command = self.exit_program,font=('Arial',12),bg="#555879",fg="#DED3C4")
         #The Ui's exit button is gridded at row,colum location with sticky and padding for y set
-        self.exit_button.grid(row=7,column=3,sticky="ew",pady=(20, 0))
+        self.exit_button.grid(row=7,column=4,sticky="ew",pady=(20, 0))
 
         #The Ui's window has grid column configure for 4 columns with weight and uniform set
         for i in range(4):
@@ -136,6 +141,10 @@ class UI:
     def exit_program(self) -> None:
         #The Ui's window envokes the destroy functon, destroying the window entirely
         self.window.destroy()
+
+
+    def load_draft(self):
+        pass
 
     #Defining the email send form as a draft and to the csv document to save it
     def save_draft(self,email:str,password:str,to_text:str,subject_text:str,message_text:str) -> None:
@@ -169,22 +178,22 @@ class UI:
         if len(message_text) == 0 and len(to_text) == 0 and len(subject_text) == 0:
             #Messagebox shows info with title and message to fill in the to section, and that subject and message are optional
             messagebox.showinfo(title="To, Subject, and Message Line Empty",message="Please fill in the to section\nSubject is optional\nMessage is optional")
-            return True
+            return False
         #Elif the length of the to and subject is 0, its empty
         elif len(to_text) == 0 and len(subject_text) == 0:
             #Messagebox shows info with title and message to fill in the to section, and that subject is optional
             messagebox.showinfo(title="To and Subject Line Empty",message="Please fill in the to section\nSubject is optional")
-            return True
+            return False
         #Elif the length of the to and message is 0, its empty
         elif len(to_text) == 0 and len(message_text) == 0:
             #Messagebox shows info with title and message to fill in the to section, and that message is optional
             messagebox.showinfo(title="To and Subject Line Empty",message="Please fill in the to section\nMessage is optional")
-            return True
+            return False
         #Elif the length of the subject and message is 0, its empty
         elif len(to_text) == 0:
             #Messagebox shows info with title and message to fill in the to section, and that subject and message are optional
             messagebox.showinfo(title="To Line",message="To Section Must Be Filled")
-            return True
+            return False
         #Elif the length of the subject is 0, its empty
         elif len(subject_text) == 0:
             #Messagebox shows info with title and message to fill in the subject section, and that subject is optional
