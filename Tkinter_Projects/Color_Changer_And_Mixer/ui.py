@@ -1,6 +1,9 @@
 from tkinter import *
 
 
+
+
+#Colors with associated rgb value tuples to represent them
 RED = (214, 33, 33)
 ORANGE = (214, 103, 33)
 YELLOW = (214, 211, 33)
@@ -84,11 +87,17 @@ class ColorChangerAndMixerUI:
 
         
 
-    def change_background_color(self,color):
+    
         
         self.window.mainloop()
 
-    def convert_rgb_to_hex_color(rgb_color_value):
+    def add_color_to_background_color(self,color):
+        pass
+
+    def remove_color_from_background_color(self,color):
+        pass
+
+    def convert_rgb_to_hex_color(rgb_color_value: tuple) -> str:
         return f"#{rgb_color_value[0]:02X}{rgb_color_value[1]:02X}{rgb_color_value[2]:02X}"
 
 
