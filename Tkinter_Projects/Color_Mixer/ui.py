@@ -91,7 +91,7 @@ class ColorMixerUI:
             g_value += color[1]
             b_value += color[2]
         self.canvas_background_color = (r_value//len(self.color_mix),g_value//len(self.color_mix),b_value//len(self.color_mix))
-        hex_number_of_color = self.convert_rgb_to_hex_color(self.canvas_background_color)
+        hex_number_of_color = convert_rgb_to_hex_color(self.canvas_background_color)
         self.canvas.config(bg=hex_number_of_color)
 
     def reset_color_mix(self):
@@ -99,8 +99,6 @@ class ColorMixerUI:
         self.canvas_background_color = "#FFFFFF"
         self.canvas.config(bg=self.canvas_background_color)
 
-    def convert_rgb_to_hex_color(self,rgb_color_value: tuple) -> str:
-        return f"#{rgb_color_value[0]:02X}{rgb_color_value[1]:02X}{rgb_color_value[2]:02X}"
 
 
     
