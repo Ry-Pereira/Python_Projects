@@ -7,13 +7,13 @@ from colors import *
 class ColorMixerUI:
     def __init__(self):
         self.window = Tk()
-        self.window.title("Color Changer And Mixer")
+        self.window.title("Color Mixer")
         self.canvas_background_color = "#FFFFFF"
         self.window.config(padx=20,pady=20,bg="white")
 
         self.color_mix = []
 
-        self.title_label = Label(text="COLOR CHANGER AND MIXER", font=("Arial",18),bg="white")
+        self.title_label = Label(text="COLOR MIXER", font=("Arial",18),bg="white")
         self.title_label.grid(row=0,column=0,columnspan=5,pady=10)
 
         self.title_label = Label(text="By: Ryan Pereira", font=("Arial",16),bg="white")
@@ -116,4 +116,4 @@ class ColorMixerUI:
 
 
 
-testui = ColorChangerAndMixerUI()
+testui = ColorMixerUI()
