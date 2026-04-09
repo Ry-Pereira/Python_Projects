@@ -4,7 +4,7 @@ from colors import *
 
 
 
-class ColorChangerAndMixerUI:
+class ColorMixerUI:
     def __init__(self):
         self.window = Tk()
         self.window.title("Color Changer And Mixer")
