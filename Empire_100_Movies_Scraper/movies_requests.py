@@ -5,28 +5,19 @@
 #Module Purpose: This program serves as the user interface for the Color Mixer application. It defines the ColorMixerUI class, which sets up the Tkinter window, canvas, and buttons for mixing colors. The class includes methods for adding colors to the mix and resetting the color mix.
 #Collaborators: None
 #Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
-#Date: 4/6/2026
-#Last Modified: 4/9/2026
-
-
-from bs4 import BeautifulSoup
-from movies_requests import get_movie_titles
-
-from movie_scraper import MovieScraper
+#Date: 4/11/2026
+#Last Modified: 4/11/2026
 
 
 
-
-def main() -> None:
-    
-    soup = BeautifulSoup(response.text,'html.parser')
-    movie_titles = soup.select("h2 strong")
-    MovieScraper(movie_titles)
-    
+import requests
 
 
 
 
 
-if __name__ == "__main__":
-    main()
+def get_movie_titles() -> list:
+    url = "https://www.empireonline.com/movies/features/best-movies-of-all-time-us/"
+    headers = {"User-Agent": "Mozilla/5.0"}
+    response = requests.get(url,headers=headers)
+    return response.text
