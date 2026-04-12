@@ -78,24 +78,38 @@ class EmpireMovieBrain:
             print(f"{movie.position}) {movie.name} ({movie.year_made})")
 
     #Defining a method to get a movie by its position. This method takes a position as input and searches through the movies list to find a movie that matches the specified position. If a matching movie is found, its information is printed in a formatted string. This allows users to quickly retrieve information about a specific movie based on its position in the list.
-    def get_movie_by_position(self,position) -> None:
+    def get_movie_by_position(self,position : str) -> None:
         #Looping through each movie in object's movie list
-        for movie in self.movies:
-            #If the movie's position matches the input position, print the movie's position, name, and year made in a formatted string. This allows users to quickly retrieve information about a specific movie based on its position in the list.
-            if movie.position == position:
-                #Print the movie's position, name, and year made in a formatted string. The output is structured to display the position followed by the movie name and the year it was made, allowing for easy reading and understanding of the movie information.
-                print(f"{movie.position}) {movie.name} ({movie.year_made})")
+        is_there_a_movie = False
+        if position.isdigit() and int(position) > 0 and int(position) <= len(self.movies):
+            for movie in self.movies:
+                #If the movie's position matches the input position, print the movie's position, name, and year made in a formatted string. This allows users to quickly retrieve information about a specific movie based on its position in the list.
+                if movie.position == position:
+                    is_there_a_movie = True
+                    #Print the movie's position, name, and year made in a formatted string. The output is structured to display the position followed by the movie name and the year it was made, allowing for easy reading and understanding of the movie information.
+                    print(f"{movie.position}) {movie.name} ({movie.year_made})")
+        elif is_there_a_movie == False:
+            print("There is no movie at that position.")
+        else:
+            print("Invalid input. Please enter a valid position.")
             
 
 
     #Defining a method to get movies by a range of positions. This method takes two positions as input and searches through the movies list to find movies that fall within the specified range of positions. If a movie's position is greater than or equal to the first position and less than or equal to the second position, its information is printed in a formatted string. This allows users to retrieve information about multiple movies based on their positions in the list.
-    def get_move_by_position_range(self,position1,position2) -> None:
+    def get_move_by_position_range(self,position1 : str, position2 : str) -> None:
+        is_there_a_movie = False
         #Looping through each movie in object's movie list
-        for movie in self.movies:
-            #If the movie's position is greater than or equal to the first input position and less than or equal to the second input position, print the movie's position, name, and year made in a formatted string. This allows users to retrieve information about multiple movies based on their positions in the list.
-            if int(movie.position) >= int(position1) and int(movie.position) <= int(position2):
-                #Print the movie's position, name, and year made in a formatted string. The output is structured to display the position followed by the movie name and the year it was made, allowing for easy reading and understanding of the movie information.
-                print(f"{movie.position}) {movie.name} ({movie.year_made})")
+        if position1.isdigit() and position2.isdigit() and int(position1) > 0 and int(position2) > 0 and int(position1) <= int(position2):
+            for movie in self.movies:
+                #If the movie's position is greater than or equal to the first input position and less than or equal to the second input position, print the movie's position, name, and year made in a formatted string. This allows users to retrieve information about multiple movies based on their positions in the list.
+                if int(movie.position) >= int(position1) and int(movie.position) <= int(position2):
+                    #Print the movie's position, name, and year made in a formatted string. The output is structured to display the position followed by the movie name and the year it was made, allowing for easy reading and understanding of the movie information.
+                    print(f"{movie.position}) {movie.name} ({movie.year_made})")
+                    is_there_a_movie = True
+        elif is_there_a_movie == False:
+            print("There is no movie at that position.")        
+        else:
+            print("Invalid input. Please enter valid positions.")
         
 
             
@@ -103,47 +117,60 @@ class EmpireMovieBrain:
 
 
     #Defining a method to get a movie by its name. This method takes a movie name as input and searches through the movies list to find a movie that matches the specified name. If a matching movie is found, its information is printed in a formatted string. This allows users to quickly retrieve information about a specific movie based on its name.
-    def get_movie_by_name(self,name) -> None:
+    def get_movie_by_name(self,name : str) -> None:
+        is_there_a_movie = False
         #Looping through each movie in object's movie list
         for movie in self.movies:
             #If the movie's name matches the input name, print the movie's position, name, and year made in a formatted string. This allows users to quickly retrieve information about a specific movie based on its name.
             if movie.name == name:
                 #Print the movie's position, name, and year made in a formatted string. The output is structured to display the position followed by the movie name and the year it was made, allowing for easy reading and understanding of the movie information.
                 print(f"{movie.position}) {movie.name} ({movie.year_made})")
-            
-            
+                is_there_a_movie = True
+
+        if is_there_a_movie == False:
+            print("Movie not found.")
 
     #Defining a method to get movies by the first letter of their name. This method takes a letter as input and searches through the movies list to find movies whose names start with the specified letter. If a movie's name starts with the input letter, its information is printed in a formatted string. This allows users to retrieve information about movies based on the first letter of their names.
-    def get_movie_by_letter(self,letter) -> None:
+    def get_movie_by_letter(self,letter : str) -> None:
+        is_there_a_movie = False
         #Looping through each movie in object's movie list
         for movie in self.movies:
             #If the movie's name starts with the input letter, print the movie's position, name, and year made in a formatted string. This allows users to retrieve information about movies based on the first letter of their names.
             if movie.name[0] == letter.upper():
                 #Print the movie's position, name, and year made in a formatted string. The output is structured to display the position followed by the movie name and the year it was made, allowing for easy reading and understanding of the movie information.
                 print(f"{movie.position}) {movie.name} ({movie.year_made})")
+                is_there_a_movie = True
+        if is_there_a_movie == False:
+            print("There are no movies that start with that letter.")
     
 
     #Defining a method to get movies by their release year. This method takes a year as input and searches through the movies list to find movies that were released in the specified year. If a movie's release year matches the input year, its information is printed in a formatted string. This allows users to retrieve information about movies based on their release year.
-    def get_movie_by_year(self,year) -> None:
+    def get_movie_by_year(self,year : str) -> None:
+        is_there_a_movie = False
+
         #Looping through each movie in object's movie list
         for movie in self.movies:
             #If the movie's release year matches the input year, print the movie's position, name, and year made in a formatted string. This allows users to retrieve information about movies based on their release year.
             if int(movie.year_made) == int(year):
                 #Print the movie's position, name, and year made in a formatted string. The output is structured to display the position followed by the movie name and the year it was made, allowing for easy reading and understanding of the movie information.
                 print(f"{movie.position}) {movie.name} ({movie.year_made})")
+                is_there_a_movie = True
+        if is_there_a_movie == False:
+            print("There are no movies that were made in that year.")
                 
 
     #Defining a method to get movies by a range of release years. This method takes two years as input and searches through the movies list to find movies that were released within the specified range of years. If a movie's release year is greater than or equal to the first input year and less than or equal to the second input year, its information is printed in a formatted string. This allows users to retrieve information about movies based on their release years.
-    def get_movie_by_year_range(self,year1,year2) -> None:
+    def get_movie_by_year_range(self,year1 : str, year2 : str) -> None:
+        is_there_a_movie = False
         #Looping through each movie in object's movie list
         for move in self.movies:
             #If the movie's release year is greater than or equal to the first input year and less than or equal to the second input year, print the movie's position, name, and year made in a formatted string. This allows users to retrieve information about movies based on their release years.
             if int(move.year_made) >= int(year1) and int(move.year_made) <= int(year2):
                 #Print the movie's position, name, and year made in a formatted string. The output is structured to display the position followed by the movie name and the year it was made, allowing for easy reading and understanding of the movie information.
                 print(f"{move.position}) {move.name} ({move.year_made})")
-
-    
-
+                is_there_a_movie = True
+        if is_there_a_movie == False:
+            print("There are no movies that were made in that year range.")
 
     
 
@@ -188,6 +215,8 @@ class EmpireMovieBrain:
                 year1 = input("Enter the first year: ")
                 year2 = input("Enter the second year: ")
                 self.get_movie_by_year_range(year1,year2)
+            else:
+                print("Invalid input. Please try again.")
             
             #After processing the user's choice and calling the appropriate method, the menu is displayed again to allow the user to make another selection. The program continues to loop and process user input until the user chooses to exit by entering "8". This structure provides a seamless and interactive experience for users to explore the movie data based on their preferences.
             self.menu()
