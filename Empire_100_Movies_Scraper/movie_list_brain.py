@@ -53,7 +53,8 @@ class EmpireMovieBrain:
             #Looping through object's movie titles
             for title in self.movie_titles:
                 #File write this title text with new line
-                file.write(title.text + "\n")
+                if len(title.text) > 1 and ")" in title.text and title.text[0].isdigit():
+                    file.write(title.text + "\n")
 
     #Defining a method to read movies from a text file. This method opens the specified text file in read mode, reads the lines of the file, and processes each line to create Movie objects. The lines are split based on the expected format of the movie data (position, name, year), and the resulting Movie objects are stored in the movies list attribute for later use in searching and displaying movie information.
     def read_movies_from_text_file(self) -> None:
@@ -93,9 +94,12 @@ class EmpireMovieBrain:
         #Looping through each movie in object's movie list
         for movie in self.movies:
             #If the movie's position is greater than or equal to the first input position and less than or equal to the second input position, print the movie's position, name, and year made in a formatted string. This allows users to retrieve information about multiple movies based on their positions in the list.
-            if movie.position >= position1 and movie.position <= position2:
+            if int(movie.position) >= int(position1) and int(movie.position) <= int(position2):
                 #Print the movie's position, name, and year made in a formatted string. The output is structured to display the position followed by the movie name and the year it was made, allowing for easy reading and understanding of the movie information.
                 print(f"{movie.position}) {movie.name} ({movie.year_made})")
+        
+
+            
     
 
 
@@ -135,7 +139,7 @@ class EmpireMovieBrain:
         #Looping through each movie in object's movie list
         for move in self.movies:
             #If the movie's release year is greater than or equal to the first input year and less than or equal to the second input year, print the movie's position, name, and year made in a formatted string. This allows users to retrieve information about movies based on their release years.
-            if move.year_made >= year1 and move.year_made <= year2:
+            if int(move.year_made) >= int(year1) and int(move.year_made) <= int(year2):
                 #Print the movie's position, name, and year made in a formatted string. The output is structured to display the position followed by the movie name and the year it was made, allowing for easy reading and understanding of the movie information.
                 print(f"{move.position}) {move.name} ({move.year_made})")
 

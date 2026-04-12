@@ -21,4 +21,4 @@ class MovieTitleScraper:
         #The constructor (__init__ method) of the MovieTitleScraper class takes a string of HTML as input. It creates a BeautifulSoup object by parsing the HTML, which allows for easy navigation and extraction of elements from the HTML structure. The movie_titles attribute is then populated by selecting all strong elements that are children of h2 tags, which are expected to contain the movie titles on the Empire Online page.
         soup = BeautifulSoup(html,'html.parser')
         #Select all strong elements that are children of h2 tags from the parsed HTML and store them in the movie_titles attribute. This is done using the select method of the BeautifulSoup object, which allows for CSS-style selectors to find specific elements in the HTML. The assumption is that the movie titles on the Empire Online page are contained within strong tags that are children of h2 tags.
-        self.movie_titles = soup.select("h2 strong")
+        self.movie_titles = soup.select("h2")
