@@ -6,7 +6,7 @@
 #Collaborators: None
 #Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
 #Date: 4/4/2026
-#Last Modified: 4/6/2026
+#Last Modified: 4/12/2026
 
 
 #Class to represent a movie with its name, position, and year made

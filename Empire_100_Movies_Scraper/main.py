@@ -6,7 +6,7 @@
 #Collaborators: None
 #Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
 #Date: 4/6/2026
-#Last Modified: 4/11/2026
+#Last Modified: 4/12/2026
 
 
 #From the movies_requests module, we import the get_movie_titles_url function, which is responsible for making an HTTP request to the Empire Online website and retrieving the HTML content of the page that contains the list of best movies of all time. This HTML will later be parsed to extract movie titles.

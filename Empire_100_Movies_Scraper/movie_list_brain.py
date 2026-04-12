@@ -2,11 +2,11 @@
 #Project Name: Empire 100 Movies Scraper
 #Description: A python program that scrapes the top 100 movies of all time from the Empire Online website and stores the movie titles in a text file. The program also defines a Movie class to represent each movie with its name, position, and year made. The MovieScraper class is responsible for scraping the data, writing it to a text file, and providing a menu for users to view the movies or search for specific movies by position, name, or year.
 #Module Name: Movie List Brain
-    #Module Purpose: This program serves as the user interface for the Color Mixer application. It defines the ColorMixerUI class, which sets up the Tkinter window, canvas, and buttons for mixing colors. The class includes methods for adding colors to the mix and resetting the color mix.
+#Module Purpose: This program serves as the user interface for the Color Mixer application. It defines the ColorMixerUI class, which sets up the Tkinter window, canvas, and buttons for mixing colors. The class includes methods for adding colors to the mix and resetting the color mix.
 #Collaborators: None
 #Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
 #Date: 4/11/2026
-#Last Modified: 4/6/2026
+#Last Modified: 4/12/2026
 
 
 #From the movie_class module, we import the Movie class, which represents a movie with its name, position, and year made. This allows us to create Movie objects to store information about each movie scraped from the Empire Online website.
@@ -79,8 +79,9 @@ class EmpireMovieBrain:
 
     #Defining a method to get a movie by its position. This method takes a position as input and searches through the movies list to find a movie that matches the specified position. If a matching movie is found, its information is printed in a formatted string. This allows users to quickly retrieve information about a specific movie based on its position in the list.
     def get_movie_by_position(self,position : str) -> None:
-        #Looping through each movie in object's movie list
+        #Is there a movie variable is initialized as False, which will be used to track whether a movie matching the specified position was found in the movies list. This allows for providing feedback to the user if no movie is found at the given position.
         is_there_a_movie = False
+        #Looping through each movie in object's movie list
         if position.isdigit() and int(position) > 0 and int(position) <= len(self.movies):
             for movie in self.movies:
                 #If the movie's position matches the input position, print the movie's position, name, and year made in a formatted string. This allows users to quickly retrieve information about a specific movie based on its position in the list.
@@ -88,8 +89,10 @@ class EmpireMovieBrain:
                     is_there_a_movie = True
                     #Print the movie's position, name, and year made in a formatted string. The output is structured to display the position followed by the movie name and the year it was made, allowing for easy reading and understanding of the movie information.
                     print(f"{movie.position}) {movie.name} ({movie.year_made})")
+        #Elif the is there a movie variable is still False after looping through the movies list, it means that no movie was found at the specified position. In this case, a message is printed to inform the user that there is no movie at that position. This provides feedback to the user about the search results.
         elif is_there_a_movie == False:
             print("There is no movie at that position.")
+        #Else statement to handle invalid input, such as non-digit input or positions that are out of range. If the input is invalid, a message is printed to inform the user to enter a valid position. This helps ensure that the user provides appropriate input for searching movies by position.
         else:
             print("Invalid input. Please enter a valid position.")
             
@@ -97,6 +100,7 @@ class EmpireMovieBrain:
 
     #Defining a method to get movies by a range of positions. This method takes two positions as input and searches through the movies list to find movies that fall within the specified range of positions. If a movie's position is greater than or equal to the first position and less than or equal to the second position, its information is printed in a formatted string. This allows users to retrieve information about multiple movies based on their positions in the list.
     def get_move_by_position_range(self,position1 : str, position2 : str) -> None:
+        #Is there a movie variable is initialized as False, which will be used to track whether any movies matching the specified position range were found in the movies list. This allows for providing feedback to the user if no movies are found within the given position range.
         is_there_a_movie = False
         #Looping through each movie in object's movie list
         if position1.isdigit() and position2.isdigit() and int(position1) > 0 and int(position2) > 0 and int(position1) <= int(position2):
@@ -118,6 +122,7 @@ class EmpireMovieBrain:
 
     #Defining a method to get a movie by its name. This method takes a movie name as input and searches through the movies list to find a movie that matches the specified name. If a matching movie is found, its information is printed in a formatted string. This allows users to quickly retrieve information about a specific movie based on its name.
     def get_movie_by_name(self,name : str) -> None:
+        #Is there a movie variable is initialized as False, which will be used to track whether a movie matching the specified name was found in the movies list. This allows for providing feedback to the user if no movie is found with the given name.
         is_there_a_movie = False
         #Looping through each movie in object's movie list
         for movie in self.movies:
@@ -132,6 +137,7 @@ class EmpireMovieBrain:
 
     #Defining a method to get movies by the first letter of their name. This method takes a letter as input and searches through the movies list to find movies whose names start with the specified letter. If a movie's name starts with the input letter, its information is printed in a formatted string. This allows users to retrieve information about movies based on the first letter of their names.
     def get_movie_by_letter(self,letter : str) -> None:
+        #Is there a movie variable is initialized as False, which will be used to track whether any movies matching the specified first letter were found in the movies list. This allows for providing feedback to the user if no movies are found that start with the given letter.
         is_there_a_movie = False
         #Looping through each movie in object's movie list
         for movie in self.movies:
@@ -146,6 +152,7 @@ class EmpireMovieBrain:
 
     #Defining a method to get movies by their release year. This method takes a year as input and searches through the movies list to find movies that were released in the specified year. If a movie's release year matches the input year, its information is printed in a formatted string. This allows users to retrieve information about movies based on their release year.
     def get_movie_by_year(self,year : str) -> None:
+        #Is there a movie variable is initialized as False, which will be used to track whether any movies matching the specified release year were found in the movies list. This allows for providing feedback to the user if no movies are found that were released in the given year.
         is_there_a_movie = False
 
         #Looping through each movie in object's movie list
@@ -161,6 +168,7 @@ class EmpireMovieBrain:
 
     #Defining a method to get movies by a range of release years. This method takes two years as input and searches through the movies list to find movies that were released within the specified range of years. If a movie's release year is greater than or equal to the first input year and less than or equal to the second input year, its information is printed in a formatted string. This allows users to retrieve information about movies based on their release years.
     def get_movie_by_year_range(self,year1 : str, year2 : str) -> None:
+        #Is there a movie variable is initialized as False, which will be used to track whether any movies matching the specified release year range were found in the movies list. This allows for providing feedback to the user if no movies are found that were released within the given year range.
         is_there_a_movie = False
         #Looping through each movie in object's movie list
         for move in self.movies:

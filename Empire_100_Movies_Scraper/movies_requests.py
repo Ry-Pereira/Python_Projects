@@ -6,7 +6,7 @@
 #Collaborators: None
 #Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
 #Date: 4/11/2026
-#Last Modified: 4/11/2026
+#Last Modified: 4/12/2026
 
 
 #From tge requests library, we import everything to make HTTP requests to the Empire Online website. This allows us to retrieve the HTML content of the page, which we can then parse to extract movie titles.
