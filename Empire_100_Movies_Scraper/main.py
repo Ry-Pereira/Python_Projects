@@ -12,6 +12,7 @@
 
 from movies_requests import get_movie_titles
 from movie_title_scraper import MovieTitleScraper
+from movie_scraper import EmpireMovieBrain
 
 
 
@@ -20,9 +21,7 @@ def main() -> None:
     
     html = get_movie_titles()
     movie_titles = MovieTitleScraper(html).movie_titles
-    
-
-    MovieScraper(movie_titles)
+    EmpireMovieBrain(movie_titles)
     
 
 

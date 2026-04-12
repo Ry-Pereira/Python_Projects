@@ -11,8 +11,8 @@
 from movie_class import Movie
 
 
-class MovieScraper:
-    def __int__(self,movie_titles):
+class EmpireMovieBrain:
+    def __init__(self,movie_titles):
         self.movie_titles = movie_titles
         self.movie_text_file = ""
         self.movies = []
@@ -55,3 +55,6 @@ class MovieScraper:
             lines = file.readlines()
             for line in lines:
                 print(line)
+
+    def run(self):
+        
