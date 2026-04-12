@@ -66,9 +66,8 @@ class EmpireMovieBrain:
             for line in lines:
                 #Line is process by replacing all right parantheses with left parentheses and splitting that line, createing as a list
                 line = line.replace(")","(").split("(")
-                print(line)
                 #Self movies list appends the a Movie object created with the name, position, and year extracted from the processed line. The line[1] is assumed to be the movie name, line[0] is the position, and line[2] is the year made. This allows for structured storage of movie data in the movies list for later retrieval and display.
-                self.movies.append(Movie(line[1],line[0],line[2]))
+                self.movies.append(Movie(line[1].strip(),line[0],line[2]))
     
 
     #Defining a method to print the list of movies.
@@ -119,7 +118,7 @@ class EmpireMovieBrain:
         #Looping through each movie in object's movie list
         for movie in self.movies:
             #If the movie's name starts with the input letter, print the movie's position, name, and year made in a formatted string. This allows users to retrieve information about movies based on the first letter of their names.
-            if movie.name.startswith(letter):
+            if movie.name[0] == letter.upper():
                 #Print the movie's position, name, and year made in a formatted string. The output is structured to display the position followed by the movie name and the year it was made, allowing for easy reading and understanding of the movie information.
                 print(f"{movie.position}) {movie.name} ({movie.year_made})")
     
@@ -129,7 +128,7 @@ class EmpireMovieBrain:
         #Looping through each movie in object's movie list
         for movie in self.movies:
             #If the movie's release year matches the input year, print the movie's position, name, and year made in a formatted string. This allows users to retrieve information about movies based on their release year.
-            if movie.year_made == year:
+            if int(movie.year_made) == int(year):
                 #Print the movie's position, name, and year made in a formatted string. The output is structured to display the position followed by the movie name and the year it was made, allowing for easy reading and understanding of the movie information.
                 print(f"{movie.position}) {movie.name} ({movie.year_made})")
                 
