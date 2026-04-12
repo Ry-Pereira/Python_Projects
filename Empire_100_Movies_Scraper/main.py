@@ -9,18 +9,19 @@
 #Last Modified: 4/9/2026
 
 
-from bs4 import BeautifulSoup
-from movies_requests import get_movie_titles
 
-from movie_scraper import MovieScraper
+from movies_requests import get_movie_titles
+from movie_title_scraper import MovieTitleScraper
 
 
 
 
 def main() -> None:
     
-    soup = BeautifulSoup(response.text,'html.parser')
-    movie_titles = soup.select("h2 strong")
+    html = get_movie_titles()
+    movie_titles = MovieTitleScraper(html).movie_titles
+    
+
     MovieScraper(movie_titles)
     
 
