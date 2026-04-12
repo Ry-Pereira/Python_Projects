@@ -17,44 +17,120 @@ class EmpireMovieBrain:
         self.movie_text_file = ""
         self.movies = []
 
-    def add_to_movie_list(self):
-        pass
-
     
-    def print_movies_list(self):
+    def menu(self) -> None:
+        print("1) Press 1 to View Movies text file")
+        print("2) Press 2 To get movie by position")
+        print("3) Press 3 To get movies by position range")
+        print("4) Press 4 To get movie by name")
+        print("5) Press 5 To get movies by letter")
+        print("6) Press 6 To get movies by year")
+        print("7) Press 7 To get movies by year range")
+        print("8) Press 8 To Exit")
+     
+
+    def write_into_moves_text_file(self, movie_text_file: str) -> None:
+        with open("movies.txt","w") as file:
+            for title in self.movie_titles:
+                file.write(title.text + "\n")
+
+    def read_movies_from_text_file(self) -> None:
+        with open("movies.txt","r") as file:
+            lines = file.readlines()
+            for line in lines:
+                line = line.replace(")","(").split("(")
+                print(line)
+                self.movies.append(Movie(line[1],line[0],line[2]))
+    
+    def print_movies_list(self) -> None:
         with open(self.movie_text_file,"r") as file:
             lines = file.readlines()
             for line in lines:
                 print(line)
 
 
-    def menu(self):
-        print("1) Press 1 to View Movies text file")
-        print("2) Press 2 To get movie by position")
-        print("3) Press 3 to get movies by name")
-        print("4) To get movies by dates")
-
-
-    with open("movies.txt","r") as file:
-        lines = file.readlines()
-        for line in lines:
-            line = line.replace(")","(").split("(")
-            print(line)
-            movies.append(Movie(line[1],line[0],line[2]))
-
-
-    def write_into_moves_text_file(movie_text_file):
-        with open("movies.txt","w") as file:
-            for title in movie_titles:
-                file.write(title.text + "\n")
+    def get_movie_by_position(self,position) -> None:
+        for movie in self.movies:
+            if movie.position == position:
+                print(f"{movie.position}) {movie.name} ({movie.year_made})")
+            
 
 
 
-    def print_movies_list(moves_text):
-        with open("movies.txt","r") as file:
-            lines = file.readlines()
-            for line in lines:
-                print(line)
+    def get_move_by_position_range(self,position1,position2) -> None:
+        for movie in self.movies:
+            if movie.position >= position1 and movie.position <= position2:
+                print(f"{movie.position}) {movie.name} ({movie.year_made})")
+    
 
-    def run(self):
+
+
+    def get_movie_by_name(self,name) -> None:
+        for movie in self.movies:
+            if movie.name == name:
+                print(f"{movie.position}) {movie.name} ({movie.year_made})")
+            
+            
+
+
+    def get_movie_by_letter(self,letter) -> None:
+        for movie in self.movies:
+            if movie.name.startswith(letter):
+                print(f"{movie.position}) {movie.name} ({movie.year_made})")
+    
+
+    def get_movie_by_year(self,year) -> None:
+        for movie in self.movies:
+            if movie.year_made == year:
+                print(f"{movie.position}) {movie.name} ({movie.year_made})")
+                
+
+    
+    def get_movie_by_year_range(self,year1,year2) -> None:
+        for move in self.movies:
+            if move.year_made >= year1 and move.year_made <= year2:
+                print(f"{move.position}) {move.name} ({move.year_made})")
+
+    
+
+
+    
+
+    
+
+
+
+
+    
+
+    def run(self) -> None:
+        self.write_into_moves_text_file(self.movie_text_file)
+        self.menu()
+        user_input = input("Enter your choice: ")
+        while user_input != "8":
+            if user_input == "1":
+                self.print_movies_list()
+            elif user_input == "2":
+                position = input("Enter the position of the movie: ")
+                self.get_movie_by_position(position)
+            elif user_input == "3":
+                position1 = input("Enter the first position: ")
+                position2 = input("Enter the second position: ")
+                self.get_move_by_position_range(position1,position2)
+            elif user_input == "4":
+                name = input("Enter the name of the movie: ")
+                self.get_movie_by_name(name)
+            elif user_input == "5":
+                letter = input("Enter the letter: ")
+                self.get_movie_by_letter(letter)
+            elif user_input == "6":
+                year = input("Enter the year: ")
+                self.get_movie_by_year(year)
+            elif user_input == "7":
+                year1 = input("Enter the first year: ")
+                year2 = input("Enter the second year: ")
+                self.get_movie_by_year_range(year1,year2)
+            
+            self.menu()
+            user_input = input("Enter your choice: ")
         
