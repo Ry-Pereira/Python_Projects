@@ -65,6 +65,7 @@ class EmpireMovieBrain:
             for line in lines:
                 #Line is process by replacing all right parantheses with left parentheses and splitting that line, createing as a list
                 line = line.replace(")","(").split("(")
+                print(line)
                 #Self movies list appends the a Movie object created with the name, position, and year extracted from the processed line. The line[1] is assumed to be the movie name, line[0] is the position, and line[2] is the year made. This allows for structured storage of movie data in the movies list for later retrieval and display.
                 self.movies.append(Movie(line[1],line[0],line[2]))
     
@@ -152,7 +153,9 @@ class EmpireMovieBrain:
     #Defining the run method, which serves as the main loop for the program. This method first writes the movie titles into a text file, then displays the menu to the user and waits for input. Based on the user's input, it calls the appropriate method to perform the desired action, such as viewing the movies list, searching for movies by position, name, letter, or year, or exiting the program. The loop continues until the user chooses to exit by entering "8".
     def run(self) -> None:
         # Write the movie titles into a text file using the write_into_movies_text_file method, passing the movie_text_file attribute as an argument. This allows for storing the movie titles in a text file for later retrieval and display.
-        self.write_into_movies_text_file(self.movie_text_file)
+        self.write_into_moves_text_file(self.movie_text_file)
+        # Read the movies from the text file using the read_movies_from_text_file method. This populates the movies list with Movie objects created from the data in the text file, allowing for easy access and manipulation of movie information in subsequent operations.
+        self.read_movies_from_text_file()
         # Display the menu and wait for user input.
         self.menu()
         #User input is taken to determine the user's choice from the menu. The program will continue to loop and process user input until the user chooses to exit by entering "8". Based on the user's input, the program will call the appropriate method to perform the desired action, such as viewing the movies list, searching for movies by position, name, letter, or year.

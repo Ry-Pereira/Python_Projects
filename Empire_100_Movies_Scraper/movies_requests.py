@@ -11,6 +11,7 @@
 
 #From tge requests library, we import everything to make HTTP requests to the Empire Online website. This allows us to retrieve the HTML content of the page, which we can then parse to extract movie titles.
 from requests import *
+import requests
 
 
 
