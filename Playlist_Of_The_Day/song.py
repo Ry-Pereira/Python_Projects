@@ -4,7 +4,7 @@
 #Module Name: song.py
 #Module Purpose: This module defines the Song class, which represents a song with its position, name, and artist. The class includes an initializer method to set these attributes when a Song object is created.
 #Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
-#Date: 4/13/2026
+#Date: 4/12/2026
 #Last Modified: 4/13/2026
 
 

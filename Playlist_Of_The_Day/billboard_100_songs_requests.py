@@ -5,7 +5,7 @@
 #Module Purpose: This program serves as the user interface for the Billboard Top 100 Songs Scraper application. It defines the BillboardTop100SongsScraperUI class, which sets up the Tkinter window, canvas, and buttons for scraping song titles. The class includes methods for adding song titles to the list and resetting the list.
 #Collaborators: None
 #Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
-#Date: 4/6/2026
+#Date: 4/12/2026
 #Last Modified: 4/13/2026
 
 
