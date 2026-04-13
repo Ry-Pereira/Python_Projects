@@ -9,18 +9,9 @@
 #Last Modified: 4/12/2026
 
 
+from bs4 import BeautfiulSoup
 
 
-
-
-
-def main():
-    pass
-    
-
-
-
-
-
-if __name__ =="__main__":
-    main()
+class AmazonProductPriceScraper:
+    def __init__(self,html:str):
+        soup = BeautifulSoup(html,'html.parser')
