@@ -1,5 +1,3 @@
-
-
 import random
 import server
 
@@ -8,18 +6,10 @@ import server
 
 
 
-
-
 def main():
-    number = random.randint(0,9)
-    server.run(number)
+    server.random_number = random.randint(0,9)
+    server.app.run()
     
-    
-
-
-
-
-
 
 
 
