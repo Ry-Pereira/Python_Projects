@@ -13,11 +13,17 @@
 
 #Importing datetime library to work with dates and times, which is used to get the current date in the required format for scraping the Billboard Top 100 songs.
 import datetime
+import os
+
 
 #Importing the get_billboard_top_100 function from the billboard_100_songs_requests module, which is responsible for making HTTP requests to the Billboard website and retrieving the HTML content of the page containing the top 100 songs.
 from billboard_100_songs_requests import get_billboard_top_100
 #Importing the BillboardTop100SongsScraper class from the billboard_100_songs_scraper module, which is responsible for parsing the HTML content of the Billboard Top 100 songs page and extracting the song titles and artists.
 from billboard_100_songs_scraper import BillboardTop100SongsScraper
+
+
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
 
 
 #Defining the main function, serves as the entry point of the program. It retrieves the HTML content of the Billboard Top 100 songs page for the current date, creates an instance of the BillboardTop100SongsScraper class to parse the content, and then prints the song titles and artists in a formatted manner.
@@ -27,12 +33,11 @@ def main():
     #Creating an instance of the BillboardTop100SongsScraper class by passing the retrieved HTML content as an argument to the constructor. This instance is stored in the variable billboard_top_100_song_scraper, which can then be used to access the parsed song titles and artists.
     billboard_top_100_song_scraper = BillboardTop100SongsScraper(billboard_top_100_songs)
 
+    print("CLIENT_ID:", os.getenv("SPOTIPY_CLIENT_ID"))
+
 
     
-    print(num + 1, test.artists[num].text.strip(), " - ", test.songs[num].text.strip())
-    num+=1
-
-
+    
 
 
 
