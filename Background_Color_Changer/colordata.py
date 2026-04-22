@@ -6,9 +6,10 @@ def get_color_hex(color_name):
     response = requests.get(url, headers=headers)
     color_data = response.json()["colors"]
     for color in color_data:
-        if color["name"] == color_name:
-            return color["hex"]
+        if color["name"] == color_name.capitalize():
+            return f'#{color["hex"]}'
 
     return "No Color of Description"
 
 
+print(get_color_hex("Black"))
