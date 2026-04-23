@@ -1,0 +1,27 @@
+
+
+
+
+<!-- Defines the document type as HTML5 -->
+<!DOCTYPE html>
+<!-- Root HTML element, language set to English -->
+<html lang="en">
+    <!-- Head section contains metadata and page settings -->
+    <head>
+        <!-- Sets character encoding to UTF-8 -->
+        <meta charset="UTF-8">
+        <!-- Makes the page responsive on different screen sizes -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Title shown in browser tab -->
+        <title>Dog Image</title>
+    </head>
+
+
+    <!-- Body section contains visible page content -->
+    <body>
+        <!-- Displays the name of the selected color centered on the page -->
+        <h1 style="text-align:center">{{ dog_breed }}</h1>
+        <!-- Displays instruction or message text centered on the page -->
+        <img src = "{{dog_image}}" alt = "Image of a {{dog_breed}}">
+    </body>
+</html>
