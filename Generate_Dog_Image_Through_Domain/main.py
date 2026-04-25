@@ -5,9 +5,8 @@ from server import app
 
 
 def main():
-    dog_image_generator = app
-    app.run()
-
+    flask_app_instance = app
+    flask_app_instance.run()
 
 
 if __name__ == "__main__":

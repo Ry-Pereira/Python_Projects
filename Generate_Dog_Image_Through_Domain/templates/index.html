@@ -20,8 +20,10 @@
     <!-- Body section contains visible page content -->
     <body>
         <!-- Displays the name of the selected color centered on the page -->
-        <h1 style="text-align:center">{{ dog_breed }}</h1>
+        <h1 style="text-align:center; color: blue;">{{ dog_breed }}</h1>
+
+        <p style="text-align:center; color:green;">{{ instructions }}</p>
         <!-- Displays instruction or message text centered on the page -->
-        <img src = "{{dog_image}}" alt = "Image of a {{dog_breed}}">
+        <img src="{{dog_image}}" alt="{{image_description}}" style="width:400px; height:400px; display:block; margin:0 auto;">
     </body>
 </html>
