@@ -2,28 +2,33 @@
 
 
 
+
+
+
 <!-- Defines the document type as HTML5 -->
 <!DOCTYPE html>
 <!-- Root HTML element, language set to English -->
 <html lang="en">
-    <!-- Head section contains metadata and page settings -->
+    <!-- Head section contains metadata, settings, and page information -->
     <head>
-        <!-- Sets character encoding to UTF-8 -->
+        <!-- Sets the character encoding to UTF-8 (supports most characters) -->
         <meta charset="UTF-8">
-        <!-- Makes the page responsive on different screen sizes -->
+        <!-- Makes the webpage responsive on different screen sizes (mobile-friendly) -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Title shown in browser tab -->
+        <!-- Title shown in the browser tab -->
         <title>Dog Image</title>
     </head>
 
 
-    <!-- Body section contains visible page content -->
+    <!-- Body section contains all visible content on the webpage -->
     <body>
-        <!-- Displays the name of the selected color centered on the page -->
+        <!-- Displays the selected dog breed centered and styled in blue -->
         <h1 style="text-align:center; color: blue;">{{ dog_breed }}</h1>
-
+        <!-- Displays instructions or messages centered in green text -->
         <p style="text-align:center; color:green;">{{ instructions }}</p>
-        <!-- Displays instruction or message text centered on the page -->
+        <!-- Displays the dog image centered on the page with fixed size -->
         <img src="{{dog_image}}" alt="{{image_description}}" style="width:400px; height:400px; display:block; margin:0 auto;">
+
     </body>
+
 </html>
