@@ -1,3 +1,12 @@
+# Name: Ryan Pereira
+# Project Name: Generate Dog Image Through Domain
+# Description: A Flask web application that retrieves and displays random dog images by breed and sub-breed using external helper functions from the dog_data module.
+# Module Name: generate_dog_image_through_domain.py
+# Module Purpose: This module defines a Flask server with routes that return random dog images, breed-specific images, and sub-breed images using helper functions from dog_data.py.
+# Collaborators: None
+# Sources: GitHub Copilot, Stack Overflow, ChatGPT, Python documentation
+# Date: 4/22/2026
+# Last Modified: 4/25/2026
 
 
 

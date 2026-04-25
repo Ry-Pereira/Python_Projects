@@ -1,4 +1,12 @@
-
+# Name: Ryan Pereira
+# Project Name: Background Color Changer
+# Description: A helper module that interacts with the Dog CEO API to retrieve random dog images, breed-specific images, sub-breed images, and lists of available breeds.
+# Module Name: colordata.py
+# Module Purpose: This module provides functions that request data from the Dog CEO API, including random dog images, breed-specific images, sub-breed images, and available breed/sub-breed lists.
+# Collaborators: None
+# Sources: GitHub Copilot, Stack Overflow, ChatGPT, Python documentation
+# Date: 4/22/2026
+# Last Modified: 4/25/2026
 
 
 

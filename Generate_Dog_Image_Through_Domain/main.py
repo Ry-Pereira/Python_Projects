@@ -1,4 +1,12 @@
-
+# Name: Ryan Pereira
+# Project Name: Background Color Changer
+# Description: An entry-point module that imports a Flask application from the server module and runs the web server.
+# Module Name: colordata.py
+# Module Purpose: This module serves as the application launcher, starting the Flask development server defined in the server module.
+# Collaborators: None
+# Sources: GitHub Copilot, Stack Overflow, ChatGPT, Python documentation
+# Date: 4/22/2026
+# Last Modified: 4/25/2026
 
 
 
