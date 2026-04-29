@@ -1,40 +1,50 @@
-📌 Overview
+# Python Projects
 
-This repository contains a collection of my Python projects. Each project is organized into dedicated folders based on its functionality and purpose. Some folders are additionally structured according to the specific libraries or frameworks used.
+## 📌 Overview
 
-The goal of this repository is to maintain clear organization, demonstrate my progress in Python development, and provide easy navigation across different types of projects.
+This repository contains a collection of my Python projects.
 
+Each project is organized into dedicated folders based on its functionality and purpose. Some folders are further structured according to the specific libraries or frameworks used. While there may be overlap between certain projects, they are grouped based on their primary objective.
 
-🧱 Project Structure
+Although Python is the primary language used, some projects also incorporate additional languages where appropriate.
 
-Each folder represents an individual project. The naming convention reflects either the project’s purpose or the libraries used.
+### Goals of this repository:
+- Maintain clear organization  
+- Demonstrate my progress in Python development  
+- Provide easy navigation across different types of projects  
 
+---
 
-🛠️ Technologies Used
+## 🧱 Project Structure
+
+Each folder represents an individual project or a group of related projects. Folder names reflect either the project’s purpose or the primary libraries/frameworks used.
+
+---
+
+## 🛠️ Technologies Used
 
 Across different projects, I have worked with:
 
-Python 3.x
-Standard Python libraries
-Flask (for web-based projects)
-HTML & CSS (for frontend integration in web apps)
-Additional libraries depending on the project requirements
+- Python 3.x  
+- Standard Python libraries  
+- Flask (for web-based projects)  
+- HTML & CSS (for frontend integration in web applications)  
+- Additional libraries depending on project requirements  
 
+---
 
+## 📖 Usage Instructions
 
+Each main folder contains one or more project folders.
 
-📂 Purpose of This Repository
-Practice and improve Python programming skills
-Explore different libraries and frameworks
-Build small to medium-sized projects
-Maintain organized documentation of my learning journey
+If you are looking for a specific functionality or use case, navigate to the relevant project folder. Detailed instructions for setup and usage are provided within each project.
 
-📬 Contact
+---
 
-If you have any suggestions or feedback, feel free to reach out or open an issue.
+## 📬 Contact
 
-![image_alt](https://github.com/Ry-Pereira/Python_Projects/blob/bc29e3edb363311c36f3fdb9f731c454c74818ed/python.gif)
+If you have suggestions or feedback, feel free to open an issue or reach out.
 
+---
 
-- Ryan Antony Pereira
-- Date: 4/25/26
+![Python Projects](https://github.com/Ry-Pereira/Python_Projects/blob/bc29e3edb363311c36f3fdb9f731c454c74818ed/python.gif)
