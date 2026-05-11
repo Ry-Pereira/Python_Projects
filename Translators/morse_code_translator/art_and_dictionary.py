@@ -1,3 +1,17 @@
+#Name: Ryan Pereira
+#Project Name: Morse Code Translator
+#Description: This variable stores a large ASCII art welcome banner used to display the program title in a visually styled format when the Morse Code Translator program starts. It enhances the user experience by providing a clear and decorative introduction screen.
+#Module Name: art_and_dictionary.py
+#Module Purpose: To store and display a formatted ASCII art title that is shown at the beginning of the program to welcome users and indicate program purpose.
+#Collaborators: None
+#Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
+#Date: 2/11/2024
+#Last Modified: 3/3/2024
+
+
+
+
+# Create a variable that stores a multi-line string (ASCII art welcome banner)
 welcome_text = ('''
 .88b  d88.  .d88b.  d8888b. .d8888. d88888b       .o88b.  .d88b.  d8888b. d88888b                                                                                                  
 88'YbdP`88 .8P  Y8. 88  `8D 88'  YP 88'          d8P  Y8 .8P  Y8. 88  `8D 88'                                                                                                      
