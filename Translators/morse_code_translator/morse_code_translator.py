@@ -5,8 +5,8 @@
 #Module Purpose: This program serves as a Morse code encoder and decoder. It uses a dictionary to map letters and numbers to Morse code equivalents and performs translation in both directions based on user input.
 #Collaborators: None
 #Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
-#Date: 3/20/2023
-#Last Modified: 3/25/2023
+#Date: 2/11/2024
+#Last Modified: 3/3/2024
 
 
 # Import everything (*) from the art_and_alphabet module
