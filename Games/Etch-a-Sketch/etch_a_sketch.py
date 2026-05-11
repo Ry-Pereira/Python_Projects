@@ -1,3 +1,15 @@
+# Name: Ryan Pereira
+# Project Name: Etch-A-Sketch
+# Description: A Python turtle graphics program that allows users to draw on the screen using keyboard controls,similar to a digital Etch-A-Sketch toy.
+# File Name: Etch-A-Sketch.py
+# File Purpose: This file creates a turtle graphics window and binds keyboard controls for movement, rotation, clearing the drawing, and resetting the turtle to the center of the screen.
+# Collaborators: None
+# Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
+# Date: 4/24/2026
+# Last Modified: 5/11/2026
+
+
+
 # Import everything from the turtle graphics module
 from turtle import *
 
