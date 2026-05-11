@@ -1,6 +1,19 @@
+#Name: Ryan Pereira
+#Project Name: Caesar Cipher Program
+#Description: This module stores the alphabet list and ASCII art banner used in the Caesar Cipher Program. The alphabet list is used for encrypting and decrypting words, while the ASCII art is displayed when the program starts.
+#Module Name: art_and_alphabet
+#Module Purpose: This module provides shared variables including the alphabet list and program title art for use in the Caesar Cipher application.
+#Collaborators: None
+#Sources: Github Copilot, Stack Overflow, ChatGPT, Python documentation
+#Date: 2/10/2026
+#Last Modified: 2/13/2026
+
+
+
+# Create a list containing every lowercase letter of the alphabet
 alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
-
+# Store ASCII art/title text inside a multi-line string variable
 text = ('''
 
   .oooooo.                                                          .oooooo.    o8o             oooo                           
