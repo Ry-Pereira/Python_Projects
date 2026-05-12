@@ -33,13 +33,21 @@ user_parameters = {
 #Running the response again, you will get error, because you already initialized the user with same username and token.
 response = requests.post(url=pixela_endpoint, json=user_parameters)
 
+# Prompts user to enter a unique graph ID for Pixela
 GRAPH_ID = input("Give your graph an id: ")
+# Prompts user to enter a name for the graph
 GRAPH_NAME = input("Give your graph a name: ")
+# Prompts user to define the type of data stored in the graph (int or float)
 GRAPH_TYPE = input("Give a type for your graph (int/float): ")
+# Prompts user to define the unit of measurement for the graph data
 GRAPH_DATA_UNIT = input("Give a unit for your graph: ")
+# Prompts user to choose a color for the graph visualization
 GRAPH_COLOR = input("Give a color for your graph: ")
-
+# Builds the API endpoint URL for creating a new graph under the user account
 graph_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs"
+# Dictionary containing configuration settings for the new graph
+
+
 graph_config = {
     "id": GRAPH_ID,
     "name": GRAPH_NAME,
@@ -48,37 +56,51 @@ graph_config = {
     "color": GRAPH_COLOR
 }
 
-#Used for authentication
+
+# Headers used for authentication when sending requests to Pixela API
 headers ={
     "X-USER-TOKEN": TOKEN
 }
 
+
+# Sends a POST request to create the graph using provided configuration
 response = requests.post(url=graph_endpoint,json=graph_config,headers=headers)
+# Prints the response from the graph creation request
 print(response)
-
-
+# Prompts user to enter the quantity value for today's pixel
 GRAPH_PIXEL_UPDATED_QUANTITY = input("Give a quantity for your graph pixel: ")
+# Builds endpoint URL for updating/adding today's pixel value
 update_graph_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs/{GRAPH_ID}"
+# Dictionary containing pixel data for today's entry
 update_graph_config ={
     "date": DATE_TODAY,
     "quantity": GRAPH_PIXEL_UPDATED_QUANTITY
 }
 
+
+# Sends POST request to add a new pixel entry to the graph
 response = requests.post(url=update_graph_endpoint,json=update_graph_config,headers=headers)
-
-
+# Prints response from pixel creation request
 print(response)
-
+# Prompts user to enter a new quantity value to edit today's pixel
 GRAPH_PIXEL_EDIT_PIXEL_QUANTITY = input("Give a quantity for your graph pixel: ")
+# Builds endpoint URL for updating an existing pixel entry
 update_graph_pixel = f"{pixela_endpoint}/{USERNAME}/graphs/{GRAPH_ID}/{DATE_TODAY}"
+# Dictionary containing updated pixel quantity
 update_graph_pixel_config = {
     "quantity": GRAPH_PIXEL_EDIT_PIXEL_QUANTITY
 }
+
+
+# Sends PUT request to update an existing pixel value
 response = requests.put(url=update_graph_pixel,json=update_graph_pixel_config,headers=headers)
+# Prints response from pixel update request
 print(response)
-
-
+# Prompts user to enter a date for the pixel they want to delete
 GRAPH_DATE_PIXEL_TO_DELETE = input("Give a date for your graph pixel to delete (YYYYMMDD): ")
+# Builds endpoint URL for deleting a specific pixel
 delete_graph_pixel = f"{pixela_endpoint}/{USERNAME}/graphs/{GRAPH_ID}/{GRAPH_DATE_PIXEL_TO_DELETE}"
+# Sends DELETE request to remove the selected pixel
 response = requests.delete(url=delete_graph_pixel, headers=headers)
+# Prints response from delete request
 print(response)
