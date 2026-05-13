@@ -1,98 +1,117 @@
-# 🔤 Fonts Repository
+# 🎬🍿🎥⭐ Empire 100 Movies Scraper ⭐🎥🍿🎬
 
 ## 📌 Overview
 
-This repository is a collection of font files organized for easy access and reuse in design, development, branding, and creative projects. It serves as a simple storage and management system for different font styles and formats.
+This project is a Python-based web scraping application that collects movie titles from Empire Online’s list of the **100 Best Movies of All Time**. The program retrieves movie data from the website, parses the HTML content, stores movie information in a text file, and allows users to search through the movies using a command-line menu system.
 
-The repository may include:
-- Serif fonts
-- Sans-serif fonts
-- Display fonts
-- Monospace fonts
-- Decorative fonts
+Users can:
+- Scrape movie titles from Empire Online  
+- Store movies in a text file  
+- View all movies  
+- Search movies by:
+  - Position  
+  - Position range  
+  - Name  
+  - First letter  
+  - Release year  
+  - Release year range  
 
 ---
 
-## 🧱 Repository Structure
+## 🧱 Project Structure
 
 ```text
-fonts-repository/
+project-folder/
 │
-├── fonts/         # Font files (.ttf, .otf, .woff, etc.)
-└── README.md      # Repository documentation
+├── main.py                  # Main entry point of the application
+├── movie_class.py           # Movie class definition
+├── movie_list_brain.py      # Main application logic and menu system
+├── movie_title_scraper.py   # HTML parsing and movie extraction
+├── movies_requests.py       # HTTP requests for movie webpage
+│
+├── movies.txt               # Generated movie text file
+│
+└── README.md
 ```
 
 ---
 
 ## 🚀 Features
 
-- Organized font collection
-- Supports multiple font formats
-- Easy access to reusable typography assets
-- Simple and clean repository structure
-- Useful for designers and developers
+- Scrapes movie data from Empire Online  
+- Extracts movie titles using BeautifulSoup  
+- Stores movie data in a text file  
+- Command-line interactive menu system  
+- Search movies by multiple criteria  
+- Organized object-oriented structure  
+- Modular Python files for readability and maintainability  
 
 ---
 
 ## 🛠️ Technologies Used
 
-- Font file formats (`.ttf`, `.otf`, `.woff`, `.woff2`)
-- Git & GitHub for version control
+- Python  
+- BeautifulSoup4  
+- Requests  
+- File Handling  
+- Object-Oriented Programming (OOP)  
 
 ---
 
-## 📡 Repository Purpose
+## 📡 Data Source
 
-This repository is designed to:
+This project retrieves movie information from:
 
-1. Store and organize font assets  
-2. Provide quick access to typography resources  
-3. Simplify font management across projects  
-4. Maintain a centralized font library  
+- Empire Online’s “Best Movies of All Time” webpage
+
+The scraper:
+- Sends an HTTP request to the webpage  
+- Parses HTML content  
+- Extracts movie title information  
 
 ---
 
-## ▶️ How to Use the Repository
+## ▶️ How to Run the Project
 
-1. Clone the repository:
-   ```bash
-   git clone <your-repository-url>
-   ```
+1. Install dependencies:
 
-2. Navigate to the fonts folder:
-   ```bash
-   cd fonts-repository/fonts
-   ```
-
-3. Use the fonts in your projects by installing them locally or importing them into your applications or websites.
-
-Example CSS usage:
-```css
-@font-face {
-    font-family: 'CustomFont';
-    src: url('./fonts/customfont.ttf');
-}
+```bash
+pip install requests beautifulsoup4
 ```
 
+2. Run the application:
+
+```bash
+python main.py
+```
+
+3. Follow the menu prompts in the terminal.
+
 ---
 
-## 📂 Supported Font Formats
+## 🌐 Menu Options
 
-- `.ttf` — TrueType Font  
-- `.otf` — OpenType Font  
-- `.woff` — Web Open Font Format  
-- `.woff2` — Compressed Web Font Format  
+| Option | Description |
+|--------|-------------|
+| 1 | View all movies |
+| 2 | Get movie by position |
+| 3 | Get movies by position range |
+| 4 | Get movie by name |
+| 5 | Get movies by first letter |
+| 6 | Get movies by year |
+| 7 | Get movies by year range |
+| 8 | Exit program |
 
 ---
 
-## 📅 Repository Info
+## 📅 Project Info
 
-**Author:** Ryan Pereira  
-**Created:** 9/25/2025  
-**Last Modified:** 5/7/2026  
+- **Author:** Ryan Pereira  
+- **Created:** 4/6/2026  
+- **Last Modified:** 4/12/2026  
 
 ---
 
 ## 📬 Contact
 
-Feel free to open an issue or suggest improvements.
+Feel free to open an issue or submit suggestions for improvements or new features.
