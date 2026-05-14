@@ -6,7 +6,6 @@
 # Date: 4/11/2026
 # Last Modified: 4/11/2026
 
-# Stuff to Hash out: Need to work on formatting, becuase only the the left hand of the minute and seconds can sipport number 0-5
 
 
 # From tkinter module import everything (GUI toolkit)
