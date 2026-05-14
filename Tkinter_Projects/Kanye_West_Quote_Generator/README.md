@@ -1,4 +1,5 @@
 # 🎤💬 Kanye West Quote Generator 💬🎤
+![image_alt](https://github.com/Ry-Pereira/Python_Projects/blob/25b299422f4ef3328cbce14263a0c2ea8433d972/Tkinter_Projects/Kanye_West_Quote_Generator/kanye.gif)
 
 ## 📌 Description
 
